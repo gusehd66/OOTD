@@ -1,24 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import StepperComponent from "./components/Stepper";
+import { SelectContext } from "./context/context";
 
 function App() {
+  const [select, setSelect] = useState({
+    상의: "",
+    하의: "",
+    신발: "",
+    아우터: "",
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <SelectContext.Provider value={{ select, setSelect }}>
+      <StepperComponent />
+    </SelectContext.Provider>
   );
 }
 
