@@ -6,14 +6,15 @@ import { SelectContext } from "../context/context";
 
 const ImageLists = ({ activeStep }) => {
   const { select, setSelect } = useContext(SelectContext);
-  const [check, setCheck] = useState(false);
+  const [check, setCheck] = useState("");
 
   const handleClick = (e) => {
     setSelect((prev) => {
-      prev[activeStep] = e.target.src;
+      prev[activeStep] =
+        select[activeStep] === e.target.src ? "" : e.target.src;
       return prev;
     });
-    setCheck((prev) => !prev);
+    setCheck((prev) => (prev === e.target.src ? "" : e.target.src));
   };
 
   return (
