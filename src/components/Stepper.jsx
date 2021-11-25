@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import ImageLists from "./ImageList";
 import { SelectContext } from "../context/context";
 import { useState, useContext } from "react";
+import SelectCard from "./SelectCard";
 
 const steps = ["상의", "하의", "신발", "아우터"];
 
@@ -119,10 +120,18 @@ export default function HorizontalNonLinearStepper() {
           </Box>
         </>
       )}
-      <div>{select["상의"]}</div>
-      <div>{select["하의"]}</div>
-      <div>{select["신발"]}</div>
-      <div>{select["아우터"]}</div>
+      <div
+        style={{
+          display: "flex",
+          width: "100%",
+          overflowX: "scroll",
+          gap: "0 10px",
+        }}
+      >
+        {steps.map(
+          (item) => select[item] && <SelectCard imgsrc={select[item]} />
+        )}
+      </div>
     </Box>
   );
 }

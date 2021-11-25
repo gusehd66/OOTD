@@ -1,6 +1,62 @@
-export const images = [
-  "https://user-images.githubusercontent.com/76733178/142819068-df8f811f-3ee1-428f-aadc-8287438095ea.JPG",
-  "https://user-images.githubusercontent.com/76733178/142819071-0523c3aa-dcf4-4b2e-b64a-f26d831110bb.png",
-  "https://user-images.githubusercontent.com/76733178/142819076-1689cb28-ce96-45a8-9ae1-5bcf78d26a70.JPG",
-  "https://user-images.githubusercontent.com/76733178/142819079-d6802490-9582-4c13-9542-9cb2f7b4d97d.JPG",
+export const itemData = [
+  {
+    img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
+    title: "Breakfast",
+    desc: "@bkristastucchio",
+  },
+  {
+    img: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
+    title: "Burger",
+    desc: "@rollelflex_graphy726",
+  },
+  {
+    img: "https://images.unsplash.com/photo-1522770179533-24471fcdba45",
+    title: "Camera",
+    desc: "@helloimnik",
+  },
+  {
+    img: "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c",
+    title: "Coffee",
+    desc: "@nolanissac",
+  },
+  {
+    img: "https://images.unsplash.com/photo-1533827432537-70133748f5c8",
+    title: "Hats",
+    desc: "@hjrc33",
+  },
+  {
+    img: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62",
+    title: "Honey",
+    desc: "@arwinneil",
+  },
+  {
+    img: "https://images.unsplash.com/photo-1516802273409-68526ee1bdd6",
+    title: "Basketball",
+    desc: "@tjdragotta",
+  },
+  {
+    img: "https://images.unsplash.com/photo-1518756131217-31eb79b20e8f",
+    title: "Fern",
+    desc: "@katie_wasserman",
+  },
+  {
+    img: "https://images.unsplash.com/photo-1597645587822-e99fa5d45d25",
+    title: "Mushrooms",
+    desc: "@silverdalex",
+  },
+  {
+    img: "https://images.unsplash.com/photo-1567306301408-9b74779a11af",
+    title: "Tomato basil",
+    desc: "@shelleypauls",
+  },
+  {
+    img: "https://images.unsplash.com/photo-1471357674240-e1a485acb3e1",
+    title: "Sea star",
+    desc: "@peterlaster",
+  },
+  {
+    img: "https://images.unsplash.com/photo-1589118949245-7d38baf380d6",
+    title: "Bike",
+    desc: "@southside_customs",
+  },
 ];
