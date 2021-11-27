@@ -8,13 +8,14 @@ import ImageLists from "./ImageList";
 import { SelectContext } from "../context/context";
 import { useState, useContext } from "react";
 import SelectCard from "./SelectCard";
+import ResultComponent from "./ResultComponent";
 
 const steps = ["상의", "하의", "신발", "아우터"];
 
 export default function HorizontalNonLinearStepper() {
   const [activeStep, setActiveStep] = useState(0);
   const [completed, setCompleted] = useState({});
-  const { select } = useContext(SelectContext);
+  const { select, setSelect } = useContext(SelectContext);
 
   const totalSteps = () => {
     return steps.length;
@@ -56,6 +57,12 @@ export default function HorizontalNonLinearStepper() {
   };
 
   const handleReset = () => {
+    setSelect({
+      상의: "",
+      하의: "",
+      신발: "",
+      아우터: "",
+    });
     setActiveStep(0);
     setCompleted({});
   };
@@ -73,9 +80,7 @@ export default function HorizontalNonLinearStepper() {
       </Stepper>
       {allStepsCompleted() ? (
         <>
-          <Typography sx={{ mt: 2, mb: 1 }}>
-            All steps completed - you&apos;re finished
-          </Typography>
+          <ResultComponent />
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
             <Box sx={{ flex: "1 1 auto" }} />
             <Button onClick={handleReset}>Reset</Button>
@@ -118,20 +123,21 @@ export default function HorizontalNonLinearStepper() {
                 </Button>
               ))}
           </Box>
+          <div
+            style={{
+              display: "flex",
+              width: "100%",
+              overflowX: "scroll",
+              gap: "0 10px",
+            }}
+          >
+            {steps.map(
+              (item) =>
+                select[item] && <SelectCard imgsrc={select[item]} key={item} />
+            )}
+          </div>
         </>
       )}
-      <div
-        style={{
-          display: "flex",
-          width: "100%",
-          overflowX: "scroll",
-          gap: "0 10px",
-        }}
-      >
-        {steps.map(
-          (item) => select[item] && <SelectCard imgsrc={select[item]} />
-        )}
-      </div>
     </Box>
   );
 }
