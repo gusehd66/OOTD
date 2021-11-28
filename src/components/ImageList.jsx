@@ -21,18 +21,16 @@ const ImageLists = ({ activeStep }) => {
   return (
     <ImageList sx={{ width: "100%", height: 450 }} cols={2} rowHeight={200}>
       {itemData.map((item) => (
-        <ImageListItem key={item.img}>
+        <ImageListItem key={item.img} sx={{ width: "169px", height: "200px" }}>
           <img
-            src={`${item.img}?w=248&fit=crop&auto=format`}
-            srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+            src={`${item.img}`}
             alt={item.title}
             loading="lazy"
             onClick={handleClick}
-            style={
-              select[activeStep] === `${item.img}?w=248&fit=crop&auto=format`
-                ? { opacity: 0.7 }
-                : { opacity: 1 }
-            }
+            style={{
+              objectFit: "contain",
+              opacity: select[activeStep] === item.img ? 0.7 : 1,
+            }}
           />
           <ImageListItemBar
             title={item.title}

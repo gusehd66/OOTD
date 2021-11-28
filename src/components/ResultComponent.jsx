@@ -4,8 +4,8 @@ import { SelectContext } from "../context/context";
 const ResultComponent = () => {
   const { select } = useContext(SelectContext);
   const keys = Object.keys(select);
-  const transX = [5, 20, 10, 10];
-  const transY = [25, 20, 15, -65];
+  const transX = [20, 20, 20, 5];
+  const transY = [15, 30, 60, 10];
   const zIndex = [4, 2, 3, 1];
 
   return (
@@ -13,6 +13,7 @@ const ResultComponent = () => {
       style={{
         width: "100vw",
         height: "80vh",
+        position: "relative",
       }}
     >
       {keys.map((key, i) => (
@@ -21,9 +22,12 @@ const ResultComponent = () => {
           alt="img"
           key={key}
           style={{
-            position: "relative",
-            top: `${transY[i]}%`,
-            left: `${transX[i]}%`,
+            objectFit: "contain",
+            width: "200px",
+            height: "auto",
+            position: "absolute",
+            top: `${transY[i]}vh`,
+            left: `${transX[i]}vw`,
             zIndex: `${zIndex[i]}`,
           }}
         />
