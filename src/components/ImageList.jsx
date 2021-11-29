@@ -5,7 +5,7 @@ import { useContext, useState } from "react";
 import { SelectContext } from "../context/context";
 import { itemData } from "../data/images";
 
-const ImageLists = ({ activeStep }) => {
+const ImageLists = ({ activeStep, completed }) => {
   const { select, setSelect } = useContext(SelectContext);
   const [check, setCheck] = useState("");
 
@@ -19,14 +19,14 @@ const ImageLists = ({ activeStep }) => {
   };
 
   return (
-    <ImageList sx={{ width: "100%", height: 450 }} cols={2} rowHeight={200}>
+    <ImageList sx={{ width: "100%", height: 450 }} cols={2} rowHeight={250}>
       {itemData.map((item) => (
-        <ImageListItem key={item.img} sx={{ width: "169px", height: "200px" }}>
+        <ImageListItem key={item.img} sx={{ width: "169px", height: "250px" }}>
           <img
             src={`${item.img}`}
             alt={item.title}
             loading="lazy"
-            onClick={handleClick}
+            onClick={completed ? (e) => e.preventDefault() : handleClick}
             style={{
               objectFit: "contain",
               opacity: select[activeStep] === item.img ? 0.7 : 1,

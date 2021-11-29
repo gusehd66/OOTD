@@ -89,7 +89,10 @@ export default function HorizontalNonLinearStepper() {
       ) : (
         <>
           <Typography sx={{ mt: 2, mb: 1 }} component={"div"}>
-            <ImageLists activeStep={steps[activeStep]} />
+            <ImageLists
+              activeStep={steps[activeStep]}
+              completed={completed[activeStep]}
+            />
           </Typography>
           <Box
             sx={{
