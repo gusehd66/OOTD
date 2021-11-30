@@ -20,25 +20,34 @@ const ImageLists = ({ activeStep, completed }) => {
 
   return (
     <ImageList sx={{ width: "100%", height: 450 }} cols={2} rowHeight={250}>
-      {itemData.map((item) => (
-        <ImageListItem key={item.img} sx={{ width: "169px", height: "250px" }}>
-          <img
-            src={`${item.img}`}
-            alt={item.title}
-            loading="lazy"
-            onClick={completed ? (e) => e.preventDefault() : handleClick}
-            style={{
-              objectFit: "contain",
-              opacity: select[activeStep] === item.img ? 0.7 : 1,
-            }}
-          />
-          <ImageListItemBar
-            title={item.title}
-            subtitle={<span>by: {item.desc}</span>}
-            position="below"
-          />
-        </ImageListItem>
-      ))}
+      {itemData.map(
+        (item) =>
+          item.key === activeStep &&
+          item.items.map((data) => {
+            return (
+              <ImageListItem
+                key={data.title}
+                sx={{ width: "169px", height: "250px" }}
+              >
+                <img
+                  src={`${data.img}`}
+                  alt={data.title}
+                  loading="lazy"
+                  onClick={completed ? (e) => e.preventDefault() : handleClick}
+                  style={{
+                    objectFit: "contain",
+                    opacity: select[activeStep] === data.img ? 0.7 : 1,
+                  }}
+                />
+                <ImageListItemBar
+                  title={data.title}
+                  subtitle={<span>by: {data.desc}</span>}
+                  position="below"
+                />
+              </ImageListItem>
+            );
+          })
+      )}
     </ImageList>
   );
 };
