@@ -72,8 +72,10 @@ export default function HorizontalNonLinearStepper() {
       <Stepper nonLinear activeStep={activeStep}>
         {steps.map((label, index) => (
           <Step key={label} completed={completed[index]}>
-            <StepButton color="inherit" onClick={handleStep(index)}>
-              {label}
+            <StepButton onClick={handleStep(index)}>
+              <Typography fontFamily="GmarketM" color="#f2ecff">
+                {label}
+              </Typography>
             </StepButton>
           </Step>
         ))}
@@ -132,6 +134,7 @@ export default function HorizontalNonLinearStepper() {
               width: "100%",
               overflowX: "scroll",
               gap: "0 10px",
+              height: "20vh",
             }}
           >
             {steps.map(

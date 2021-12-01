@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "./App.css";
 import StepperComponent from "./components/Stepper";
 import { SelectContext } from "./context/context";
 

@@ -1,6 +1,6 @@
+import { Typography } from "@mui/material";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
-import ImageListItemBar from "@mui/material/ImageListItemBar";
 import { useContext, useState } from "react";
 import { SelectContext } from "../context/context";
 import { itemData } from "../data/images";
@@ -39,11 +39,26 @@ const ImageLists = ({ activeStep, completed }) => {
                     opacity: select[activeStep] === data.img ? 0.7 : 1,
                   }}
                 />
-                <ImageListItemBar
-                  title={data.title}
-                  subtitle={<span>by: {data.desc}</span>}
-                  position="below"
-                />
+                <Typography
+                  variant="h1"
+                  pl="10px"
+                  sx={{
+                    fontFamily: "GmarketM",
+                    fontSize: "1rem",
+                  }}
+                >
+                  {data.title}
+                </Typography>
+                <Typography
+                  variant="body1"
+                  pl="10px"
+                  sx={{
+                    fontFamily: "GmarketL",
+                    fontSize: ".8rem",
+                  }}
+                >
+                  <span>{data.desc}</span>
+                </Typography>
               </ImageListItem>
             );
           })
