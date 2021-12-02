@@ -134,7 +134,7 @@ export default function HorizontalNonLinearStepper() {
               width: "100%",
               overflowX: "scroll",
               gap: "0 10px",
-              height: "20vh",
+              height: "15vh",
             }}
           >
             {steps.map(

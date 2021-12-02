@@ -19,7 +19,7 @@ const ImageLists = ({ activeStep, completed }) => {
   };
 
   return (
-    <ImageList sx={{ width: "100%", height: 450 }} cols={2} rowHeight={250}>
+    <ImageList sx={{ width: "100%", height: 440 }} cols={2} rowHeight={240}>
       {itemData.map(
         (item) =>
           item.key === activeStep &&
@@ -27,7 +27,7 @@ const ImageLists = ({ activeStep, completed }) => {
             return (
               <ImageListItem
                 key={data.title}
-                sx={{ width: "169px", height: "250px" }}
+                sx={{ width: "169px", height: "240px" }}
               >
                 <img
                   src={`${data.img}`}

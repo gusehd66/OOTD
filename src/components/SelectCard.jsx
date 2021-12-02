@@ -5,7 +5,7 @@ const SelectCard = ({ imgsrc }) => {
   return (
     <Card
       sx={{
-        width: "48%",
+        width: "28%",
         height: "100%",
         flex: "0 0 auto",
       }}
