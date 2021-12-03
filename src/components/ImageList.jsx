@@ -19,16 +19,13 @@ const ImageLists = ({ activeStep, completed }) => {
   };
 
   return (
-    <ImageList sx={{ width: "100%", height: 440 }} cols={2} rowHeight={240}>
+    <ImageList sx={{ width: "100%", height: "56vh" }} cols={2} rowHeight={200}>
       {itemData.map(
         (item) =>
           item.key === activeStep &&
           item.items.map((data) => {
             return (
-              <ImageListItem
-                key={data.title}
-                sx={{ width: "169px", height: "240px" }}
-              >
+              <ImageListItem key={data.title} sx={{ width: "169px" }}>
                 <img
                   src={`${data.img}`}
                   alt={data.title}
@@ -37,6 +34,7 @@ const ImageLists = ({ activeStep, completed }) => {
                   style={{
                     objectFit: "contain",
                     opacity: select[activeStep] === data.img ? 0.7 : 1,
+                    height: "80%",
                   }}
                 />
                 <Typography

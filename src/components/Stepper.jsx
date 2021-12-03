@@ -12,7 +12,7 @@ import ResultComponent from "./ResultComponent";
 
 const steps = ["상의", "하의", "신발", "아우터"];
 
-export default function HorizontalNonLinearStepper() {
+const StepperComponent = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [completed, setCompleted] = useState({});
   const { select, setSelect } = useContext(SelectContext);
@@ -146,4 +146,6 @@ export default function HorizontalNonLinearStepper() {
       )}
     </Box>
   );
-}
+};
+
+export default StepperComponent;
