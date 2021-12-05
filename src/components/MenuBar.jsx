@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { Menu, SensorDoor } from "@mui/icons-material";
 import { useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 
 const MenuBar = () => {
   const [state, setState] = useState(false);
@@ -33,14 +34,22 @@ const MenuBar = () => {
       onKeyDown={toggleDrawer}
     >
       <List>
-        {["menu1", "menu2", "menu3"].map((text, index) => (
+        {["home", "random"].map((text, index) => (
           <div key={text}>
-            <ListItem button>
-              <ListItemIcon>
-                <SensorDoor />
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
+            <Link
+              to={text === "home" ? "/" : `/${text}`}
+              style={{
+                color: "black",
+                textDecoration: "none",
+              }}
+            >
+              <ListItem button>
+                <ListItemIcon>
+                  <SensorDoor />
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItem>
+            </Link>
             {index === 0 && <Divider />}
           </div>
         ))}
