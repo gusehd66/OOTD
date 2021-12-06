@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { Menu, SensorDoor } from "@mui/icons-material";
 import { useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const MenuBar = () => {
   const [state, setState] = useState(false);
