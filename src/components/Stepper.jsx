@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import ImageLists from "./ImageList";
 import { SelectContext } from "../context/context";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import SelectCard from "./SelectCard";
 import ResultComponent from "./ResultComponent";
 
@@ -16,6 +16,17 @@ const StepperComponent = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [completed, setCompleted] = useState({});
   const { select, setSelect } = useContext(SelectContext);
+
+  useEffect(() => {
+    return () => {
+      setSelect({
+        상의: "",
+        하의: "",
+        신발: "",
+        아우터: "",
+      });
+    };
+  }, [setSelect]);
 
   const totalSteps = () => {
     return steps.length;

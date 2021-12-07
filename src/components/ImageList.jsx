@@ -33,7 +33,7 @@ const ImageLists = ({ activeStep, completed }) => {
                   onClick={completed ? (e) => e.preventDefault() : handleClick}
                   style={{
                     objectFit: "contain",
-                    opacity: select[activeStep] === data.img ? 0.7 : 1,
+                    opacity: check === data.img ? 0.7 : 1,
                     height: "80%",
                   }}
                 />
