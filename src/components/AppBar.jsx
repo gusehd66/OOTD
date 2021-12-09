@@ -5,15 +5,27 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import MenuBar from "./MenuBar";
 import { Person } from "@mui/icons-material";
+import { useState } from "react";
+import { Menu, MenuItem, MenuList } from "@mui/material";
 
 const Appbar = () => {
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
         position="static"
         sx={{
           height: "7vh",
-          backgroundColor: "#959595",
+          backgroundColor: Boolean(anchorEl) ? "#555555" : "#959595",
           justifyContent: "center",
         }}
       >
@@ -24,6 +36,7 @@ const Appbar = () => {
           </Typography>
           <Button color="inherit">
             <Person
+              onClick={handleMenu}
               sx={{
                 border: "solid 1px",
                 borderRadius: "50%",
@@ -31,6 +44,28 @@ const Appbar = () => {
               }}
             />
           </Button>
+          <Menu
+            id="menu-appbar"
+            anchorEl={anchorEl}
+            sx={{ mt: 0.6 }}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "right",
+            }}
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            <MenuList>
+              <MenuItem onClick={handleClose} divider>
+                Profile
+              </MenuItem>
+              <MenuItem onClick={handleClose}>My account</MenuItem>
+            </MenuList>
+          </Menu>
         </Toolbar>
       </AppBar>
     </Box>
