@@ -3,6 +3,7 @@ import { SelectContext } from "../context/context";
 import ResultComponent from "./ResultComponent";
 import { itemData } from "../data/images";
 import { Button } from "@mui/material";
+import RandomMain from "./RandomMain";
 
 const RandomResult = () => {
   const { setSelect } = useContext(SelectContext);
@@ -35,7 +36,7 @@ const RandomResult = () => {
 
   return (
     <>
-      {checkEmpty && <ResultComponent />}
+      {checkEmpty ? <ResultComponent /> : <RandomMain />}
       <Button
         variant="contained"
         color="primary"
