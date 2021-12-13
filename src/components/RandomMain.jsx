@@ -1,11 +1,9 @@
 import { motion } from "framer-motion";
 import { itemData } from "../data/images";
 import { useState, useEffect } from "react";
-import useWindowSize from "../hooks/useWindowSize";
 
 const RandomMain = () => {
   const [image, setImage] = useState(1);
-  const { height, width } = useWindowSize();
   const random = itemData[Math.floor(Math.random() * (itemData.length - 1))];
 
   useEffect(() => {
