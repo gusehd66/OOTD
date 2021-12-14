@@ -1,18 +1,20 @@
 import { motion } from "framer-motion";
 import { itemData } from "../data/images";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 const RandomMain = () => {
   const [image, setImage] = useState(1);
   const random = itemData[Math.floor(Math.random() * (itemData.length - 1))];
 
+  const handleTick = useCallback(
+    () => () => setTimeout(() => setImage(image + 1), 5000),
+    [image]
+  );
+
   useEffect(() => {
-    function tick() {
-      return setTimeout(() => setImage(image + 1), 5000);
-    }
-    tick();
-    return () => clearTimeout(tick);
-  }, [image]);
+    handleTick();
+    return () => clearTimeout(handleTick);
+  }, [handleTick]);
 
   return (
     <div
@@ -34,7 +36,6 @@ const RandomMain = () => {
           position: "absolute",
         }}
         animate={{
-          scale: [1, 1, 1, 1, 1],
           left: ["100vw", "30vw", `20vw`, "10vw", "-80vw"],
           opacity: [0, 1, 1, 1, 0],
         }}

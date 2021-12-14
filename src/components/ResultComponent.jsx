@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { useContext } from "react";
 import { SelectContext } from "../context/context";
 
@@ -10,33 +11,43 @@ const ResultComponent = () => {
   const zIndex = [4, 2, 3, 1];
 
   return (
-    <div
-      style={{
-        width: "100vw",
-        height: "80vh",
-        position: "relative",
+    <motion.div
+      animate={{
+        x: [200, 0],
+      }}
+      transition={{
+        duration: 1,
+        ease: "easeInOut",
       }}
     >
-      {keys.map(
-        (key, i) =>
-          select[key] && (
-            <img
-              src={select[key]}
-              alt="img"
-              key={key}
-              style={{
-                objectFit: "contain",
-                width: "200px",
-                height: "auto",
-                position: "absolute",
-                top: `${transY[i]}vh`,
-                left: `${transX[i]}vw`,
-                zIndex: `${zIndex[i]}`,
-              }}
-            />
-          )
-      )}
-    </div>
+      <div
+        style={{
+          width: "100vw",
+          height: "80vh",
+          position: "relative",
+        }}
+      >
+        {keys.map(
+          (key, i) =>
+            select[key] && (
+              <img
+                src={select[key]}
+                alt="img"
+                key={key}
+                style={{
+                  objectFit: "contain",
+                  width: "200px",
+                  height: "auto",
+                  position: "absolute",
+                  top: `${transY[i]}vh`,
+                  left: `${transX[i]}vw`,
+                  zIndex: `${zIndex[i]}`,
+                }}
+              />
+            )
+        )}
+      </div>
+    </motion.div>
   );
 };
 
