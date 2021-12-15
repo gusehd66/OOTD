@@ -23,9 +23,9 @@ const RandomMain = () => {
         height: "50vh",
         overflow: "hidden",
         position: "relative",
-        border: "solid 1px #d3d3d3",
+        border: "solid 5px #d3d3d3",
         borderRadius: "20px",
-        margin: "2vh auto",
+        margin: "10vh auto",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -50,7 +50,7 @@ const RandomMain = () => {
             random.items[Math.floor(Math.random() * (random.items.length - 1))]
               .img
           }
-          alt={"1213"}
+          alt={"img"}
           style={{ width: "250px", height: "auto" }}
         />
       </motion.div>
