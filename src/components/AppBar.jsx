@@ -10,13 +10,15 @@ import { Menu, MenuItem, MenuList } from "@mui/material";
 
 const Appbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [login, setLogin] = useState(false);
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handleClose = (event) => {
     setAnchorEl(null);
+    event.target.innerText === "LogOut" && setLogin(false);
   };
 
   return (
@@ -35,14 +37,18 @@ const Appbar = () => {
             MY ROOM
           </Typography>
           <Button color="inherit">
-            <Person
-              onClick={handleMenu}
-              sx={{
-                border: "solid 1px",
-                borderRadius: "50%",
-                padding: "2px",
-              }}
-            />
+            {login ? (
+              <Person
+                onClick={handleMenu}
+                sx={{
+                  border: "solid 1px",
+                  borderRadius: "50%",
+                  padding: "2px",
+                }}
+              />
+            ) : (
+              <p onClick={() => setLogin(true)}>Log-In</p>
+            )}
           </Button>
           <Menu
             id="menu-appbar"
@@ -63,7 +69,7 @@ const Appbar = () => {
               <MenuItem onClick={handleClose} divider>
                 Profile
               </MenuItem>
-              <MenuItem onClick={handleClose}>My account</MenuItem>
+              <MenuItem onClick={handleClose}>LogOut</MenuItem>
             </MenuList>
           </Menu>
         </Toolbar>
