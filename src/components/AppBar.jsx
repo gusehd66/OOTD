@@ -16,9 +16,13 @@ const Appbar = () => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = (event) => {
+  const handleClose = () => {
     setAnchorEl(null);
-    event.target.innerText === "LogOut" && setLogin(false);
+  };
+
+  const handleLogout = () => {
+    setAnchorEl(null);
+    setLogin(false);
   };
 
   return (
@@ -69,7 +73,7 @@ const Appbar = () => {
               <MenuItem onClick={handleClose} divider>
                 Profile
               </MenuItem>
-              <MenuItem onClick={handleClose}>LogOut</MenuItem>
+              <MenuItem onClick={handleLogout}>LogOut</MenuItem>
             </MenuList>
           </Menu>
         </Toolbar>
