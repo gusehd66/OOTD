@@ -5,12 +5,14 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import MenuBar from "./MenuBar";
 import { Person } from "@mui/icons-material";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Menu, MenuItem, MenuList } from "@mui/material";
+import { Link } from "react-router-dom";
+import { SelectContext } from "../context/context";
 
 const Appbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
-  const [login, setLogin] = useState(false);
+  const { nickname, setNickname } = useContext(SelectContext);
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -22,7 +24,8 @@ const Appbar = () => {
 
   const handleLogout = () => {
     setAnchorEl(null);
-    setLogin(false);
+    localStorage.removeItem("nickname");
+    setNickname(null);
   };
 
   return (
@@ -41,17 +44,24 @@ const Appbar = () => {
             MY ROOM
           </Typography>
           <Button color="inherit">
-            {login ? (
-              <Person
-                onClick={handleMenu}
-                sx={{
-                  border: "solid 1px",
-                  borderRadius: "50%",
-                  padding: "2px",
-                }}
-              />
+            {nickname ? (
+              <>
+                <Person
+                  onClick={handleMenu}
+                  sx={{
+                    border: "solid 1px",
+                    borderRadius: "50%",
+                    padding: "2px",
+                  }}
+                />
+              </>
             ) : (
-              <p onClick={() => setLogin(true)}>Log-In</p>
+              <Link
+                to="/signin"
+                style={{ textDecoration: "none", color: "#333" }}
+              >
+                Log-In
+              </Link>
             )}
           </Button>
           <Menu

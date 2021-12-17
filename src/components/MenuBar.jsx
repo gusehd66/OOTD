@@ -7,13 +7,16 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
+  Typography,
 } from "@mui/material";
 import { Menu, SensorDoor } from "@mui/icons-material";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { SelectContext } from "../context/context";
 
 const MenuBar = () => {
   const [state, setState] = useState(false);
+  const { nickname } = useContext(SelectContext);
 
   const toggleDrawer = (event) => {
     if (
@@ -33,6 +36,30 @@ const MenuBar = () => {
       onClick={toggleDrawer}
       onKeyDown={toggleDrawer}
     >
+      <Typography
+        align="left"
+        variant="h5"
+        style={{ padding: "10px", color: "#222", fontFamily: "GmarketB" }}
+      >
+        {nickname ? (
+          <div>
+            {nickname} <span style={{ fontSize: "15px" }}>님</span>
+          </div>
+        ) : (
+          <Link
+            to="/signin"
+            style={{
+              textDecoration: "none",
+              color: "#333",
+              fontSize: "15px",
+              fontWeight: "700",
+            }}
+          >
+            로그인이 필요합니다.
+          </Link>
+        )}
+      </Typography>
+      <Divider />
       <List>
         {["home", "random"].map((text, index) => (
           <div key={text}>
@@ -50,7 +77,6 @@ const MenuBar = () => {
                 <ListItemText primary={text} />
               </ListItem>
             </Link>
-            {index === 0 && <Divider />}
           </div>
         ))}
       </List>
