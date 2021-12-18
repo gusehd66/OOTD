@@ -61,10 +61,10 @@ const MenuBar = () => {
       </Typography>
       <Divider />
       <List>
-        {["home", "random"].map((text, index) => (
+        {["Home", "Random"].map((text, index) => (
           <div key={text}>
             <Link
-              to={text === "home" ? "/" : `/${text}`}
+              to={text === "Home" ? "/" : `/${text.toLowerCase()}`}
               style={{
                 color: "black",
                 textDecoration: "none",

@@ -6,15 +6,10 @@ const RandomMain = () => {
   const [image, setImage] = useState(1);
   const random = itemData[Math.floor(Math.random() * (itemData.length - 1))];
 
-  const handleTick = useCallback(
-    () => () => setTimeout(() => setImage(image + 1), 5000),
-    [image]
-  );
-
   useEffect(() => {
-    handleTick();
+    const handleTick = setTimeout(() => setImage(image + 1), 5000);
     return () => clearTimeout(handleTick);
-  }, [handleTick]);
+  }, [image]);
 
   return (
     <div
