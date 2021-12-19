@@ -14,9 +14,11 @@ const SignIn = () => {
 
   const onSignin = (event) => {
     event.preventDefault();
-    window.localStorage.setItem("nickname", name);
-    setNickname(name);
-    navigate("/");
+    if (name.trim() !== "") {
+      window.localStorage.setItem("nickname", name);
+      setNickname(name);
+      navigate("/");
+    }
   };
 
   return (

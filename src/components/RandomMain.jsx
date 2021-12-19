@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { itemData } from "../data/images";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 
 const RandomMain = () => {
   const [image, setImage] = useState(1);
