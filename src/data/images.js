@@ -1,6 +1,6 @@
 export const itemData = [
   {
-    key: "상의",
+    key: "top",
     items: [
       {
         img: "https://user-images.githubusercontent.com/76733178/143682277-de55590c-61e6-4f66-b952-db8dc38555ec.png",
@@ -30,7 +30,7 @@ export const itemData = [
     ],
   },
   {
-    key: "하의",
+    key: "bottom",
     items: [
       {
         img: "https://user-images.githubusercontent.com/76733178/143682272-9e584cd1-bba2-4550-aee8-9619f42a8dd4.png",
@@ -65,7 +65,7 @@ export const itemData = [
     ],
   },
   {
-    key: "신발",
+    key: "shoes",
     items: [
       {
         img: "https://user-images.githubusercontent.com/76733178/143682268-9d577c57-822d-4782-a8eb-05cf61d0fec9.png",
@@ -100,7 +100,7 @@ export const itemData = [
     ],
   },
   {
-    key: "아우터",
+    key: "outer",
     items: [
       {
         img: "https://user-images.githubusercontent.com/76733178/143682276-06956f4c-b6bc-4d47-91ed-9153b0c408f9.png",

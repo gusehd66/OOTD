@@ -23,10 +23,10 @@ const RandomResult = () => {
 
   const cleanContext = useCallback(() => {
     setSelect({
-      상의: "",
-      하의: "",
-      신발: "",
-      아우터: "",
+      top: "",
+      bottom: "",
+      shoes: "",
+      outer: "",
     });
   }, [setSelect]);
 

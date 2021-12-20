@@ -8,10 +8,10 @@ import { SelectContext } from "./context/context";
 
 function App() {
   const [select, setSelect] = useState({
-    상의: "",
-    하의: "",
-    신발: "",
-    아우터: "",
+    top: "",
+    bottom: "",
+    shoes: "",
+    outer: "",
   });
 
   const [nickname, setNickname] = useState(

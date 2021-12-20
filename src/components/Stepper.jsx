@@ -9,24 +9,28 @@ import { SelectContext } from "../context/context";
 import { useState, useContext, useEffect } from "react";
 import SelectCard from "./SelectCard";
 import ResultComponent from "./ResultComponent";
+import { useDispatch, useSelector } from "react-redux";
 
-const steps = ["상의", "하의", "신발", "아우터"];
+const steps = ["top", "bottom", "shoes", "outer"];
 
 const StepperComponent = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [completed, setCompleted] = useState({});
   const { select, setSelect } = useContext(SelectContext);
+  const dispatch = useDispatch();
+  const clothes = useSelector((state) => state);
 
   useEffect(() => {
     return () => {
       setSelect({
-        상의: "",
-        하의: "",
-        신발: "",
-        아우터: "",
+        top: "",
+        bottom: "",
+        shoes: "",
+        outer: "",
       });
+      dispatch({ type: "init" });
     };
-  }, [setSelect]);
+  }, [setSelect, dispatch]);
 
   const totalSteps = () => {
     return steps.length;
@@ -69,11 +73,12 @@ const StepperComponent = () => {
 
   const handleReset = () => {
     setSelect({
-      상의: "",
-      하의: "",
-      신발: "",
-      아우터: "",
+      top: "",
+      bottom: "",
+      shoes: "",
+      outer: "",
     });
+    dispatch({ type: "init" });
     setActiveStep(0);
     setCompleted({});
   };
@@ -148,10 +153,18 @@ const StepperComponent = () => {
               height: "15vh",
             }}
           >
-            {steps.map(
-              (item) =>
-                select[item] && <SelectCard imgsrc={select[item]} key={item} />
-            )}
+            {steps.map((item) => {
+              return (
+                <div>
+                  {select[item] && (
+                    <SelectCard imgsrc={select[item]} key={select[item]} />
+                  )}
+                  {clothes[item] && (
+                    <SelectCard imgsrc={clothes[item]} key={clothes[item]} />
+                  )}
+                </div>
+              );
+            })}
           </div>
         </>
       )}
