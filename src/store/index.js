@@ -11,15 +11,20 @@ const counterReducer = (state = initialstate, action) => {
   if (action.type === "init") {
     console.log("init");
     return {
+      top: "",
+      bottom: "",
+      shoes: "",
+      outer: "",
+    };
+  }
+  if (action.type === "select") {
+    state[action.step] = action.value;
+    return {
       top: state.top,
       bottom: state.bottom,
       shoes: state.shoes,
       outer: state.outer,
     };
-  }
-  if (action.type === "select") {
-    console.log(action);
-    return state;
   }
   return state;
 };

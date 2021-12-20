@@ -4,10 +4,12 @@ import ResultComponent from "./ResultComponent";
 import { itemData } from "../data/images";
 import RandomMain from "./RandomMain";
 import { motion } from "framer-motion";
+import { useDispatch } from "react-redux";
 
 const RandomResult = () => {
   const { setSelect } = useContext(SelectContext);
   const [checkEmpty, setCheckEmpty] = useState(false);
+  const dispatch = useDispatch();
 
   const onClick = () => {
     cleanContext();
@@ -28,7 +30,8 @@ const RandomResult = () => {
       shoes: "",
       outer: "",
     });
-  }, [setSelect]);
+    dispatch({ type: "init" });
+  }, [setSelect, dispatch]);
 
   useEffect(() => {
     return () => cleanContext();

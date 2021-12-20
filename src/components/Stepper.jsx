@@ -84,12 +84,22 @@ const StepperComponent = () => {
   };
 
   return (
-    <Box sx={{ width: "100%", padding: 2, boxSizing: "border-box" }}>
+    <Box
+      style={{
+        width: "100%",
+        padding: "10px 2px",
+        boxSizing: "border-box",
+      }}
+    >
       <Stepper nonLinear activeStep={activeStep}>
         {steps.map((label, index) => (
           <Step key={label} completed={completed[index]}>
             <StepButton onClick={handleStep(index)}>
-              <Typography fontFamily="GmarketM" color="#f2ecff">
+              <Typography
+                fontFamily="GmarketM"
+                color="#f2ecff"
+                style={{ fontSize: "12px" }}
+              >
                 {label}
               </Typography>
             </StepButton>
@@ -151,18 +161,20 @@ const StepperComponent = () => {
               overflowX: "scroll",
               gap: "0 10px",
               height: "15vh",
+              padding: "0 15px",
+              boxSizing: "border-box",
             }}
           >
             {steps.map((item) => {
               return (
-                <div>
-                  {select[item] && (
+                <>
+                  {/* {select[item] && (
                     <SelectCard imgsrc={select[item]} key={select[item]} />
-                  )}
+                  )} */}
                   {clothes[item] && (
                     <SelectCard imgsrc={clothes[item]} key={clothes[item]} />
                   )}
-                </div>
+                </>
               );
             })}
           </div>
