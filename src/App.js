@@ -7,12 +7,12 @@ import StepperComponent from "./components/Stepper";
 import { SelectContext } from "./context/context";
 
 function App() {
-  const [select, setSelect] = useState({
-    top: "",
-    bottom: "",
-    shoes: "",
-    outer: "",
-  });
+  // const [select, setSelect] = useState({
+  //   top: "",
+  //   bottom: "",
+  //   shoes: "",
+  //   outer: "",
+  // });
 
   const [nickname, setNickname] = useState(
     window.localStorage.getItem("nickname")
@@ -20,9 +20,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <SelectContext.Provider
-        value={{ select, setSelect, nickname, setNickname }}
-      >
+      <SelectContext.Provider value={{ nickname, setNickname }}>
         <Appbar />
         <Routes>
           <Route path="/" element={<StepperComponent />} />

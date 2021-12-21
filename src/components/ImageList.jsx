@@ -5,6 +5,7 @@ import { useContext, useState } from "react";
 import { useDispatch } from "react-redux";
 import { SelectContext } from "../context/context";
 import { itemData } from "../data/images";
+import { clothActions } from "../store";
 
 const ImageLists = ({ activeStep, completed }) => {
   const { select, setSelect } = useContext(SelectContext);
@@ -12,13 +13,14 @@ const ImageLists = ({ activeStep, completed }) => {
   const dispatch = useDispatch();
 
   const handleClick = (e) => {
-    setSelect((prev) => {
-      prev[activeStep] =
-        select[activeStep] === e.target.src ? "" : e.target.src;
-      return prev;
-    });
+    // setSelect((prev) => {
+    //   prev[activeStep] =
+    //     select[activeStep] === e.target.src ? "" : e.target.src;
+    //   return prev;
+    // });
     setCheck((prev) => (prev === e.target.src ? "" : e.target.src));
-    dispatch({ type: "select", value: e.target.src, step: activeStep });
+    // dispatch({ type: "select", value: e.target.src, step: activeStep });
+    dispatch(clothActions.select({ value: e.target.src, step: activeStep }));
   };
 
   return (

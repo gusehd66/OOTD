@@ -5,6 +5,7 @@ import { itemData } from "../data/images";
 import RandomMain from "./RandomMain";
 import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
+import { clothActions } from "../store";
 
 const RandomResult = () => {
   const { setSelect } = useContext(SelectContext);
@@ -24,14 +25,14 @@ const RandomResult = () => {
   };
 
   const cleanContext = useCallback(() => {
-    setSelect({
-      top: "",
-      bottom: "",
-      shoes: "",
-      outer: "",
-    });
-    dispatch({ type: "init" });
-  }, [setSelect, dispatch]);
+    // setSelect({
+    //   top: "",
+    //   bottom: "",
+    //   shoes: "",
+    //   outer: "",
+    // });
+    dispatch(clothActions.init());
+  }, [dispatch]);
 
   useEffect(() => {
     return () => cleanContext();

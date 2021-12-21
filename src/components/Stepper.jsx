@@ -5,32 +5,25 @@ import StepButton from "@mui/material/StepButton";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import ImageLists from "./ImageList";
-import { SelectContext } from "../context/context";
-import { useState, useContext, useEffect } from "react";
+import { useState, useEffect } from "react";
 import SelectCard from "./SelectCard";
 import ResultComponent from "./ResultComponent";
 import { useDispatch, useSelector } from "react-redux";
+import { clothActions } from "../store/index";
 
 const steps = ["top", "bottom", "shoes", "outer"];
 
 const StepperComponent = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [completed, setCompleted] = useState({});
-  const { select, setSelect } = useContext(SelectContext);
   const dispatch = useDispatch();
   const clothes = useSelector((state) => state);
 
   useEffect(() => {
     return () => {
-      setSelect({
-        top: "",
-        bottom: "",
-        shoes: "",
-        outer: "",
-      });
-      dispatch({ type: "init" });
+      dispatch(clothActions.init());
     };
-  }, [setSelect, dispatch]);
+  }, [dispatch]);
 
   const totalSteps = () => {
     return steps.length;
@@ -72,15 +65,9 @@ const StepperComponent = () => {
   };
 
   const handleReset = () => {
-    setSelect({
-      top: "",
-      bottom: "",
-      shoes: "",
-      outer: "",
-    });
-    dispatch({ type: "init" });
     setActiveStep(0);
     setCompleted({});
+    dispatch(clothActions.init());
   };
 
   return (
@@ -167,14 +154,9 @@ const StepperComponent = () => {
           >
             {steps.map((item) => {
               return (
-                <>
-                  {/* {select[item] && (
-                    <SelectCard imgsrc={select[item]} key={select[item]} />
-                  )} */}
-                  {clothes[item] && (
-                    <SelectCard imgsrc={clothes[item]} key={clothes[item]} />
-                  )}
-                </>
+                <div key={item}>
+                  {clothes[item] && <SelectCard imgsrc={clothes[item]} />}
+                </div>
               );
             })}
           </div>
