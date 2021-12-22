@@ -7,13 +7,6 @@ import StepperComponent from "./components/Stepper";
 import { SelectContext } from "./context/context";
 
 function App() {
-  // const [select, setSelect] = useState({
-  //   top: "",
-  //   bottom: "",
-  //   shoes: "",
-  //   outer: "",
-  // });
-
   const [nickname, setNickname] = useState(
     window.localStorage.getItem("nickname")
   );

@@ -154,9 +154,9 @@ const StepperComponent = () => {
           >
             {steps.map((item) => {
               return (
-                <div key={item}>
-                  {clothes[item] && <SelectCard imgsrc={clothes[item]} />}
-                </div>
+                clothes[item] && (
+                  <SelectCard imgsrc={clothes[item]} key={item} />
+                )
               );
             })}
           </div>

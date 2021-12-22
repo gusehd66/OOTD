@@ -1,25 +1,17 @@
 import { Typography } from "@mui/material";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { SelectContext } from "../context/context";
 import { itemData } from "../data/images";
 import { clothActions } from "../store";
 
 const ImageLists = ({ activeStep, completed }) => {
-  const { select, setSelect } = useContext(SelectContext);
   const [check, setCheck] = useState("");
   const dispatch = useDispatch();
 
   const handleClick = (e) => {
-    // setSelect((prev) => {
-    //   prev[activeStep] =
-    //     select[activeStep] === e.target.src ? "" : e.target.src;
-    //   return prev;
-    // });
     setCheck((prev) => (prev === e.target.src ? "" : e.target.src));
-    // dispatch({ type: "select", value: e.target.src, step: activeStep });
     dispatch(clothActions.select({ value: e.target.src, step: activeStep }));
   };
 

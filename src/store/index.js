@@ -1,5 +1,4 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
-import { createStore } from "redux";
 
 const initialState = {
   top: "",
@@ -27,29 +26,6 @@ const ClothSlice = createSlice({
   },
 });
 
-// const counterReducer = (state = initialState, action) => {
-//   if (action.type === "init") {
-//     console.log("init");
-//     return {
-//       top: "",
-//       bottom: "",
-//       shoes: "",
-//       outer: "",
-//     };
-//   }
-//   if (action.type === "select") {
-//     state[action.step] = action.value;
-//     return {
-//       top: state.top,
-//       bottom: state.bottom,
-//       shoes: state.shoes,
-//       outer: state.outer,
-//     };
-//   }
-//   return state;
-// };
-
-// const store = createStore(counterReducer);
 const store = configureStore({ reducer: ClothSlice.reducer });
 
 export const clothActions = ClothSlice.actions;
