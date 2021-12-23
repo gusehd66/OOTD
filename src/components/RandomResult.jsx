@@ -1,5 +1,4 @@
-import { useContext, useEffect, useCallback, useState } from "react";
-import { SelectContext } from "../context/context";
+import { useEffect, useCallback, useState } from "react";
 import ResultComponent from "./ResultComponent";
 import { itemData } from "../data/images";
 import RandomMain from "./RandomMain";
@@ -8,29 +7,21 @@ import { useDispatch } from "react-redux";
 import { clothActions } from "../store";
 
 const RandomResult = () => {
-  const { setSelect } = useContext(SelectContext);
   const [checkEmpty, setCheckEmpty] = useState(false);
   const dispatch = useDispatch();
 
   const onClick = () => {
     cleanContext();
-    itemData.map((key) => {
+    itemData.forEach((key) => {
       const randomItem = Math.floor(Math.random() * key.items.length);
-      return setSelect((prev) => {
-        prev[key.key] = key.items[randomItem].img;
-        return prev;
-      });
+      dispatch(
+        clothActions.select({ step: key.key, value: key.items[randomItem].img })
+      );
     });
     setCheckEmpty(true);
   };
 
   const cleanContext = useCallback(() => {
-    // setSelect({
-    //   top: "",
-    //   bottom: "",
-    //   shoes: "",
-    //   outer: "",
-    // });
     dispatch(clothActions.init());
   }, [dispatch]);
 

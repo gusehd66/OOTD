@@ -11,13 +11,7 @@ const ClothSlice = createSlice({
   name: "clothes",
   initialState,
   reducers: {
-    init: (state) => {
-      console.log("init");
-      return void ((state.top = ""),
-      (state.bottom = ""),
-      (state.shoes = ""),
-      (state.outer = ""));
-    },
+    init: () => initialState,
     select: (state, action) => {
       state[action.payload.step] === action.payload.value
         ? (state[action.payload.step] = "")
