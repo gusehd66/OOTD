@@ -9,6 +9,7 @@ import { useContext, useState } from "react";
 import { Menu, MenuItem, MenuList } from "@mui/material";
 import { Link } from "react-router-dom";
 import { SelectContext } from "../context/context";
+import Clock from "./Clock";
 
 const Appbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -41,7 +42,7 @@ const Appbar = () => {
         <Toolbar>
           <MenuBar />
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            MY ROOM
+            <Clock />
           </Typography>
           <Button color="inherit">
             {nickname ? (
