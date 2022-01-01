@@ -3,10 +3,11 @@ import axios from "axios";
 import { Icon, Col, Card, Row } from "antd";
 import Meta from "antd/lib/card/Meta";
 import ImageSlider from "../../utils/ImageSlider";
-import { categories } from "./Sections/Datas";
+import { categories, price } from "./Sections/Datas";
 import CheckBox from "./Sections/CheckBox";
+import RadioBox from "./Sections/RadioBox";
 
-function LandingPage() {
+function LandingPage(props) {
   const [products, setProducts] = useState([]);
   const [skip, setSkip] = useState(0);
   const [limit, setLimit] = useState(8);
@@ -16,6 +17,8 @@ function LandingPage() {
     price: [],
   });
 
+  // console.log(props.user.userData && props.user.userData._id);
+  // console.log(response.data.productInfo);
   const getProducts = useCallback(async (body) => {
     await axios.post("/api/product/products", body).then((response) => {
       if (response.data.success) {
@@ -25,9 +28,9 @@ function LandingPage() {
             ...response.data.productInfo,
           ]);
         } else {
-          setProducts((r) => response.data.productInfo);
+          setProducts(response.data.productInfo);
         }
-        setPostSize((r) => response.data.postSize);
+        setPostSize(response.data.postSize);
       } else {
         alert("상품들을 가져오는데 실패 했습니다.");
       }
@@ -75,11 +78,30 @@ function LandingPage() {
     setSkip(0);
   };
 
+  const handlePrice = (value) => {
+    const data = price;
+    let priceArray = [];
+
+    for (let key in data) {
+      if (data[key]._id === parseInt(value, 10)) {
+        priceArray = data[key].array;
+      }
+    }
+
+    return priceArray;
+  };
+
   const handleFilters = (filter, category) => {
     const newFilters = { ...filters };
     newFilters[category] = filter;
 
+    if (category === "price") {
+      const priceValues = handlePrice(filter);
+      newFilters["price"] = priceValues;
+    }
+
     showFilterdResults(newFilters);
+    setFilters(newFilters);
   };
 
   return (
@@ -90,10 +112,20 @@ function LandingPage() {
         </h2>
       </div>
 
-      <CheckBox
-        list={categories}
-        handleFilters={(filter) => handleFilters(filter, "categories")}
-      />
+      <Row gutter={[16, 16]}>
+        <Col lg={12} xs={24}>
+          <CheckBox
+            list={categories}
+            handleFilters={(filter) => handleFilters(filter, "categories")}
+          />
+        </Col>
+        <Col lg={12} xs={24}>
+          <RadioBox
+            list={price}
+            handleFilters={(filter) => handleFilters(filter, "price")}
+          />
+        </Col>
+      </Row>
 
       <Row gutter={(16, 16)}>{renderCards}</Row>
       <br />
