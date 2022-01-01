@@ -5,8 +5,10 @@
   "dependencies": {
     "antd": "^3.24.1",
     "axios": "^0.19.2",
+    "core-js": "^3.20.1",
     "moment": "^2.24.0",
     "react": "^17.0.2",
+    "react-app-polyfill": "^3.0.0",
     "react-dom": "^17.0.2",
     "react-dropzone": "^11.4.2",
     "react-redux": "^7.2.6",

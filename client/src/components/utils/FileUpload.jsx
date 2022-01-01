@@ -66,7 +66,8 @@ const FileUpload = ({ refreshFunction }) => {
             <img
               style={{ minWidth: "300px", width: "300px", height: "240px" }}
               src={`http://localhost:5000/${image}`}
-            ></img>
+              alt="img"
+            />
           </div>
         ))}
       </div>

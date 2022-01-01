@@ -27,6 +27,10 @@ const productSchema = mongoose.Schema(
       maxlength: 100,
       default: 0,
     },
+    categories: {
+      type: Number,
+      default: 1,
+    },
   },
   { timestamps: true }
 );
