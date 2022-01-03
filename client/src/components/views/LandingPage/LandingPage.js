@@ -6,6 +6,7 @@ import ImageSlider from "../../utils/ImageSlider";
 import { categories, price } from "./Sections/Datas";
 import CheckBox from "./Sections/CheckBox";
 import RadioBox from "./Sections/RadioBox";
+import SearchFeature from "./Sections/SearchFeatuer";
 
 function LandingPage(props) {
   const [products, setProducts] = useState([]);
@@ -16,6 +17,7 @@ function LandingPage(props) {
     categories: [],
     price: [],
   });
+  const [searchItem, setSearchItem] = useState("");
 
   // console.log(props.user.userData && props.user.userData._id);
   // console.log(response.data.productInfo);
@@ -104,6 +106,18 @@ function LandingPage(props) {
     setFilters(newFilters);
   };
 
+  const updateSearchItem = (newSearchItem) => {
+    const body = {
+      skip: 0,
+      limit,
+      filters,
+      searchTerm: newSearchItem,
+    };
+    setSkip(0);
+    setSearchItem(newSearchItem);
+    getProducts(body);
+  };
+
   return (
     <div style={{ width: "75%", margin: "3rem auto" }}>
       <div style={{ textAlign: "center" }}>
@@ -126,6 +140,16 @@ function LandingPage(props) {
           />
         </Col>
       </Row>
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          margin: "1rem auto",
+        }}
+      >
+        <SearchFeature refreshFuntion={updateSearchItem} />
+      </div>
 
       <Row gutter={(16, 16)}>{renderCards}</Row>
       <br />
