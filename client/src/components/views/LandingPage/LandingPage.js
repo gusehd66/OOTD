@@ -7,6 +7,7 @@ import { categories, price } from "./Sections/Datas";
 import CheckBox from "./Sections/CheckBox";
 import RadioBox from "./Sections/RadioBox";
 import SearchFeature from "./Sections/SearchFeatuer";
+import { useSelector } from "react-redux";
 
 function LandingPage(props) {
   const [products, setProducts] = useState([]);
@@ -19,8 +20,8 @@ function LandingPage(props) {
   });
   const [searchItem, setSearchItem] = useState("");
 
-  // console.log(props.user.userData && props.user.userData._id);
-  // console.log(response.data.productInfo);
+  const user = useSelector((state) => state.user.userData);
+
   const getProducts = useCallback(async (body) => {
     await axios.post("/api/product/products", body).then((response) => {
       if (response.data.success) {
@@ -48,13 +49,23 @@ function LandingPage(props) {
   }, [skip, limit, getProducts]);
 
   const renderCards = products.map((product, index) => {
-    return (
-      <Col key={index} lg={6} md={8} sm={24}>
-        <Card cover={<ImageSlider images={product.images} />}>
-          <Meta title={product.title} description={`$${product.price}`} />
-        </Card>
-      </Col>
-    );
+    if (product.writer._id === user?._id) {
+      return (
+        <Col key={index} lg={6} md={8} sm={24}>
+          <Card
+            cover={
+              <a href={`/product/${product._id}`}>
+                <ImageSlider images={product.images} />
+              </a>
+            }
+          >
+            <Meta title={product.title} description={`$${product.price}`} />
+          </Card>
+        </Col>
+      );
+    } else {
+      return null;
+    }
   });
 
   const loadMoreHandler = () => {
@@ -151,7 +162,9 @@ function LandingPage(props) {
         <SearchFeature refreshFuntion={updateSearchItem} />
       </div>
 
-      <Row gutter={(16, 16)}>{renderCards}</Row>
+      <Row gutter={(16, 16)}>
+        {user?._id ? renderCards : <h2>로그인을 해주세요</h2>}
+      </Row>
       <br />
       {postSize >= limit && (
         <div style={{ justifyContent: "center" }}>
