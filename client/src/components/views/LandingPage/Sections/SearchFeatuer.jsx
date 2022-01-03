@@ -13,7 +13,7 @@ const SearchFeature = ({ refreshFuntion }) => {
 
   return (
     <Search
-      placeholder="input search text"
+      placeholder="Search Items"
       allowClear
       onChange={searchHandler}
       value={searchItem}
