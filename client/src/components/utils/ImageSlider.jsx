@@ -8,7 +8,10 @@ function ImageSlider(props) {
         <div key={index}>
           <img
             style={{ width: "100%", maxHeight: "150px", objectFit: "contain" }}
-            src={`http://localhost:5000/${image}`}
+            src={
+              `http://localhost:5000/${image}` ||
+              `https://ootd-dongit.herokuapp.com//${image}`
+            }
             alt="img"
           />
         </div>
