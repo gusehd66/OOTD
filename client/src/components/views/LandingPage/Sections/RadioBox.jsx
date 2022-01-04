@@ -1,4 +1,4 @@
-import { Collapse, Checkbox, Radio } from "antd";
+import { Collapse, Radio } from "antd";
 import { useState } from "react";
 
 const { Panel } = Collapse;
