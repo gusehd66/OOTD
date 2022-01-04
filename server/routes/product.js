@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const { Product } = require("../models/Product");
+const { getRegExp } = require("korean-regexp");
 
 //=================================
 //             Product
@@ -65,8 +66,10 @@ router.post("/products", (req, res) => {
   }
 
   if (term) {
+    const reg = getRegExp(`${term}`, { startsWith: true });
     Product.find(findArgs)
-      .find({ $text: { $search: term } })
+      .find({ title: reg })
+      // .find({ $text: { $search: reg } })
       .populate("writer")
       .skip(skip)
       .limit(limit)
