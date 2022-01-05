@@ -44,29 +44,26 @@ function LandingPage(props) {
     const body = {
       skip,
       limit,
+      user: user?._id || null,
     };
     getProducts(body);
-  }, [skip, limit, getProducts]);
+  }, [skip, user, limit, getProducts]);
 
   const renderCards = products.map((product, index) => {
-    if (product.writer._id === user?._id) {
-      return (
-        <Col key={index} lg={6} md={8} sm={24}>
-          <Card
-            style={{ margin: "10px", padding: "8px" }}
-            cover={
-              <a href={`/product/${product._id}`}>
-                <ImageSlider images={product.images} />
-              </a>
-            }
-          >
-            <Meta title={product.title} description={`$${product.price}`} />
-          </Card>
-        </Col>
-      );
-    } else {
-      return null;
-    }
+    return (
+      <Col key={index} lg={6} md={8} sm={24}>
+        <Card
+          style={{ margin: "10px", padding: "8px" }}
+          cover={
+            <a href={`/product/${product._id}`}>
+              <ImageSlider images={product.images} />
+            </a>
+          }
+        >
+          <Meta title={product.title} description={`$${product.price}`} />
+        </Card>
+      </Col>
+    );
   });
 
   const loadMoreHandler = () => {

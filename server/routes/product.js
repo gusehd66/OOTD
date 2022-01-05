@@ -47,6 +47,7 @@ router.post("/products", (req, res) => {
   const limit = req.body.limit ? parseInt(req.body.limit) : 20;
   const skip = req.body.skip ? parseInt(req.body.skip) : 0;
   const term = req.body.searchTerm;
+  const user = req.body.user;
 
   let findArgs = {};
 
@@ -67,7 +68,8 @@ router.post("/products", (req, res) => {
 
   if (term) {
     const reg = getRegExp(`${term}`, { startsWith: true });
-    Product.find(findArgs)
+    Product.find({ writer: user })
+      .find(findArgs)
       .find({ title: reg })
       // .find({ $text: { $search: reg } })
       .populate("writer")
@@ -80,7 +82,8 @@ router.post("/products", (req, res) => {
           .json({ success: true, productInfo, postSize: productInfo.length });
       });
   } else {
-    Product.find(findArgs)
+    Product.find({ writer: user })
+      .find(findArgs)
       .populate("writer")
       .skip(skip)
       .limit(limit)
