@@ -1,0 +1,8 @@
+@media (max-width: 480px) {
+  .ant-steps-navigation > .ant-steps-item.ant-steps-item-active::before {
+    display: none;
+  }
+  .ant-steps-navigation > .ant-steps-item::after {
+    display: none;
+  }
+}

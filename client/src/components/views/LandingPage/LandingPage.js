@@ -53,6 +53,7 @@ function LandingPage(props) {
       return (
         <Col key={index} lg={6} md={8} sm={24}>
           <Card
+            style={{ margin: "10px", padding: "8px" }}
             cover={
               <a href={`/product/${product._id}`}>
                 <ImageSlider images={product.images} />
