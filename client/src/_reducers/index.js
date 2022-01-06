@@ -1,8 +1,10 @@
-import { combineReducers } from 'redux';
-import user from './user_reducer';
+import { combineReducers } from "redux";
+import user from "./user_reducer";
+import selectItem from "./select_item";
 
 const rootReducer = combineReducers({
-    user,
+  user,
+  selectItem,
 });
 
 export default rootReducer;

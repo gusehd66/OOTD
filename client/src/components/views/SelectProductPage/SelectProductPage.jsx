@@ -5,13 +5,13 @@
 import { Steps, Button, Col, Card, Divider } from "antd";
 import Meta from "antd/lib/card/Meta";
 import Axios from "axios";
-import { useCallback, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { Fragment, useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "./SelectProductPage.css";
 
 const { Step } = Steps;
 
-const steps = ["Top", "Bottom", "Shoes", "Outer"];
+const steps = ["top", "bottom", "shoes", "outer"];
 
 const SelectProductPage = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -20,6 +20,9 @@ const SelectProductPage = () => {
   const [skip, setSkip] = useState(0);
   const [limit, setLimit] = useState(8);
   const [postSize, setPostSize] = useState(0);
+
+  const dispatch = useDispatch();
+  const clothes = useSelector((state) => state.selectItem);
 
   const user = useSelector((state) => state.user.userData);
 
@@ -59,6 +62,7 @@ const SelectProductPage = () => {
   const handleReset = () => {
     setActiveStep(0);
     setCompleted({});
+    dispatch({ type: "init" });
   };
 
   const getProducts = useCallback(async (body) => {
@@ -79,19 +83,23 @@ const SelectProductPage = () => {
     });
   }, []);
 
+  const handleClick = (e) => {
+    dispatch({ type: "select", value: e.target.src, step: steps[activeStep] });
+  };
+
   useEffect(() => {
+    dispatch({ type: "init" });
     const body = {
       skip,
       limit,
+      user: user?._id || null,
     };
     getProducts(body);
-  }, [skip, limit, getProducts]);
+    return () => dispatch({ type: "init" });
+  }, [skip, limit, user, getProducts, dispatch]);
 
   const renderCards = products.map((product, index) => {
-    if (
-      product.writer._id === user?._id &&
-      product.categories === activeStep + 1
-    ) {
+    if (product.categories === activeStep + 1) {
       return (
         <Col key={index} lg={6} md={8} sm={24}>
           <Card
@@ -105,6 +113,9 @@ const SelectProductPage = () => {
                 }}
                 alt={product.title}
                 src={`https://ootd-dongit.herokuapp.com/${product.images[0]}`}
+                onClick={
+                  completed[index] ? (e) => e.preventDefault() : handleClick
+                }
               />
             }
           >
@@ -160,6 +171,24 @@ const SelectProductPage = () => {
           </Button>
         ))}
       <Button onClick={handleReset}>Reset</Button>
+      <div
+        style={{
+          display: "flex",
+          width: "100%",
+          gap: "0 10px",
+          height: "15vh",
+          padding: "0 15px",
+          boxSizing: "border-box",
+        }}
+      >
+        {steps.map((item, index) => {
+          return (
+            <Fragment key={index}>
+              {clothes[item] && <img src={clothes[item]} alt="img" />}
+            </Fragment>
+          );
+        })}
+      </div>
     </>
   );
 };

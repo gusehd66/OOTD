@@ -72,6 +72,7 @@ function LandingPage(props) {
       skip: reSkip,
       limit,
       loadMore: true,
+      user: user?._id || null,
     };
 
     getProducts(body);
@@ -83,6 +84,7 @@ function LandingPage(props) {
       skip: 0,
       limit,
       filters,
+      user: user?._id || null,
     };
 
     getProducts(body);
@@ -121,6 +123,7 @@ function LandingPage(props) {
       limit,
       filters,
       searchTerm: newSearchItem,
+      user: user?._id || null,
     };
     setSkip(0);
     setSearchItem(newSearchItem);
