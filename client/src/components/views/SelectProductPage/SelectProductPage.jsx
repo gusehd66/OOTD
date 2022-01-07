@@ -7,6 +7,7 @@ import Meta from "antd/lib/card/Meta";
 import Axios from "axios";
 import { Fragment, useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { selectInit, selectProduct } from "../../../_actions/select_actions";
 import "./SelectProductPage.css";
 
 const { Step } = Steps;
@@ -23,6 +24,8 @@ const SelectProductPage = () => {
 
   const dispatch = useDispatch();
   const clothes = useSelector((state) => state.selectItem);
+  console.log(clothes);
+  // console.log(steps[activeStep]);
 
   const user = useSelector((state) => state.user.userData);
 
@@ -62,7 +65,7 @@ const SelectProductPage = () => {
   const handleReset = () => {
     setActiveStep(0);
     setCompleted({});
-    dispatch({ type: "init" });
+    dispatch(selectInit());
   };
 
   const getProducts = useCallback(async (body) => {
@@ -84,32 +87,42 @@ const SelectProductPage = () => {
   }, []);
 
   const handleClick = (e) => {
-    dispatch({ type: "select", value: e.target.src, step: steps[activeStep] });
+    dispatch(
+      selectProduct({
+        value: e.target.src,
+        step: steps[activeStep],
+        id: e.target.dataset.id,
+      })
+    );
   };
 
   useEffect(() => {
-    dispatch({ type: "init" });
+    dispatch(selectInit());
     const body = {
       skip,
       limit,
       user: user?._id || null,
     };
     getProducts(body);
-    return () => dispatch({ type: "init" });
+    return () => dispatch(selectInit());
   }, [skip, limit, user, getProducts, dispatch]);
 
-  const renderCards = products.map((product, index) => {
-    if (product.categories === activeStep + 1) {
-      return (
+  const renderCards = products.map(
+    (product, index) =>
+      product.categories === activeStep + 1 && (
         <Col key={index} lg={6} md={8} sm={24}>
           <Card
-            style={{ margin: "10px", padding: "8px" }}
+            style={{ margin: "10px", padding: "8px " }}
             cover={
               <img
+                data-id={product._id}
                 style={{
                   width: "100%",
                   maxHeight: "150px",
                   objectFit: "contain",
+                  cursor: "pointer",
+                  opacity:
+                    clothes[steps[activeStep]].id === product._id ? 0.7 : 1,
                 }}
                 alt={product.title}
                 src={`https://ootd-dongit.herokuapp.com/${product.images[0]}`}
@@ -122,11 +135,8 @@ const SelectProductPage = () => {
             <Meta title={product.title} description={`$${product.price}`} />
           </Card>
         </Col>
-      );
-    } else {
-      return null;
-    }
-  });
+      )
+  );
 
   return (
     <>
@@ -184,7 +194,7 @@ const SelectProductPage = () => {
         {steps.map((item, index) => {
           return (
             <Fragment key={index}>
-              {clothes[item] && <img src={clothes[item]} alt="img" />}
+              {clothes[item].src && <img src={clothes[item].src} alt="img" />}
             </Fragment>
           );
         })}

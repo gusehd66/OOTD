@@ -8,7 +8,6 @@ const Auth = (SpecificComponent, option, adminRoute = null) => {
     let user = useSelector((state) => state.user);
     const dispatch = useDispatch();
     useEffect(() => {
-      //To know my current status, send Auth request
       dispatch(auth()).then((response) => {
         //Not Loggined in Status
         if (!response.payload.isAuth) {
