@@ -42,7 +42,7 @@ router.post("/", (req, res) => {
   });
 });
 
-router.post("/products", (req, res) => {
+router.post("/products", async (req, res) => {
   // product collection 상품 정보 가져오기
   const limit = req.body.limit ? parseInt(req.body.limit) : 20;
   const skip = req.body.skip ? parseInt(req.body.skip) : 0;
@@ -107,6 +107,17 @@ router.get("/products_by_id", (req, res) => {
       if (err) return res.status(400).send(err);
       return res.status(200).send({ success: true, product });
     });
+});
+
+router.delete("/delete", (req, res) => {
+  console.log(req);
+  const productId = req.query.id;
+
+  //productId를 이용해서 DB에서 정보를 가져오기
+  Product.deleteOne({ _id: productId }).exec((err, product) => {
+    if (err) return res.status(400).send(err);
+    return res.status(200).send({ success: true, product });
+  });
 });
 
 module.exports = router;

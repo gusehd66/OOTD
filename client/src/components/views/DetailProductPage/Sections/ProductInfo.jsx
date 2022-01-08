@@ -1,6 +1,17 @@
-import { Descriptions } from "antd";
+import { Button, Descriptions } from "antd";
+import Axios from "axios";
 
-const ProductInfo = ({ detail }) => {
+const ProductInfo = ({ detail, productId }) => {
+  const handleDelete = () => {
+    Axios.delete(`/api/product/delete?id=${productId}`).then((response) => {
+      if (response.data.success) {
+        console.log(response.data);
+      } else {
+        alert("삭제를 실패했습니다.");
+      }
+    });
+  };
+
   return (
     <div>
       <Descriptions title="Item Info" bordered>
@@ -13,7 +24,7 @@ const ProductInfo = ({ detail }) => {
           {detail.description}
         </Descriptions.Item>
       </Descriptions>
-      ,
+      <Button onClick={handleDelete}>Delete</Button>
     </div>
   );
 };
