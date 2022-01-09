@@ -48,7 +48,6 @@ const FileUpload = ({ refreshFunction }) => {
             {...getRootProps()}
           >
             <input {...getInputProps()} />
-            {/* <Icon type="plus" style={{ fontSize: "3rem" }} /> */}
             <PlusOutlined />
           </div>
         )}

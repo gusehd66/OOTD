@@ -57,7 +57,7 @@ const UploadProductPage = ({ user }) => {
       description,
       price,
       images,
-      category,
+      categories: category,
     };
     Axios.post("/api/product", body).then((response) => {
       if (response.data.success) {
@@ -69,7 +69,6 @@ const UploadProductPage = ({ user }) => {
       }
     });
   };
-
   return (
     <div style={{ maxWidth: "700px", margin: "2rem auto" }}>
       <div style={{ textAlign: "center", marginBottom: "2rem" }}>

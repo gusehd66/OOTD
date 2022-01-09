@@ -40,12 +40,13 @@ function NavBar() {
           <AlignRightOutlined />
         </Button>
         <Drawer
-          title="Basic Drawer"
+          title="Menu"
           placement="right"
           className="menu_drawer"
           closable={false}
           onClose={onClose}
           visible={visible}
+          width={"65%"}
         >
           <LeftMenu mode="inline" />
           <RightMenu mode="inline" />

@@ -1,7 +1,3 @@
-// const SelectProductPage = () => {
-//   return <div>select</div>;
-// };
-
 import { Steps, Button, Col, Card, Divider } from "antd";
 import Meta from "antd/lib/card/Meta";
 import Axios from "axios";
@@ -145,12 +141,12 @@ const SelectProductPage = () => {
         current={activeStep}
         onChange={onChange}
         direction="horizontal "
-        style={{ padding: "10px" }}
+        style={{ padding: "10px", flexDirection: "row" }}
         size="small"
       >
         {steps.map((label, index) => (
           <Step
-            style={{ width: "100px" }}
+            style={{ width: "0" }}
             key={label}
             title={label}
             status={
@@ -193,9 +189,9 @@ const SelectProductPage = () => {
       >
         {steps.map((item, index) => {
           return (
-            <Fragment key={index}>
-              {clothes[item].src && <img src={clothes[item].src} alt="img" />}
-            </Fragment>
+            clothes[item].src && (
+              <img src={clothes[item].src} alt="img" key={index} />
+            )
           );
         })}
       </div>

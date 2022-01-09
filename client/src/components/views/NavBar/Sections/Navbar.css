@@ -12,7 +12,6 @@
 
 .menu__logo {
   width: 150px;
-  /* float: left; */
 }
 
 .menu__logo a {
@@ -63,6 +62,10 @@
   .menu__container {
     flex-direction: row-reverse;
   }
+  .menu__container .ant-drawer-content {
+    width: 300px;
+  }
+
   .menu_left,
   .menu_rigth {
     display: none;
@@ -70,14 +73,11 @@
 
   .menu__logo a {
     margin-left: -20px;
+    padding: 10px 20px;
   }
 
   .menu__container .ant-menu-item,
   .menu__container .ant-menu-submenu-title {
     padding: 1px 20px;
-  }
-
-  .menu__logo a {
-    padding: 10px 20px;
   }
 }

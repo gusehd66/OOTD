@@ -5,4 +5,14 @@
   .ant-steps-navigation > .ant-steps-item::after {
     display: none;
   }
+  .ant-steps-navigation.ant-steps-vertical
+    > .ant-steps-item.ant-steps-item-active::before {
+    display: none;
+  }
+  .ant-steps-navigation.ant-steps-vertical > .ant-steps-item::after {
+    display: none;
+  }
+  .ant-steps-vertical > .ant-steps-item .ant-steps-item-content {
+    min-height: 10px;
+  }
 }
