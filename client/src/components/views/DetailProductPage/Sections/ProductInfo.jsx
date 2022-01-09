@@ -1,11 +1,15 @@
 import { Button, Descriptions } from "antd";
 import Axios from "axios";
+import { useHistory } from "react-router-dom";
 
 const ProductInfo = ({ detail, productId }) => {
+  const history = useHistory();
+
   const handleDelete = () => {
-    Axios.delete(`/api/product/delete?id=${productId}`).then((response) => {
+    Axios.get(`/api/product/delete?id=${productId}`).then((response) => {
       if (response.data.success) {
-        console.log(response.data);
+        alert("삭제를 완료했습니다.");
+        history.push("/");
       } else {
         alert("삭제를 실패했습니다.");
       }
@@ -24,6 +28,7 @@ const ProductInfo = ({ detail, productId }) => {
           {detail.description}
         </Descriptions.Item>
       </Descriptions>
+      <br />
       <Button onClick={handleDelete}>Delete</Button>
     </div>
   );

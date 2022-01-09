@@ -33,7 +33,7 @@ const DetailProductPage = (props) => {
           <ProductImage detail={product} />
         </Col>
         <Col lg={12} sm={24}>
-          <ProductInfo detail={product} />
+          <ProductInfo detail={product} productId={productId} />
         </Col>
       </Row>
     </div>

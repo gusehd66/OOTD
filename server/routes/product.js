@@ -109,8 +109,7 @@ router.get("/products_by_id", (req, res) => {
     });
 });
 
-router.delete("/delete", (req, res) => {
-  console.log(req);
+router.get("/delete", (req, res) => {
   const productId = req.query.id;
 
   //productId를 이용해서 DB에서 정보를 가져오기
