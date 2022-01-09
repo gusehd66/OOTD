@@ -4,13 +4,13 @@ import { Link } from "react-router-dom";
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 
-function LeftMenu(props) {
+function LeftMenu({ mode }) {
   return (
-    <Menu mode={props.mode}>
+    <Menu mode={mode}>
       <Menu.Item key="home">
         <Link to="/">Home</Link>
       </Menu.Item>
-      <SubMenu title={<span>Room</span>}>
+      <SubMenu title={<span>Room</span>} key="submenu">
         <MenuItemGroup title="실험존">
           <Menu.Item key="select">
             <Link to="/product/select">Select</Link>

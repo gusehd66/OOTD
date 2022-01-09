@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
-import { Icon, Col, Card, Row } from "antd";
+import { Col, Card, Row } from "antd";
 import Meta from "antd/lib/card/Meta";
 import ImageSlider from "../../utils/ImageSlider";
 import { categories, price } from "./Sections/Datas";
@@ -8,8 +8,10 @@ import CheckBox from "./Sections/CheckBox";
 import RadioBox from "./Sections/RadioBox";
 import SearchFeature from "./Sections/SearchFeatuer";
 import { useSelector } from "react-redux";
+import { SkinOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 
-function LandingPage(props) {
+function LandingPage() {
   const [products, setProducts] = useState([]);
   const [skip, setSkip] = useState(0);
   const [limit, setLimit] = useState(8);
@@ -55,9 +57,9 @@ function LandingPage(props) {
         <Card
           style={{ margin: "10px", padding: "8px" }}
           cover={
-            <a href={`/product/${product._id}`}>
+            <Link to={`/product/${product._id}`}>
               <ImageSlider images={product.images} />
-            </a>
+            </Link>
           }
         >
           <Meta title={product.title} description={`$${product.price}`} />
@@ -134,7 +136,7 @@ function LandingPage(props) {
     <div style={{ width: "75%", margin: "3rem auto" }}>
       <div style={{ textAlign: "center" }}>
         <h2>
-          My Room <Icon type="rocket" />{" "}
+          My Room <SkinOutlined />{" "}
         </h2>
       </div>
 

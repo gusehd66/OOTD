@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Dropzone from "react-dropzone";
-import { Icon } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
 import axios from "axios";
 
 const FileUpload = ({ refreshFunction }) => {
@@ -48,7 +48,8 @@ const FileUpload = ({ refreshFunction }) => {
             {...getRootProps()}
           >
             <input {...getInputProps()} />
-            <Icon type="plus" style={{ fontSize: "3rem" }} />
+            {/* <Icon type="plus" style={{ fontSize: "3rem" }} /> */}
+            <PlusOutlined />
           </div>
         )}
       </Dropzone>

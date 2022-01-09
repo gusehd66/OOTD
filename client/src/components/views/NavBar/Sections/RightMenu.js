@@ -3,16 +3,17 @@ import React from "react";
 import { Menu } from "antd";
 import axios from "axios";
 import { USER_SERVER } from "../../../Config";
-import { withRouter, Link } from "react-router-dom";
+import { withRouter, Link, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-function RightMenu(props) {
+function RightMenu({ mode }) {
   const user = useSelector((state) => state.user);
+  const history = useHistory();
 
   const logoutHandler = () => {
     axios.get(`${USER_SERVER}/logout`).then((response) => {
       if (response.status === 200) {
-        props.history.push("/login");
+        history.push("/login");
       } else {
         alert("Log Out Failed");
       }
@@ -21,7 +22,7 @@ function RightMenu(props) {
 
   if (user.userData && !user.userData.isAuth) {
     return (
-      <Menu mode={props.mode}>
+      <Menu mode={mode}>
         <Menu.Item key="mail">
           <Link to="/login">Signin</Link>
         </Menu.Item>
@@ -32,7 +33,7 @@ function RightMenu(props) {
     );
   } else {
     return (
-      <Menu mode={props.mode}>
+      <Menu mode={mode}>
         <Menu.Item key="upload">
           <Link to="/product/upload">Upload</Link>
         </Menu.Item>

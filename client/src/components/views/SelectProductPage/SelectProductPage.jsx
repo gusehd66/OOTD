@@ -8,6 +8,7 @@ import Axios from "axios";
 import { Fragment, useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectInit, selectProduct } from "../../../_actions/select_actions";
+import SelectCompletePage from "./Sections/SelectCompltePage";
 import "./SelectProductPage.css";
 
 const { Step } = Steps;
@@ -24,11 +25,8 @@ const SelectProductPage = () => {
 
   const dispatch = useDispatch();
   const clothes = useSelector((state) => state.selectItem);
-  console.log(clothes);
-  // console.log(steps[activeStep]);
 
   const user = useSelector((state) => state.user.userData);
-
   const totalSteps = () => {
     return steps.length;
   };
@@ -138,7 +136,9 @@ const SelectProductPage = () => {
       )
   );
 
-  return (
+  return allStepsCompleted() ? (
+    <SelectCompletePage />
+  ) : (
     <>
       <Steps
         type="navigation"
