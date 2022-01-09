@@ -3,6 +3,7 @@ import { Typography, Button, Form, Input } from "antd";
 import { useState } from "react";
 import FileUpload from "../../utils/FileUpload";
 import Axios from "axios";
+import { useHistory } from "react-router-dom";
 
 const { Title } = Typography;
 const { TextArea } = Input;
@@ -14,12 +15,14 @@ const Categories = [
   { key: 4, value: "Outer" },
 ];
 
-const UploadProductPage = (props) => {
+const UploadProductPage = ({ user }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
   const [category, setCategory] = useState(1);
   const [images, setImages] = useState([]);
+
+  const history = useHistory();
 
   const titleChangeHandler = (event) => {
     setTitle(event.currentTarget.value);
@@ -42,7 +45,6 @@ const UploadProductPage = (props) => {
   };
 
   const submitHandler = (event) => {
-    event.preventDefault();
     if (!title || !description || !price || !category || !images) {
       return alert("모든 값을 넣어주셔야 합니다.");
     }
@@ -50,7 +52,7 @@ const UploadProductPage = (props) => {
     //서버에 채운 값 request
     const body = {
       //로그인된 id
-      writer: props.user.userData._id,
+      writer: user.userData._id,
       title,
       description,
       price,
@@ -61,7 +63,7 @@ const UploadProductPage = (props) => {
       if (response.data.success) {
         alert("상품 업로드에 성공 했습니다.");
         // history("/");
-        props.history.push("/");
+        history.push("/");
       } else {
         alert("상품 업로드에 실패 했습니다.");
       }
@@ -74,7 +76,7 @@ const UploadProductPage = (props) => {
         <Title level={2}>옷장 업로드</Title>
       </div>
 
-      <Form onSubmit={submitHandler}>
+      <Form onFinish={submitHandler}>
         <FileUpload refreshFunction={updateImages} />
         <br />
         <br />
@@ -99,7 +101,9 @@ const UploadProductPage = (props) => {
         </select>
         <br />
         <br />
-        <Button htmlType="submit">확인</Button>
+        <Button type="primary" htmlType="submit">
+          확인
+        </Button>
       </Form>
     </div>
   );
