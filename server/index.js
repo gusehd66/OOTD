@@ -38,3 +38,9 @@ const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`Server Listening on ${port}`);
 });
+
+//heroku sleep 방지
+let https = require("https");
+setInterval(() => {
+  https.get("https://ootd-dongit.herokuapp.com/");
+}, 600000);

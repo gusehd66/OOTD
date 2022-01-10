@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { Col, Card, Row } from "antd";
 import Meta from "antd/lib/card/Meta";
