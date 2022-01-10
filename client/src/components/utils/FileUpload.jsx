@@ -31,7 +31,6 @@ const FileUpload = ({ refreshFunction }) => {
     setImages(newImages);
     refreshFunction(newImages);
   };
-
   return (
     <div style={{ display: "flex", justifyContent: "sapce-between" }}>
       <Dropzone onDrop={dropHandler}>
@@ -59,12 +58,18 @@ const FileUpload = ({ refreshFunction }) => {
           width: "350px",
           height: "240px",
           overflowX: "scroll",
+          margin: "0 20px",
         }}
       >
         {images.map((image, index) => (
           <div onClick={() => deleteHandler(image)} key={index}>
             <img
-              style={{ minWidth: "300px", width: "300px", height: "240px" }}
+              style={{
+                minWidth: "300px",
+                width: "300px",
+                height: "240px",
+                objectFit: "contain",
+              }}
               src={`https://ootd-dongit.herokuapp.com/${image}`}
               alt="img"
             />

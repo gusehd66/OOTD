@@ -1,4 +1,4 @@
-import { Steps, Button, Col, Card, Divider } from "antd";
+import { Steps, Button, Col, Card, Divider, Row } from "antd";
 import Meta from "antd/lib/card/Meta";
 import Axios from "axios";
 import { Fragment, useCallback, useEffect, useState } from "react";
@@ -15,9 +15,6 @@ const SelectProductPage = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [completed, setCompleted] = useState({});
   const [products, setProducts] = useState([]);
-  const [skip, setSkip] = useState(0);
-  const [limit, setLimit] = useState(8);
-  const [postSize, setPostSize] = useState(0);
 
   const dispatch = useDispatch();
   const clothes = useSelector((state) => state.selectItem);
@@ -63,17 +60,9 @@ const SelectProductPage = () => {
   };
 
   const getProducts = useCallback(async (body) => {
-    await Axios.post("/api/product/products", body).then((response) => {
+    await Axios.post("/api/product/products_select", body).then((response) => {
       if (response.data.success) {
-        if (body.loadMore) {
-          setProducts((products) => [
-            ...products,
-            ...response.data.productInfo,
-          ]);
-        } else {
-          setProducts(response.data.productInfo);
-        }
-        setPostSize(response.data.postSize);
+        setProducts(response.data.productInfo);
       } else {
         alert("상품들을 가져오는데 실패 했습니다.");
       }
@@ -93,26 +82,24 @@ const SelectProductPage = () => {
   useEffect(() => {
     dispatch(selectInit());
     const body = {
-      skip,
-      limit,
       user: user?._id || null,
     };
     getProducts(body);
     return () => dispatch(selectInit());
-  }, [skip, limit, user, getProducts, dispatch]);
+  }, [user, getProducts, dispatch]);
 
   const renderCards = products.map(
     (product, index) =>
       product.categories === activeStep + 1 && (
-        <Col key={index} lg={6} md={8} sm={24}>
+        <Col key={index} lg={6} md={8} xs={12}>
           <Card
-            style={{ margin: "10px", padding: "8px " }}
+            style={{ margin: "10px", padding: "8px ", width: "100%" }}
             cover={
               <img
                 data-id={product._id}
                 style={{
                   width: "100%",
-                  maxHeight: "150px",
+                  height: "150px",
                   objectFit: "contain",
                   cursor: "pointer",
                   opacity:
@@ -133,6 +120,7 @@ const SelectProductPage = () => {
         </Col>
       )
   );
+
   return allStepsCompleted() ? (
     <SelectCompletePage />
   ) : (
@@ -162,7 +150,9 @@ const SelectProductPage = () => {
       </Steps>
 
       {/* Select Page */}
-      {renderCards}
+      <Row gutter={[16, 16]} style={{ width: "100%" }}>
+        {renderCards}
+      </Row>
 
       <Divider />
       <Button disabled={activeStep === 0} onClick={handleBack}>
@@ -181,17 +171,23 @@ const SelectProductPage = () => {
       <div
         style={{
           display: "flex",
-          width: "100%",
+          width: "90%",
           gap: "0 10px",
-          height: "15vh",
-          padding: "0 15px",
+          height: "25vh",
+          margin: "15px",
           boxSizing: "border-box",
+          overflow: "auto",
         }}
       >
         {steps.map((item, index) => {
           return (
             clothes[item].src && (
-              <img src={clothes[item].src} alt="img" key={index} />
+              <img
+                src={clothes[item].src}
+                alt="img"
+                key={index}
+                style={{ margin: "8px 10px" }}
+              />
             )
           );
         })}

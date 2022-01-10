@@ -69,7 +69,6 @@ router.post("/products", async (req, res) => {
   if (term) {
     const reg = getRegExp(`${term}`, { startsWith: true });
     Product.find({ writer: user })
-      .find(findArgs)
       .find({ title: reg })
       // .find({ $text: { $search: reg } })
       .populate("writer")
@@ -83,7 +82,6 @@ router.post("/products", async (req, res) => {
       });
   } else {
     Product.find({ writer: user })
-      .find(findArgs)
       .populate("writer")
       .skip(skip)
       .limit(limit)
@@ -94,6 +92,22 @@ router.post("/products", async (req, res) => {
           .json({ success: true, productInfo, postSize: productInfo.length });
       });
   }
+});
+
+router.post("/products_select", async (req, res) => {
+  // product collection 상품 정보 가져오기
+  const user = req.body.user;
+
+  let findArgs = { writer: user };
+
+  Product.find(findArgs)
+    .populate("writer")
+    .exec((err, productInfo) => {
+      if (err) return res.status(400).json({ success: false, err });
+      return res
+        .status(200)
+        .json({ success: true, productInfo, postSize: productInfo.length });
+    });
 });
 
 router.get("/products_by_id", (req, res) => {

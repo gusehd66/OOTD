@@ -53,9 +53,9 @@ function LandingPage() {
 
   const renderCards = products.map((product, index) => {
     return (
-      <Col key={index} lg={6} md={8} sm={24}>
+      <Col key={index} lg={6} md={8} xs={12}>
         <Card
-          style={{ margin: "10px", padding: "8px" }}
+          style={{ margin: "10px", padding: "8px", width: "100%" }}
           cover={
             <Link to={`/product/${product._id}`}>
               <ImageSlider images={product.images} />
@@ -136,7 +136,7 @@ function LandingPage() {
     <div style={{ width: "75%", margin: "3rem auto" }}>
       <div style={{ textAlign: "center" }}>
         <h2>
-          My Room <SkinOutlined />{" "}
+          My Room <SkinOutlined />
         </h2>
       </div>
 
@@ -165,7 +165,7 @@ function LandingPage() {
         <SearchFeature refreshFuntion={updateSearchItem} />
       </div>
 
-      <Row gutter={(16, 16)}>
+      <Row gutter={[16, 16]}>
         {user?._id ? renderCards : <h2>로그인을 해주세요</h2>}
       </Row>
       <br />

@@ -75,7 +75,7 @@ const UploadProductPage = ({ user }) => {
         <Title level={2}>옷장 업로드</Title>
       </div>
 
-      <Form onFinish={submitHandler}>
+      <Form onFinish={submitHandler} style={{ padding: "0 1rem" }}>
         <FileUpload refreshFunction={updateImages} />
         <br />
         <br />
