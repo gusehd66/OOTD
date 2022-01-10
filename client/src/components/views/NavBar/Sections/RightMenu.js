@@ -1,6 +1,4 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
-import { Menu } from "antd";
+import { Button, Menu } from "antd";
 import axios from "axios";
 import { USER_SERVER } from "../../../Config";
 import { withRouter, Link, useHistory } from "react-router-dom";
@@ -22,14 +20,17 @@ function RightMenu({ mode }) {
 
   if (user.userData && !user.userData.isAuth) {
     return (
-      <Menu mode={mode}>
-        <Menu.Item key="mail">
-          <Link to="/login">Signin</Link>
-        </Menu.Item>
-        <Menu.Item key="app">
-          <Link to="/register">Signup</Link>
-        </Menu.Item>
-      </Menu>
+      //div 없으면 표시안됨
+      <div>
+        <Menu mode={mode}>
+          <Menu.Item key="mail">
+            <Link to="/login">SignIn</Link>
+          </Menu.Item>
+          <Menu.Item key="app">
+            <Link to="/register">Signup</Link>
+          </Menu.Item>
+        </Menu>
+      </div>
     );
   } else {
     return (
@@ -38,7 +39,7 @@ function RightMenu({ mode }) {
           <Link to="/product/upload">Upload</Link>
         </Menu.Item>
         <Menu.Item key="logout">
-          <a onClick={logoutHandler}>Logout</a>
+          <Button onClick={logoutHandler}>Logout</Button>
         </Menu.Item>
       </Menu>
     );

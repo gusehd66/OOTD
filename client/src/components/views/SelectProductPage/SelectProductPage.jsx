@@ -21,8 +21,8 @@ const SelectProductPage = () => {
 
   const dispatch = useDispatch();
   const clothes = useSelector((state) => state.selectItem);
-
   const user = useSelector((state) => state.user.userData);
+
   const totalSteps = () => {
     return steps.length;
   };
@@ -121,7 +121,9 @@ const SelectProductPage = () => {
                 alt={product.title}
                 src={`https://ootd-dongit.herokuapp.com/${product.images[0]}`}
                 onClick={
-                  completed[index] ? (e) => e.preventDefault() : handleClick
+                  completed[activeStep]
+                    ? (e) => e.preventDefault()
+                    : handleClick
                 }
               />
             }
@@ -131,7 +133,6 @@ const SelectProductPage = () => {
         </Col>
       )
   );
-
   return allStepsCompleted() ? (
     <SelectCompletePage />
   ) : (
