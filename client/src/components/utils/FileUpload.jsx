@@ -54,7 +54,8 @@ const FileUpload = ({ refreshFunction }) => {
     margin: 0 20px;
   `;
   const UploadImages = styled.img.attrs((props) => ({
-    src: `https://ootd-dongit.herokuapp.com/${props.image}`,
+    // src: `https://ootd-dongit.herokuapp.com/${props.image}`,
+    src: `http://localhost:5000/${props.image}`,
     alt: "img",
   }))`
     min-width: 300px;

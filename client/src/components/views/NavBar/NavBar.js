@@ -8,6 +8,8 @@ import { AlignRightOutlined } from "@ant-design/icons";
 
 function NavBar() {
   const [visible, setVisible] = useState(false);
+  const [selectKey, setSelectKey] = useState("home");
+  console.log(selectKey);
 
   const showDrawer = () => {
     setVisible(true);
@@ -22,15 +24,23 @@ function NavBar() {
       className="menu"
       style={{ position: "fixed", zIndex: 5, width: "100%" }}
     >
-      <div className="menu__logo">
+      <div className="menu__logo" onClick={() => setSelectKey("home")}>
         <Link to="/">Dongit</Link>
       </div>
       <div className="menu__container">
         <div className="menu_left">
-          <LeftMenu mode="horizontal" />
+          <LeftMenu
+            mode="horizontal"
+            selectkey={selectKey}
+            setKey={setSelectKey}
+          />
         </div>
         <div className="menu_rigth">
-          <RightMenu mode="horizontal" />
+          <RightMenu
+            mode="horizontal"
+            selectkey={selectKey}
+            setKey={setSelectKey}
+          />
         </div>
         <Button
           className="menu__mobile-button"
@@ -48,8 +58,18 @@ function NavBar() {
           visible={visible}
           width={"65%"}
         >
-          <LeftMenu mode="inline" />
-          <RightMenu mode="inline" />
+          <LeftMenu
+            mode="inline"
+            onClose={onClose}
+            selectkey={selectKey}
+            setKey={setSelectKey}
+          />
+          <RightMenu
+            mode="inline"
+            onClose={onClose}
+            selectkey={selectKey}
+            setKey={setSelectKey}
+          />
         </Drawer>
       </div>
     </nav>

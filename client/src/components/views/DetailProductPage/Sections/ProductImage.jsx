@@ -9,8 +9,10 @@ const ProductImage = ({ detail }) => {
       const images = [];
       detail.images.map((item) =>
         images.push({
-          original: `https://ootd-dongit.herokuapp.com/${item}`,
-          thumbnail: `https://ootd-dongit.herokuapp.com/${item}`,
+          // original: `https://ootd-dongit.herokuapp.com/${item}`,
+          original: `http://localhost:5000/${item}`,
+          // thumbnail: `https://ootd-dongit.herokuapp.com/${item}`,
+          thumbnail: `http://localhost:5000/${item}`,
         })
       );
       setImages(images);
