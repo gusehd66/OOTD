@@ -166,7 +166,13 @@ function LandingPage() {
       </div>
 
       <Row gutter={[16, 16]}>
-        {user?._id ? renderCards : <h2>로그인을 해주세요</h2>}
+        {user?._id ? (
+          renderCards
+        ) : (
+          <h2>
+            <Link to="/login">로그인</Link>을 해주세요
+          </h2>
+        )}
       </Row>
       <br />
       {postSize >= limit && (

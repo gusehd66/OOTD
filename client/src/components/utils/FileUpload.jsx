@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Dropzone from "react-dropzone";
 import { PlusOutlined } from "@ant-design/icons";
 import axios from "axios";
+import styled from "styled-components";
 
 const FileUpload = ({ refreshFunction }) => {
   const [images, setImages] = useState([]);
@@ -31,52 +32,56 @@ const FileUpload = ({ refreshFunction }) => {
     setImages(newImages);
     refreshFunction(newImages);
   };
+
+  const UploadContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+  `;
+  const UploadButton = styled.div`
+    width: 300px;
+    height: 240px;
+    border: 1px solid lightgray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  `;
+  const UploadImageBox = styled.div`
+    display: flex;
+    width: 350px;
+    height: 240px;
+    overflow-x: scroll;
+    margin: 0 20px;
+  `;
+  const UploadImages = styled.img.attrs((props) => ({
+    src: `https://ootd-dongit.herokuapp.com/${props.image}`,
+    alt: "img",
+  }))`
+    min-width: 300px;
+    width: 300px;
+    height: 240px;
+    object-fit: contain;
+  `;
+
   return (
-    <div style={{ display: "flex", justifyContent: "sapce-between" }}>
+    <UploadContainer>
       <Dropzone onDrop={dropHandler}>
         {({ getRootProps, getInputProps }) => (
-          <div
-            style={{
-              width: 300,
-              height: 240,
-              border: "1px solid lightgray",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-            {...getRootProps()}
-          >
+          <UploadButton {...getRootProps()}>
             <input {...getInputProps()} />
             <PlusOutlined />
-          </div>
+          </UploadButton>
         )}
       </Dropzone>
 
-      <div
-        style={{
-          display: "flex",
-          width: "350px",
-          height: "240px",
-          overflowX: "scroll",
-          margin: "0 20px",
-        }}
-      >
+      <UploadImageBox>
         {images.map((image, index) => (
           <div onClick={() => deleteHandler(image)} key={index}>
-            <img
-              style={{
-                minWidth: "300px",
-                width: "300px",
-                height: "240px",
-                objectFit: "contain",
-              }}
-              src={`https://ootd-dongit.herokuapp.com/${image}`}
-              alt="img"
-            />
+            <UploadImages image={image} />
           </div>
         ))}
-      </div>
-    </div>
+      </UploadImageBox>
+    </UploadContainer>
   );
 };
 

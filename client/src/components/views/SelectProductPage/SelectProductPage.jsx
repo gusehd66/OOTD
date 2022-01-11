@@ -93,7 +93,12 @@ const SelectProductPage = () => {
       product.categories === activeStep + 1 && (
         <Col key={index} lg={6} md={8} xs={12}>
           <Card
-            style={{ margin: "10px", padding: "8px ", width: "100%" }}
+            style={{
+              margin: "0 10px",
+              padding: "8px ",
+              width: "100%",
+              boxSizing: "border-box",
+            }}
             cover={
               <img
                 data-id={product._id}

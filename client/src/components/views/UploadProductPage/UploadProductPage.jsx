@@ -77,12 +77,12 @@ const UploadProductPage = ({ user }) => {
 
       <Form onFinish={submitHandler} style={{ padding: "0 1rem" }}>
         <FileUpload refreshFunction={updateImages} />
-        <br />
-        <br />
         <label>이름</label>
-        <Input onChange={titleChangeHandler} value={title} />
-        <br />
-        <br />
+        <Input
+          onChange={titleChangeHandler}
+          value={title}
+          style={{ marginBottom: "20px" }}
+        />
         <label>설명</label>
         <TextArea onChange={descriptionChangeHandler} value={description} />
         <br />
