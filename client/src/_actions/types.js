@@ -5,3 +5,4 @@ export const LOGOUT_USER = "logout_user";
 
 export const SELECT_PRODUCT = "select_product";
 export const INIT_PRODUCT = "init_product";
+export const RANDOM_SELECT = "random_select";

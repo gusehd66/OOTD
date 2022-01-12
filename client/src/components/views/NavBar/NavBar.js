@@ -9,7 +9,6 @@ import { AlignRightOutlined } from "@ant-design/icons";
 function NavBar() {
   const [visible, setVisible] = useState(false);
   const [selectKey, setSelectKey] = useState("home");
-  console.log(selectKey);
 
   const showDrawer = () => {
     setVisible(true);

@@ -1,4 +1,4 @@
-import { SELECT_PRODUCT, INIT_PRODUCT } from "../_actions/types";
+import { SELECT_PRODUCT, INIT_PRODUCT, RANDOM_SELECT } from "../_actions/types";
 
 const initialState = {
   top: { src: "", id: "" },
@@ -8,11 +8,10 @@ const initialState = {
 };
 
 const selectItem = (state = initialState, action) => {
+  const newState = state;
+  const payload = action.payload;
   switch (action.type) {
     case SELECT_PRODUCT:
-      const newState = state;
-      const payload = action.payload;
-
       newState[payload.step] =
         newState[payload.step].src === payload.value
           ? { src: "", id: "" }
@@ -21,7 +20,9 @@ const selectItem = (state = initialState, action) => {
       return {
         ...newState,
       };
-
+    case RANDOM_SELECT:
+      newState[payload.step] = { src: payload.value, id: payload.id };
+      return { ...newState };
     case INIT_PRODUCT:
       return { ...initialState };
     default:

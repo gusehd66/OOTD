@@ -10,6 +10,7 @@ import Footer from "./views/Footer/Footer";
 import UploadProductPage from "./views/UploadProductPage/UploadProductPage";
 import DetailProductPage from "./views/DetailProductPage/DetailProductPage";
 import SelectProductPage from "./views/SelectProductPage/SelectProductPage";
+import RandomSelectPage from "./views/RandomSelectPage/RandomSelectPage";
 
 //null   Anyone Can go inside
 //true   only logged in user can go inside
@@ -33,6 +34,11 @@ function App() {
             exact
             path="/product/select"
             component={Auth(SelectProductPage, null)}
+          />
+          <Route
+            exact
+            path="/product/random"
+            component={Auth(RandomSelectPage, null)}
           />
           <Route
             exact

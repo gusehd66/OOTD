@@ -17,7 +17,7 @@ function LeftMenu({ mode, onClose, selectkey, setKey }) {
             <Link to="/product/select">Select</Link>
           </Menu.Item>
           <Menu.Item key="setting:2" onClick={handleClick}>
-            Option 2
+            <Link to="/product/random">Random</Link>
           </Menu.Item>
         </MenuItemGroup>
       </SubMenu>

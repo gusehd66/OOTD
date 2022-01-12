@@ -8,7 +8,6 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import promiseMiddleware from "redux-promise";
 import ReduxThunk from "redux-thunk";
-import store from "./_reducers/select_item";
 
 const createStoreWithMiddleware = applyMiddleware(
   promiseMiddleware,

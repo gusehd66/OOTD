@@ -1,4 +1,4 @@
-import { SELECT_PRODUCT, INIT_PRODUCT } from "../_actions/types";
+import { SELECT_PRODUCT, INIT_PRODUCT, RANDOM_SELECT } from "../_actions/types";
 
 export const selectInit = () => {
   return {
@@ -9,6 +9,13 @@ export const selectInit = () => {
 export const selectProduct = (payload) => {
   return {
     type: SELECT_PRODUCT,
-    payload: payload,
+    payload,
+  };
+};
+
+export const randomSelect = (payload) => {
+  return {
+    type: RANDOM_SELECT,
+    payload,
   };
 };

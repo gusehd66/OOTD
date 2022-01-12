@@ -33,37 +33,6 @@ const FileUpload = ({ refreshFunction }) => {
     refreshFunction(newImages);
   };
 
-  const UploadContainer = styled.div`
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 30px;
-  `;
-  const UploadButton = styled.div`
-    width: 300px;
-    height: 240px;
-    border: 1px solid lightgray;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  `;
-  const UploadImageBox = styled.div`
-    display: flex;
-    width: 350px;
-    height: 240px;
-    overflow-x: scroll;
-    margin: 0 20px;
-  `;
-  const UploadImages = styled.img.attrs((props) => ({
-    // src: `https://ootd-dongit.herokuapp.com/${props.image}`,
-    src: `http://localhost:5000/${props.image}`,
-    alt: "img",
-  }))`
-    min-width: 300px;
-    width: 300px;
-    height: 240px;
-    object-fit: contain;
-  `;
-
   return (
     <UploadContainer>
       <Dropzone onDrop={dropHandler}>
@@ -85,5 +54,36 @@ const FileUpload = ({ refreshFunction }) => {
     </UploadContainer>
   );
 };
+
+const UploadContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+`;
+const UploadButton = styled.div`
+  width: 300px;
+  height: 240px;
+  border: 1px solid lightgray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+const UploadImageBox = styled.div`
+  display: flex;
+  width: 350px;
+  height: 240px;
+  overflow-x: scroll;
+  margin: 0 20px;
+`;
+const UploadImages = styled.img.attrs((props) => ({
+  // src: `https://ootd-dongit.herokuapp.com/${props.image}`,
+  src: `http://localhost:5000/${props.image}`,
+  alt: "img",
+}))`
+  min-width: 300px;
+  width: 300px;
+  height: 240px;
+  object-fit: contain;
+`;
 
 export default FileUpload;

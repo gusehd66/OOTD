@@ -1,7 +1,7 @@
 import { Steps, Button, Col, Card, Divider, Row } from "antd";
 import Meta from "antd/lib/card/Meta";
 import Axios from "axios";
-import { Fragment, useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectInit, selectProduct } from "../../../_actions/select_actions";
 import SelectCompletePage from "./Sections/SelectCompltePage";
