@@ -15,19 +15,25 @@ const FileUpload = ({ refreshFunction }) => {
     formData.append("file", files[0]);
     axios.post("/api/product/image", formData, config).then((response) => {
       if (response.data.success) {
-        setImages([...images, response.data.filePath]);
-        refreshFunction([...images, response.data.filePath]);
+        setImages([
+          ...images,
+          { image: response.data.filePath, key: response.data.fileKey },
+        ]);
+        refreshFunction([
+          ...images,
+          { image: response.data.filePath, key: response.data.fileKey },
+        ]);
       } else {
         alert("파일을 저장하는데 실패했습니다.");
       }
     });
   };
-
   const deleteHandler = (image) => {
     const currentIndex = images.indexOf(image);
 
     let newImages = [...images];
-    newImages.splice(currentIndex, 1);
+    const deleteKey = newImages.splice(currentIndex, 1)[0];
+    axios.post("/api/product/delete", { key: deleteKey.key });
 
     setImages(newImages);
     refreshFunction(newImages);
@@ -45,9 +51,9 @@ const FileUpload = ({ refreshFunction }) => {
       </Dropzone>
 
       <UploadImageBox>
-        {images.map((image, index) => (
-          <div onClick={() => deleteHandler(image)} key={index}>
-            <UploadImages image={image} />
+        {images.map((item, index) => (
+          <div onClick={() => deleteHandler(item)} key={index}>
+            <UploadImages src={item.image} />
           </div>
         ))}
       </UploadImageBox>
@@ -76,8 +82,7 @@ const UploadImageBox = styled.div`
   margin: 0 20px;
 `;
 const UploadImages = styled.img.attrs((props) => ({
-  // src: `https://ootd-dongit.herokuapp.com/${props.image}`,
-  src: `http://localhost:5000/${props.image}`,
+  src: props.src,
   alt: "img",
 }))`
   min-width: 300px;

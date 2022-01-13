@@ -50,7 +50,6 @@ function LandingPage() {
     };
     getProducts(body);
   }, [skip, user, limit, getProducts]);
-
   const renderCards = products.map((product, index) => {
     return (
       <Col key={index} lg={6} md={8} xs={12}>

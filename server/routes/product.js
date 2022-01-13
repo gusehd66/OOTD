@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const aws = require("aws-sdk");
+const multerS3 = require("multer-s3");
 const multer = require("multer");
 const { Product } = require("../models/Product");
 const { getRegExp } = require("korean-regexp");
@@ -8,27 +10,37 @@ const { getRegExp } = require("korean-regexp");
 //             Product
 //=================================
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads/");
+const config = require("../config/key");
+const s3 = new aws.S3({
+  accessKeyId: config.s3_access_key,
+  secretAccessKey: config.s3_secretaccess_key,
+  region: config.s3_bucket_region,
+});
+
+const storage = multerS3({
+  s3: s3,
+  bucket: "ootd-picture",
+  contentType: multerS3.AUTO_CONTENT_TYPE,
+  ACL: "public-read",
+  metadata: function (req, file, cb) {
+    cb(null, { fieldName: file.fieldname });
   },
-  filename: function (req, file, cb) {
-    cb(null, `${Date.now()}_${file.originalname}`);
+  key: function (req, file, cb) {
+    cb(null, `uploads/${Date.now()}_${file.originalname}`);
   },
 });
 
 const upload = multer({ storage: storage }).single("file");
 
 router.post("/image", (req, res) => {
-  // 가져온 이미지 저장
   upload(req, res, (err) => {
     if (err) {
       return req.json({ success: false, err });
     }
     return res.json({
       success: true,
-      filePath: res.req.file.path,
-      fileName: res.req.file.filename,
+      filePath: res.req.file.location,
+      fileKey: res.req.file.key,
     });
   });
 });
@@ -123,14 +135,25 @@ router.get("/products_by_id", (req, res) => {
     });
 });
 
-router.get("/delete", (req, res) => {
+router.post("/delete", (req, res) => {
   const productId = req.query.id;
-
+  s3.deleteObject(
+    {
+      Bucket: "ootd-picture", // 사용자 버켓 이름
+      Key: req.body.key, // 버켓 내 경로
+    },
+    (err, data) => {
+      if (err) {
+        throw err;
+      }
+    }
+  );
   //productId를 이용해서 DB에서 정보를 가져오기
-  Product.deleteOne({ _id: productId }).exec((err, product) => {
-    if (err) return res.status(400).send(err);
-    return res.status(200).send({ success: true, product });
-  });
+  productId &&
+    Product.deleteOne({ _id: productId }).exec((err, product) => {
+      if (err) return res.status(400).send(err);
+      return res.status(200).send({ success: true, product });
+    });
 });
 
 module.exports = router;

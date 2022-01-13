@@ -111,8 +111,7 @@ const SelectProductPage = () => {
                     clothes[steps[activeStep]].id === product._id ? 0.7 : 1,
                 }}
                 alt={product.title}
-                // src={`https://ootd-dongit.herokuapp.com/${product.images[0]}`}
-                src={`http://localhost:5000/${product.images[0]}`}
+                src={product.images[0].image}
                 onClick={
                   completed[activeStep]
                     ? (e) => e.preventDefault()

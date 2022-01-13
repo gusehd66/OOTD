@@ -6,7 +6,9 @@ const ProductInfo = ({ detail, productId }) => {
   const history = useHistory();
 
   const handleDelete = () => {
-    Axios.get(`/api/product/delete?id=${productId}`).then((response) => {
+    Axios.post(`/api/product/delete?id=${productId}`, {
+      key: detail.images[0].key,
+    }).then((response) => {
       if (response.data.success) {
         alert("삭제를 완료했습니다.");
         history.push("/");

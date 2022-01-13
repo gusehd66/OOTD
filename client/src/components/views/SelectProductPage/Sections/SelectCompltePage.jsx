@@ -4,18 +4,21 @@ import styled from "styled-components";
 const SelectCompletePage = () => {
   const clothes = useSelector((state) => state.selectItem);
   const ProductKey = Object.keys(clothes).reverse();
-
+  console.log(clothes);
   return (
     <Container>
-      {ProductKey.map((cloth, idx) => (
-        <ProductImage
-          top={topCss[idx]}
-          left={leftCss[idx]}
-          src={clothes[cloth].src}
-          category={cloth}
-          key={cloth}
-        />
-      ))}
+      {ProductKey.map(
+        (cloth, idx) =>
+          clothes[cloth].src !== "" && (
+            <ProductImage
+              top={topCss[idx]}
+              left={leftCss[idx]}
+              src={clothes[cloth].src.image}
+              category={cloth}
+              key={cloth}
+            />
+          )
+      )}
     </Container>
   );
 };

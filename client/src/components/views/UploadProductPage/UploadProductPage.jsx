@@ -48,7 +48,6 @@ const UploadProductPage = ({ user }) => {
     if (!title || !description || !price || !category || !images) {
       return alert("모든 값을 넣어주셔야 합니다.");
     }
-
     //서버에 채운 값 request
     const body = {
       //로그인된 id
@@ -62,13 +61,13 @@ const UploadProductPage = ({ user }) => {
     Axios.post("/api/product", body).then((response) => {
       if (response.data.success) {
         alert("상품 업로드에 성공 했습니다.");
-        // history("/");
         history.push("/");
       } else {
         alert("상품 업로드에 실패 했습니다.");
       }
     });
   };
+
   return (
     <div style={{ maxWidth: "700px", margin: "2rem auto" }}>
       <div style={{ textAlign: "center", marginBottom: "2rem" }}>

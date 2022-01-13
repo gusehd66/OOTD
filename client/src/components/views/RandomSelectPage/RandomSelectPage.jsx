@@ -29,26 +29,27 @@ const RandomSelectPage = () => {
     getProducts(body);
   }, [user, getProducts]);
 
-  const select = () =>
+  const handleClick = () =>
     steps.forEach((step, idx) => {
-      const random = products.filter((product, index) => {
+      const random = products.filter((product) => {
         return product.categories === idx + 1;
       });
       const randomItem = random[Math.floor(Math.random() * random.length)];
-      dispatch(
-        randomSelect({
-          value: `http://localhost:5000/${randomItem.images[0]}`,
-          step: step,
-          id: randomItem._id,
-        })
-      );
+      randomItem &&
+        dispatch(
+          randomSelect({
+            value: randomItem.images[0],
+            step: step,
+            id: randomItem._id,
+          })
+        );
     });
 
   return (
     <>
       <SelectCompletePage />
       <Button
-        onClick={select}
+        onClick={handleClick}
         style={{
           left: "50%",
           transform: "translateX(-50%)",
