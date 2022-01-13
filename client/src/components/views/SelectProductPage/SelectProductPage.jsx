@@ -72,7 +72,7 @@ const SelectProductPage = () => {
   const handleClick = (e) => {
     dispatch(
       selectProduct({
-        value: e.target.src,
+        value: { image: e.target.src, key: e.target.dataset.imgkey },
         step: steps[activeStep],
         id: e.target.dataset.id,
       })
@@ -102,6 +102,7 @@ const SelectProductPage = () => {
             cover={
               <img
                 data-id={product._id}
+                data-imgkey={product.images[0].key}
                 style={{
                   width: "100%",
                   height: "150px",
@@ -188,7 +189,7 @@ const SelectProductPage = () => {
           return (
             clothes[item].src && (
               <img
-                src={clothes[item].src}
+                src={clothes[item].src.image}
                 alt="img"
                 key={index}
                 style={{ margin: "8px 10px" }}

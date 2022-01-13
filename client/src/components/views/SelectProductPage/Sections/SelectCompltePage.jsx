@@ -4,7 +4,7 @@ import styled from "styled-components";
 const SelectCompletePage = () => {
   const clothes = useSelector((state) => state.selectItem);
   const ProductKey = Object.keys(clothes).reverse();
-  console.log(clothes);
+
   return (
     <Container>
       {ProductKey.map(
