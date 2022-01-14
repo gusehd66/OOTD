@@ -17,14 +17,17 @@ const selectItem = (state = initialState, action) => {
           ? { src: "", id: "" }
           : { src: payload.value, id: payload.id };
 
-      return {
-        ...newState,
-      };
+      return { ...newState };
     case RANDOM_SELECT:
       newState[payload.step] = { src: payload.value, id: payload.id };
       return { ...newState };
     case INIT_PRODUCT:
-      return { ...initialState };
+      return {
+        top: { src: "", id: "" },
+        bottom: { src: "", id: "" },
+        shoes: { src: "", id: "" },
+        outer: { src: "", id: "" },
+      };
     default:
       return state;
   }

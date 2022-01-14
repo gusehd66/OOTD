@@ -29,7 +29,7 @@ const leftCss = ["35%", "50%", "50%", "50%"];
 const Container = styled.div`
   position: relative;
   width: 100vw;
-  height: 78vh;
+  height: 76vh;
   overflow: hidden;
 `;
 const ProductImage = styled.img.attrs((props) => ({

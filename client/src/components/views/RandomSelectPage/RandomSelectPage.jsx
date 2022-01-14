@@ -4,9 +4,11 @@ import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { randomSelect } from "../../../_actions/select_actions";
 import SelectCompletePage from "../SelectProductPage/Sections/SelectCompltePage";
+import RandomWaitPage from "./Sections/RandomWaitPage";
 
 const RandomSelectPage = () => {
   const [products, setProducts] = useState([]);
+  const [clickStart, setClickStart] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.userData);
 
@@ -29,7 +31,7 @@ const RandomSelectPage = () => {
     getProducts(body);
   }, [user, getProducts]);
 
-  const handleClick = () =>
+  const handleClick = () => {
     steps.forEach((step, idx) => {
       const random = products.filter((product) => {
         return product.categories === idx + 1;
@@ -44,10 +46,16 @@ const RandomSelectPage = () => {
           })
         );
     });
+    setClickStart(true);
+  };
 
   return (
     <>
-      <SelectCompletePage />
+      {clickStart ? (
+        <SelectCompletePage />
+      ) : (
+        <RandomWaitPage products={products} />
+      )}
       <Button
         onClick={handleClick}
         style={{
