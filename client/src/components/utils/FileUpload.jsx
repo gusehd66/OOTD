@@ -73,6 +73,7 @@ const UploadButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  border: solid 1px grey;
 `;
 const UploadImageBox = styled.div`
   display: flex;

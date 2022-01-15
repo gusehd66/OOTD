@@ -1,8 +1,15 @@
 @import "~react-image-gallery/styles/css/image-gallery.css";
 
+@font-face {
+  font-family: "GmarketM";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
+    format("truetype");
+}
+
 .image-gallery-slide {
   height: 500px;
   overflow: hidden;
+  background-color: whitesmoke;
 }
 .image-gallery-slide img {
   width: auto;
@@ -28,7 +35,22 @@ body {
   font-size: 14px;
   line-height: 1.5;
   color: #24292e;
-  background-color: #fff;
+  height: 100%;
+  background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.15) 0%,
+      rgba(0, 0, 0, 0.15) 100%
+    ),
+    radial-gradient(
+        at top center,
+        rgba(255, 255, 255, 0.4) 0%,
+        rgba(0, 0, 0, 0.4) 120%
+      )
+      #989898;
+  background-blend-mode: multiply, multiply;
+}
+#root {
+  font-family: "GmarketM";
 }
 
 code {

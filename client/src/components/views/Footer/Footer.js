@@ -1,23 +1,22 @@
-import React from "react";
 import { SkinOutlined } from "@ant-design/icons";
+import styled from "styled-components";
 
 function Footer() {
   return (
-    <div
-      style={{
-        height: "80px",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        fontSize: "1rem",
-      }}
-    >
+    <FooterContainer>
       <p>
         OOTD by Dongit <SkinOutlined />
       </p>
-    </div>
+    </FooterContainer>
   );
 }
+
+const FooterContainer = styled.div`
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+`;
 
 export default Footer;

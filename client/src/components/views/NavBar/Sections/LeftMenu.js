@@ -7,7 +7,12 @@ const MenuItemGroup = Menu.ItemGroup;
 function LeftMenu({ mode, onClose, selectkey, setKey }) {
   const handleClick = (e) => setKey(e.key);
   return (
-    <Menu mode={mode} onSelect={onClose} selectedKeys={selectkey}>
+    <Menu
+      mode={mode}
+      onSelect={onClose}
+      selectedKeys={selectkey}
+      style={{ minWidth: "200px" }}
+    >
       <Menu.Item key="home" onClick={handleClick}>
         <Link to="/">Home</Link>
       </Menu.Item>
