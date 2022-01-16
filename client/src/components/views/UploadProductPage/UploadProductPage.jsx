@@ -16,47 +16,44 @@ const Categories = [
 ];
 
 const UploadProductPage = ({ user }) => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState(0);
-  const [category, setCategory] = useState(1);
   const [images, setImages] = useState([]);
+  const [state, setState] = useState({
+    title: "",
+    description: "",
+    price: 0,
+    categories: 1,
+  });
 
   const history = useHistory();
 
-  const titleChangeHandler = (event) => {
-    setTitle(event.currentTarget.value);
-  };
-
-  const descriptionChangeHandler = (event) => {
-    setDescription(event.currentTarget.value);
-  };
-
-  const priceChangeHandler = (event) => {
-    setPrice(event.currentTarget.value);
-  };
-
-  const categoryChangeHandler = (event) => {
-    setCategory(event.currentTarget.value);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
   const updateImages = (newImages) => {
     setImages(newImages);
   };
 
-  const submitHandler = (event) => {
-    if (!title || !description || !price || !category || !images) {
+  const submitHandler = () => {
+    if (
+      !state.title ||
+      !state.description ||
+      !state.price ||
+      !state.categories ||
+      !images
+    ) {
       return alert("모든 값을 넣어주셔야 합니다.");
     }
     //서버에 채운 값 request
     const body = {
       //로그인된 id
       writer: user.userData._id,
-      title,
-      description,
-      price,
       images,
-      categories: category,
+      ...state,
     };
     Axios.post("/api/product", body).then((response) => {
       if (response.data.success) {
@@ -78,19 +75,33 @@ const UploadProductPage = ({ user }) => {
         <FileUpload refreshFunction={updateImages} />
         <label>이름</label>
         <Input
-          onChange={titleChangeHandler}
-          value={title}
+          onChange={handleChange}
+          value={state.title}
+          name="title"
           style={{ marginBottom: "20px" }}
         />
         <label>설명</label>
-        <TextArea onChange={descriptionChangeHandler} value={description} />
+        <TextArea
+          onChange={handleChange}
+          value={state.description}
+          name="description"
+        />
         <br />
         <br />
         <label>가격($)</label>
-        <Input type="number" onChange={priceChangeHandler} value={price} />
+        <Input
+          type="number"
+          onChange={handleChange}
+          value={state.price}
+          name="price"
+        />
         <br />
         <br />
-        <select onChange={categoryChangeHandler} value={category}>
+        <select
+          onChange={handleChange}
+          value={state.categories}
+          name="categories"
+        >
           {Categories.map((item) => (
             <option key={item.key} value={item.key}>
               {item.value}

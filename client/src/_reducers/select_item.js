@@ -10,10 +10,11 @@ const initialState = {
 const selectItem = (state = initialState, action) => {
   const newState = state;
   const payload = action.payload;
+
   switch (action.type) {
     case SELECT_PRODUCT:
       newState[payload.step] =
-        newState[payload.step].src === payload.value
+        newState[payload.step].src.key === payload.value.key
           ? { src: "", id: "" }
           : { src: payload.value, id: payload.id };
 
