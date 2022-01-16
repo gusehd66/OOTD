@@ -61,7 +61,7 @@ router.post("/products", async (req, res) => {
   const term = req.body.searchTerm;
   const user = req.body.user;
 
-  let findArgs = {};
+  let findArgs = { writer: user };
 
   for (let key in req.body.filters) {
     if (req.body.filters[key].length > 0) {
@@ -80,7 +80,7 @@ router.post("/products", async (req, res) => {
 
   if (term) {
     const reg = getRegExp(`${term}`, { startsWith: true });
-    Product.find({ writer: user })
+    Product.find(findArgs)
       .find({ title: reg })
       // .find({ $text: { $search: reg } })
       .populate("writer")
@@ -93,7 +93,7 @@ router.post("/products", async (req, res) => {
           .json({ success: true, productInfo, postSize: productInfo.length });
       });
   } else {
-    Product.find({ writer: user })
+    Product.find(findArgs)
       .populate("writer")
       .skip(skip)
       .limit(limit)

@@ -46,7 +46,12 @@ const LoginPage = (props) => {
         onSubmit={onSubmitHandler}
       >
         <label>Email</label>
-        <input type="email" value={email} onChange={onEmailChange} />
+        <input
+          type="email"
+          value={email}
+          onChange={onEmailChange}
+          style={{ fontFamily: "sans-serif" }}
+        />
 
         <label>Password</label>
         <input type="password" value={password} onChange={onPasswordChange} />

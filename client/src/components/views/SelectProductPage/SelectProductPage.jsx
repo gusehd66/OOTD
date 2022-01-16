@@ -161,19 +161,23 @@ const SelectProductPage = () => {
       </Row>
 
       <Divider />
-      <Button disabled={activeStep === 0} onClick={handleBack}>
-        Prev
-      </Button>
-      <Button onClick={handleNext}>Next</Button>
-      {activeStep !== steps.length &&
-        (completed[activeStep] ? (
-          <span>{activeStep + 1} already completed</span>
-        ) : (
-          <Button onClick={handleComplete}>
-            {completedSteps() === totalSteps() - 1 ? "Finish" : "Complete"}
-          </Button>
-        ))}
-      <Button onClick={handleReset}>Reset</Button>
+      <div
+        style={{ display: "flex", justifyContent: "center", columnGap: "10px" }}
+      >
+        <Button disabled={activeStep === 0} onClick={handleBack}>
+          Prev
+        </Button>
+        <Button onClick={handleNext}>Next</Button>
+        {activeStep !== steps.length &&
+          (completed[activeStep] ? (
+            <span>{activeStep + 1} already completed</span>
+          ) : (
+            <Button onClick={handleComplete}>
+              {completedSteps() === totalSteps() - 1 ? "Finish" : "Complete"}
+            </Button>
+          ))}
+        <Button onClick={handleReset}>Reset</Button>
+      </div>
       <div
         style={{
           display: "flex",
