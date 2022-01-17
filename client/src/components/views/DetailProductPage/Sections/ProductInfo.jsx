@@ -31,7 +31,9 @@ const ProductInfo = ({ detail, productId }) => {
         </Descriptions.Item>
       </Descriptions>
       <br />
-      <Button onClick={handleDelete}>Delete</Button>
+      <Button onClick={handleDelete} type="primary" danger>
+        Delete
+      </Button>
     </div>
   );
 };

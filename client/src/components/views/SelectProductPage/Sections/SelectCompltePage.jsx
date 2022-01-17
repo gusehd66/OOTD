@@ -11,8 +11,7 @@ const SelectCompletePage = () => {
         (cloth, idx) =>
           clothes[cloth].src !== "" && (
             <ProductImage
-              top={topCss[idx]}
-              left={leftCss[idx]}
+              index={idx}
               src={clothes[cloth].src.image}
               category={cloth}
               key={cloth}
@@ -23,8 +22,14 @@ const SelectCompletePage = () => {
   );
 };
 
-const topCss = ["25%", "90%", "65%", "35%"];
-const leftCss = ["35%", "50%", "50%", "50%"];
+//  [outer,shoes,bottom,top]
+const topCss = ["35%", "88%", "60%", "25%"];
+const leftCss = ["40%", "50%", "50%", "50%"];
+const heightCss = ["42%", "22%", "35%", "35%"];
+
+const MobiletopCss = ["30%", "70%", "65%", "32%"];
+const MobileleftCss = ["30%", "30%", "55%", "55%"];
+const MobileheightCss = ["37%", "23%", "35%", "35%"];
 
 const Container = styled.div`
   position: relative;
@@ -36,12 +41,18 @@ const ProductImage = styled.img.attrs((props) => ({
   src: props.src,
   alt: "img",
 }))`
-  height: ${(props) => (props.category === "shoes" ? "20%" : "50%")};
   objectfit: contain;
   position: absolute;
   transform: translate(-50%, -50%);
-  top: ${(props) => props.top};
-  left: ${(props) => props.left};
+  height: ${(props) => heightCss[props.index]};
+  top: ${(props) => topCss[props.index]};
+  left: ${(props) => leftCss[props.index]};
+
+  @media screen and (max-width: 770px) {
+    height: ${(props) => MobileheightCss[props.index]};
+    top: ${(props) => MobiletopCss[props.index]};
+    left: ${(props) => MobileleftCss[props.index]};
+  }
 `;
 
 export default SelectCompletePage;

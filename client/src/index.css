@@ -7,7 +7,7 @@
 }
 
 .image-gallery-slide {
-  height: 500px;
+  height: 450px;
   overflow: hidden;
   background-color: whitesmoke;
 }
@@ -18,10 +18,14 @@
   overflow: hidden;
   object-position: center center;
 }
+.image-gallery-thumbnails {
+  max-height: 160px;
+}
 
 @media (max-width: 800px) {
   .image-gallery-slide {
-    height: 50vh;
+    height: 45vh;
+    margin-bottom: 30px;
   }
 }
 

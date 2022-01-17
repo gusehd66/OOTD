@@ -28,7 +28,7 @@ const DetailProductPage = (props) => {
       </div>
       <br />
 
-      <Row gutter={[16, 16]}>
+      <Row gutter={[16, 16]} style={{ justifyContent: "center" }}>
         <Col lg={12} sm={24}>
           <ProductImage detail={product} />
         </Col>

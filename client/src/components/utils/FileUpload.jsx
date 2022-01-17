@@ -69,7 +69,7 @@ const UploadContainer = styled.div`
 const UploadButton = styled.div`
   width: 300px;
   height: 240px;
-  border: 1px solid lightgray;
+  border: 1px dashed lightgray;
   display: flex;
   align-items: center;
   justify-content: center;
