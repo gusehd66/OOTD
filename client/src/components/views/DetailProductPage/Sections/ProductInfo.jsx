@@ -1,21 +1,25 @@
 import { Button, Descriptions } from "antd";
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
+import UpdateModal from "../../../utils/UpdateModal";
+import styled from "styled-components";
 
 const ProductInfo = ({ detail, productId }) => {
   const history = useHistory();
 
   const handleDelete = () => {
-    Axios.post(`/api/product/delete?id=${productId}`, {
-      key: detail.images[0].key,
-    }).then((response) => {
-      if (response.data.success) {
-        alert("삭제를 완료했습니다.");
-        history.push("/");
-      } else {
-        alert("삭제를 실패했습니다.");
-      }
-    });
+    const confirm = window.confirm("삭제하시겠습니까?");
+    confirm &&
+      Axios.post(`/api/product/delete?id=${productId}`, {
+        key: detail.images[0].key,
+      }).then((response) => {
+        if (response.data.success) {
+          alert("삭제를 완료했습니다.");
+          history.push("/");
+        } else {
+          alert("삭제를 실패했습니다.");
+        }
+      });
   };
 
   return (
@@ -31,11 +35,19 @@ const ProductInfo = ({ detail, productId }) => {
         </Descriptions.Item>
       </Descriptions>
       <br />
-      <Button onClick={handleDelete} type="primary" danger>
-        Delete
-      </Button>
+      <ButtonBox>
+        <UpdateModal detail={detail} />
+        <Button onClick={handleDelete} type="primary" danger>
+          Delete
+        </Button>
+      </ButtonBox>
     </div>
   );
 };
+
+const ButtonBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
 
 export default ProductInfo;

@@ -53,16 +53,14 @@ function LandingPage() {
   const renderCards = products.map((product, index) => {
     return (
       <Col key={index} lg={6} md={8} xs={12}>
-        <Card
-          style={{ margin: "10px", padding: "8px", width: "100%" }}
-          cover={
-            <Link to={`/product/${product._id}`}>
-              <ImageSlider images={product.images} />
-            </Link>
-          }
-        >
-          <Meta title={product.title} description={`$${product.price}`} />
-        </Card>
+        <Link to={`/product/${product._id}`}>
+          <Card
+            style={{ margin: "10px", padding: "8px", width: "100%" }}
+            cover={<ImageSlider images={product.images} />}
+          >
+            <Meta title={product.title} description={`$${product.price}`} />
+          </Card>
+        </Link>
       </Col>
     );
   });

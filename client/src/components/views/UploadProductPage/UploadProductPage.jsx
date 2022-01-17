@@ -15,13 +15,13 @@ const Categories = [
   { key: 4, value: "Outer" },
 ];
 
-const UploadProductPage = ({ user }) => {
-  const [images, setImages] = useState([]);
+const UploadProductPage = ({ user, detail }) => {
+  const [images, setImages] = useState(detail?.images || []);
   const [state, setState] = useState({
-    title: "",
-    description: "",
-    price: 0,
-    categories: 1,
+    title: detail?.title || "",
+    description: detail?.description || "",
+    price: detail?.price || 0,
+    categories: detail?.categories || 1,
   });
 
   const history = useHistory();
@@ -51,18 +51,29 @@ const UploadProductPage = ({ user }) => {
     //서버에 채운 값 request
     const body = {
       //로그인된 id
-      writer: user.userData._id,
+      writer: detail?.writer._id || user.userData._id,
       images,
       ...state,
     };
-    Axios.post("/api/product", body).then((response) => {
-      if (response.data.success) {
-        alert("상품 업로드에 성공 했습니다.");
-        history.push("/");
-      } else {
-        alert("상품 업로드에 실패 했습니다.");
-      }
-    });
+    detail
+      ? Axios.post(`/api/product/update?id=${detail?._id}`, body).then(
+          (response) => {
+            if (response.data.success) {
+              alert("상품 수정에 성공 했습니다.");
+              history.push("/");
+            } else {
+              alert("상품 수정에 실패 했습니다.");
+            }
+          }
+        )
+      : Axios.post("/api/product", body).then((response) => {
+          if (response.data.success) {
+            alert("상품 업로드에 성공 했습니다.");
+            history.push("/");
+          } else {
+            alert("상품 업로드에 실패 했습니다.");
+          }
+        });
   };
 
   return (
@@ -72,7 +83,10 @@ const UploadProductPage = ({ user }) => {
       </div>
 
       <Form onFinish={submitHandler} style={{ padding: "0 1rem" }}>
-        <FileUpload refreshFunction={updateImages} />
+        <FileUpload
+          refreshFunction={updateImages}
+          productImage={detail?.images}
+        />
         <label>이름</label>
         <Input
           onChange={handleChange}
@@ -111,7 +125,7 @@ const UploadProductPage = ({ user }) => {
         <br />
         <br />
         <Button type="primary" htmlType="submit">
-          확인
+          {detail ? "수정" : "확인"}
         </Button>
       </Form>
     </div>

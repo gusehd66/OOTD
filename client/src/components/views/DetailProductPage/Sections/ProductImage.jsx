@@ -3,7 +3,6 @@ import ImageGallery from "react-image-gallery";
 
 const ProductImage = ({ detail }) => {
   const [images, setImages] = useState([]);
-  console.log(detail);
   useEffect(() => {
     if (detail.images && detail.images.length > 0) {
       const imagesArray = [];

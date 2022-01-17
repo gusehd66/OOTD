@@ -135,6 +135,16 @@ router.get("/products_by_id", (req, res) => {
     });
 });
 
+router.post("/update", async (req, res) => {
+  const productId = req.query.id;
+  Product.replaceOne({ _id: productId }, { ...req.body }).exec(
+    (err, product) => {
+      if (err) return res.status(400).send(err);
+      return res.status(200).send({ success: true, product });
+    }
+  );
+});
+
 router.post("/delete", (req, res) => {
   const productId = req.query.id;
   s3.deleteObject(

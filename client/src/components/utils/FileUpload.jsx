@@ -4,8 +4,8 @@ import { PlusOutlined } from "@ant-design/icons";
 import axios from "axios";
 import styled from "styled-components";
 
-const FileUpload = ({ refreshFunction }) => {
-  const [images, setImages] = useState([]);
+const FileUpload = ({ refreshFunction, productImage }) => {
+  const [images, setImages] = useState(productImage || []);
 
   const dropHandler = (files) => {
     let formData = new FormData();
