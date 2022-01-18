@@ -65,11 +65,17 @@ const RegisterPage = (props) => {
         <input type="text" value={name} onChange={onNameChange} />
 
         <label>Password</label>
-        <input type="password" value={password} onChange={onPasswordChange} />
+        <input
+          type="password"
+          value={password}
+          autoComplete="on"
+          onChange={onPasswordChange}
+        />
 
         <label>Confirm Password</label>
         <input
           type="password"
+          autoComplete="on"
           value={confirmPassword}
           onChange={onConfirmPasswordChange}
         />

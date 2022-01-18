@@ -54,7 +54,12 @@ const LoginPage = (props) => {
         />
 
         <label>Password</label>
-        <input type="password" value={password} onChange={onPasswordChange} />
+        <input
+          type="password"
+          autoComplete="on"
+          value={password}
+          onChange={onPasswordChange}
+        />
         <br />
         <button type="submit">Login</button>
       </form>
