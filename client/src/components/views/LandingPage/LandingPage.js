@@ -10,6 +10,7 @@ import SearchFeature from "./Sections/SearchFeatuer";
 import { useSelector } from "react-redux";
 import { SkinOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import RequestLogin from "../RequestLogin/RequestLogin";
 
 function LandingPage() {
   const [products, setProducts] = useState([]);
@@ -130,7 +131,7 @@ function LandingPage() {
   };
 
   return (
-    <div style={{ width: "75%", margin: "3rem auto" }}>
+    <div style={{ width: "75%", margin: "2rem auto" }}>
       <div style={{ textAlign: "center" }}>
         <h2>
           My Room <SkinOutlined />
@@ -162,15 +163,7 @@ function LandingPage() {
         <SearchFeature refreshFuntion={updateSearchItem} />
       </div>
 
-      <Row gutter={[16, 16]}>
-        {user?._id ? (
-          renderCards
-        ) : (
-          <h2>
-            <Link to="/login">로그인</Link>을 해주세요
-          </h2>
-        )}
-      </Row>
+      <Row gutter={[16, 16]}>{user?._id ? renderCards : <RequestLogin />}</Row>
       <br />
       {postSize >= limit && (
         <div style={{ justifyContent: "center" }}>
