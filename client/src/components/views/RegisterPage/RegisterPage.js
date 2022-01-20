@@ -1,13 +1,18 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import useAuth from "../../../hooks/auth";
 import { registerUser } from "../../../_actions/user_actions";
 
-const RegisterPage = (props) => {
+const RegisterPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  useAuth(false);
+
+  const history = useHistory();
   const dispatch = useDispatch();
 
   const onEmailChange = (event) => {
@@ -38,7 +43,7 @@ const RegisterPage = (props) => {
     dispatch(registerUser(body)).then((response) => {
       if (response.payload.success) {
         // history("/login");
-        props.history.push("/login");
+        history.push("/login");
       } else {
         alert("Failed to sign up");
       }

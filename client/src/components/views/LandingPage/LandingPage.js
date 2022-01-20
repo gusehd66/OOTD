@@ -7,10 +7,10 @@ import { categories, price } from "./Sections/Datas";
 import CheckBox from "./Sections/CheckBox";
 import RadioBox from "./Sections/RadioBox";
 import SearchFeature from "./Sections/SearchFeatuer";
-import { useSelector } from "react-redux";
 import { SkinOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import RequestLogin from "../RequestLogin/RequestLogin";
+import useAuth from "../../../hooks/auth";
 
 function LandingPage() {
   const [products, setProducts] = useState([]);
@@ -22,8 +22,7 @@ function LandingPage() {
     price: [],
   });
   const [searchItem, setSearchItem] = useState("");
-
-  const user = useSelector((state) => state.user.userData);
+  const user = useAuth(null);
 
   const getProducts = useCallback(async (body) => {
     await axios.post("/api/product/products", body).then((response) => {

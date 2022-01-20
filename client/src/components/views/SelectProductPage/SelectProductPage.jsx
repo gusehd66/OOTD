@@ -3,6 +3,7 @@ import Meta from "antd/lib/card/Meta";
 import Axios from "axios";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import useAuth from "../../../hooks/auth";
 import { selectInit, selectProduct } from "../../../_actions/select_actions";
 import SelectCompletePage from "./Sections/SelectCompltePage";
 import "./SelectProductPage.css";
@@ -16,9 +17,10 @@ const SelectProductPage = () => {
   const [completed, setCompleted] = useState({});
   const [products, setProducts] = useState([]);
 
+  const user = useAuth(null);
+
   const dispatch = useDispatch();
   const clothes = useSelector((state) => state.selectItem);
-  const user = useSelector((state) => state.user.userData);
 
   const totalSteps = () => {
     return steps.length;

@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import useAuth from "../../../hooks/auth";
 import { loginUser } from "../../../_actions/user_actions";
 
-const LoginPage = (props) => {
+const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  useAuth(false);
+
+  const history = useHistory();
   const dispatch = useDispatch();
 
   const onEmailChange = (event) => {
@@ -24,8 +29,7 @@ const LoginPage = (props) => {
     };
     dispatch(loginUser(body)).then((response) => {
       if (response.payload.loginSuccess) {
-        // history("/");
-        props.history.push("/");
+        history.push("/");
       } else {
         alert("Error");
       }

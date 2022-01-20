@@ -1,5 +1,5 @@
 import { Modal, Button } from "antd";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import UploadProductPage from "../views/UploadProductPage/UploadProductPage";
 
 const UpdateModal = ({ detail }) => {

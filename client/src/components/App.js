@@ -1,6 +1,5 @@
 import React, { Suspense } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
-import Auth from "../hoc/auth";
 // pages for this product
 import LandingPage from "./views/LandingPage/LandingPage.js";
 import LoginPage from "./views/LoginPage/LoginPage.js";
@@ -25,28 +24,16 @@ function App() {
       <NavBar />
       <div style={{ paddingTop: "69px" }}>
         <Switch>
-          <Route exact path="/" component={Auth(LandingPage, null)} />
-          <Route exact path="/login" component={Auth(LoginPage, false)} />
-          <Route exact path="/register" component={Auth(RegisterPage, false)} />
-          <Route
-            exact
-            path="/product/upload"
-            component={Auth(UploadProductPage, true)}
-          />
-          <Route
-            exact
-            path="/product/select"
-            component={Auth(SelectProductPage, null)}
-          />
-          <Route
-            exact
-            path="/product/random"
-            component={Auth(RandomSelectPage, null)}
-          />
+          <Route exact path="/" component={LandingPage} />
+          <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/register" component={RegisterPage} />
+          <Route exact path="/product/upload" component={UploadProductPage} />
+          <Route exact path="/product/select" component={SelectProductPage} />
+          <Route exact path="/product/random" component={RandomSelectPage} />
           <Route
             exact
             path="/product/:productId"
-            component={Auth(DetailProductPage, null)}
+            component={DetailProductPage}
           />
         </Switch>
       </div>

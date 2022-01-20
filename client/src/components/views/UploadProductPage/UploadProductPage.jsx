@@ -4,6 +4,7 @@ import { useState } from "react";
 import FileUpload from "../../utils/FileUpload";
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
+import useAuth from "../../../hooks/auth";
 
 const { Title } = Typography;
 const { TextArea } = Input;
@@ -15,7 +16,7 @@ const Categories = [
   { key: 4, value: "Outer" },
 ];
 
-const UploadProductPage = ({ user, detail }) => {
+const UploadProductPage = ({ detail }) => {
   const [images, setImages] = useState(detail?.images || []);
   const [state, setState] = useState({
     title: detail?.title || "",
@@ -23,6 +24,8 @@ const UploadProductPage = ({ user, detail }) => {
     price: detail?.price || 0,
     categories: detail?.categories || 1,
   });
+
+  const user = useAuth(true);
 
   const history = useHistory();
 
@@ -51,7 +54,7 @@ const UploadProductPage = ({ user, detail }) => {
     //서버에 채운 값 request
     const body = {
       //로그인된 id
-      writer: detail?.writer._id || user.userData._id,
+      writer: detail?.writer._id || user._id,
       images,
       ...state,
     };

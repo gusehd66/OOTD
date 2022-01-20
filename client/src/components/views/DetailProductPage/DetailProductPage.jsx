@@ -4,10 +4,13 @@ import { useEffect } from "react";
 import ProductImage from "./Sections/ProductImage";
 import ProductInfo from "./Sections/ProductInfo";
 import { Row, Col } from "antd";
+import useAuth from "../../../hooks/auth";
 
 const DetailProductPage = (props) => {
   const productId = props.match.params.productId;
   const [product, setProduct] = useState({});
+
+  useAuth(null);
 
   useEffect(() => {
     axios

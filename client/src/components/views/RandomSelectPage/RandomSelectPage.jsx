@@ -1,7 +1,8 @@
 import { Button } from "antd";
 import Axios from "axios";
 import { useCallback, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import useAuth from "../../../hooks/auth";
 import { randomSelect } from "../../../_actions/select_actions";
 import SelectCompletePage from "../SelectProductPage/Sections/SelectCompltePage";
 import RandomWaitPage from "./Sections/RandomWaitPage";
@@ -9,8 +10,10 @@ import RandomWaitPage from "./Sections/RandomWaitPage";
 const RandomSelectPage = () => {
   const [products, setProducts] = useState([]);
   const [clickStart, setClickStart] = useState(false);
+
+  const user = useAuth(null);
+
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.userData);
 
   const steps = ["top", "bottom", "shoes", "outer"];
 
