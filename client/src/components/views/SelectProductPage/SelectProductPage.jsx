@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useAuth from "../../../hooks/auth";
 import { selectInit, selectProduct } from "../../../_actions/select_actions";
+import RequestLogin from "../RequestLogin/RequestLogin";
 import SelectCompletePage from "./Sections/SelectCompltePage";
 import "./SelectProductPage.css";
 
@@ -159,7 +160,7 @@ const SelectProductPage = () => {
 
       {/* Select Page */}
       <Row gutter={[16, 16]} style={{ width: "100%" }}>
-        {renderCards}
+        {user?._id ? renderCards : <RequestLogin />}
       </Row>
 
       <Divider />

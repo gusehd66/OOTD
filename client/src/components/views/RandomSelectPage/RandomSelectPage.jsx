@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import useAuth from "../../../hooks/auth";
 import { randomSelect } from "../../../_actions/select_actions";
+import RequestLogin from "../RequestLogin/RequestLogin";
 import SelectCompletePage from "../SelectProductPage/Sections/SelectCompltePage";
 import RandomWaitPage from "./Sections/RandomWaitPage";
 
@@ -54,21 +55,27 @@ const RandomSelectPage = () => {
 
   return (
     <>
-      {clickStart ? (
-        <SelectCompletePage />
+      {user?._id ? (
+        <>
+          {clickStart ? (
+            <SelectCompletePage />
+          ) : (
+            <RandomWaitPage products={products} />
+          )}
+          <Button
+            onClick={handleClick}
+            style={{
+              left: "50%",
+              transform: "translateX(-50%)",
+              marginTop: "30px",
+            }}
+          >
+            Random
+          </Button>
+        </>
       ) : (
-        <RandomWaitPage products={products} />
+        <RequestLogin />
       )}
-      <Button
-        onClick={handleClick}
-        style={{
-          left: "50%",
-          transform: "translateX(-50%)",
-          marginTop: "30px",
-        }}
-      >
-        Random
-      </Button>
     </>
   );
 };
