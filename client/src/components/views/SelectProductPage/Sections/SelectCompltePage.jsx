@@ -2,9 +2,8 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 const SelectCompletePage = () => {
-  const clothes = useSelector((state) => state.selectItem);
+  const clothes = useSelector((state) => state.cloth);
   const ProductKey = Object.keys(clothes).reverse();
-
   return (
     <Container>
       {ProductKey.map(

@@ -1,47 +1,27 @@
 import axios from "axios";
 import { LOGIN_USER, REGISTER_USER, AUTH_USER, LOGOUT_USER } from "./types";
 import { USER_SERVER } from "../components/Config.js";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export function registerUser(dataToSubmit) {
-  const request = axios
-    .post(`${USER_SERVER}/register`, dataToSubmit)
-    .then((response) => response.data);
+export const registerUser = createAsyncThunk(
+  REGISTER_USER,
+  async (dataToSubmit) => {
+    const request = await axios.post(`${USER_SERVER}/register`, dataToSubmit);
+    return request.data;
+  }
+);
 
-  return {
-    type: REGISTER_USER,
-    payload: request,
-  };
-}
+export const loginUser = createAsyncThunk(LOGIN_USER, async (dataToSubmit) => {
+  const request = await axios.post(`${USER_SERVER}/login`, dataToSubmit);
+  return request.data;
+});
 
-export const loginUser = (dataToSubmit) => {
-  const request = axios
-    .post(`${USER_SERVER}/login`, dataToSubmit)
-    .then((response) => response.data);
+export const auth = createAsyncThunk(AUTH_USER, async () => {
+  const request = await axios.get(`${USER_SERVER}/auth`);
+  return request.data;
+});
 
-  return {
-    type: LOGIN_USER,
-    payload: request,
-  };
-};
-
-export const auth = () => {
-  const request = axios
-    .get(`${USER_SERVER}/auth`)
-    .then((response) => response.data);
-
-  return {
-    type: AUTH_USER,
-    payload: request,
-  };
-};
-
-export const logoutUser = () => {
-  const request = axios
-    .get(`${USER_SERVER}/logout`)
-    .then((response) => response.data);
-
-  return {
-    type: LOGOUT_USER,
-    payload: request,
-  };
-};
+export const logoutUser = createAsyncThunk(LOGOUT_USER, async () => {
+  const request = await axios.get(`${USER_SERVER}/logout`);
+  return request.data;
+});

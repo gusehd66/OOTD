@@ -24,8 +24,8 @@ function LandingPage() {
   const [searchItem, setSearchItem] = useState("");
   const user = useAuth(null);
 
-  const getProducts = useCallback(async (body) => {
-    await axios.post("/api/product/products", body).then((response) => {
+  const getProducts = useCallback((body) => {
+    axios.post("/api/product/products", body).then((response) => {
       if (response.data.success) {
         if (body.loadMore) {
           setProducts((products) => [

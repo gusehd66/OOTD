@@ -3,7 +3,7 @@ import Axios from "axios";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import useAuth from "../../../hooks/auth";
-import { randomSelect } from "../../../_actions/select_actions";
+import { clothActions } from "../../../_store/select_item";
 import RequestLogin from "../RequestLogin/RequestLogin";
 import SelectCompletePage from "../SelectProductPage/Sections/SelectCompltePage";
 import RandomWaitPage from "./Sections/RandomWaitPage";
@@ -11,15 +11,14 @@ import RandomWaitPage from "./Sections/RandomWaitPage";
 const RandomSelectPage = () => {
   const [products, setProducts] = useState([]);
   const [clickStart, setClickStart] = useState(false);
-
   const user = useAuth(null);
 
   const dispatch = useDispatch();
 
   const steps = ["top", "bottom", "shoes", "outer"];
 
-  const getProducts = useCallback(async (body) => {
-    await Axios.post("/api/product/products_select", body).then((response) => {
+  const getProducts = useCallback((body) => {
+    Axios.post("/api/product/products_select", body).then((response) => {
       if (response.data.success) {
         setProducts(response.data.productInfo);
       } else {
@@ -43,7 +42,7 @@ const RandomSelectPage = () => {
       const randomItem = random[Math.floor(Math.random() * random.length)];
       randomItem &&
         dispatch(
-          randomSelect({
+          clothActions.randomSelect({
             value: randomItem.images[0],
             step: step,
             id: randomItem._id,

@@ -5,7 +5,6 @@ import { useHistory } from "react-router-dom";
 
 const useAuth = (option, adminRoute = null) => {
   const user = useSelector((state) => state.user);
-
   const history = useHistory();
   const dispatch = useDispatch();
 

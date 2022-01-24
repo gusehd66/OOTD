@@ -54,7 +54,7 @@ router.post("/", (req, res) => {
   });
 });
 
-router.post("/products", async (req, res) => {
+router.post("/products", (req, res) => {
   // product collection 상품 정보 가져오기
   const limit = req.body.limit ? parseInt(req.body.limit) : 20;
   const skip = req.body.skip ? parseInt(req.body.skip) : 0;
@@ -106,7 +106,7 @@ router.post("/products", async (req, res) => {
   }
 });
 
-router.post("/products_select", async (req, res) => {
+router.post("/products_select", (req, res) => {
   // product collection 상품 정보 가져오기
   const user = req.body.user;
 
@@ -135,7 +135,7 @@ router.get("/products_by_id", (req, res) => {
     });
 });
 
-router.post("/update", async (req, res) => {
+router.post("/update", (req, res) => {
   const productId = req.query.id;
   Product.replaceOne({ _id: productId }, { ...req.body }).exec(
     (err, product) => {
