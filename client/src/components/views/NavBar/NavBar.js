@@ -3,7 +3,7 @@ import LeftMenu from "./Sections/LeftMenu";
 import RightMenu from "./Sections/RightMenu";
 import { Drawer, Button } from "antd";
 import { Link } from "react-router-dom";
-import "./Sections/Navbar.css";
+import "./Navbar.css";
 import { AlignRightOutlined } from "@ant-design/icons";
 
 function NavBar() {
@@ -19,10 +19,7 @@ function NavBar() {
   };
 
   return (
-    <nav
-      className="menu"
-      style={{ position: "fixed", zIndex: 5, width: "100%" }}
-    >
+    <nav className="menu">
       <div className="menu__logo" onClick={() => setSelectKey("home")}>
         <Link to="/">Dongit</Link>
       </div>

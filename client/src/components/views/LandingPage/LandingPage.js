@@ -11,6 +11,7 @@ import { SkinOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import RequestLogin from "../RequestLogin/RequestLogin";
 import useAuth from "../../../hooks/auth";
+import styled from "styled-components";
 
 function LandingPage() {
   const [products, setProducts] = useState([]);
@@ -55,7 +56,11 @@ function LandingPage() {
       <Col key={index} lg={6} md={8} xs={12}>
         <Link to={`/product/${product._id}`}>
           <Card
-            style={{ margin: "10px", padding: "8px", width: "100%" }}
+            style={{
+              padding: "8px",
+              width: "100%",
+              boxShadow: "5px 5px 5px #666",
+            }}
             cover={<ImageSlider images={product.images} />}
           >
             <Meta title={product.title} description={`$${product.price}`} />
@@ -130,12 +135,10 @@ function LandingPage() {
   };
 
   return (
-    <div style={{ width: "75%", margin: "2rem auto" }}>
-      <div style={{ textAlign: "center" }}>
-        <h2>
-          My Room <SkinOutlined />
-        </h2>
-      </div>
+    <LandingContainer>
+      <TitleBox>
+        My Room <SkinOutlined />
+      </TitleBox>
 
       <Row gutter={[16, 16]}>
         <Col lg={12} xs={24}>
@@ -152,15 +155,9 @@ function LandingPage() {
         </Col>
       </Row>
 
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "flex-end",
-          margin: "1rem auto",
-        }}
-      >
+      <SearchFeatuerBox>
         <SearchFeature refreshFuntion={updateSearchItem} />
-      </div>
+      </SearchFeatuerBox>
 
       <Row gutter={[16, 16]}>{user?._id ? renderCards : <RequestLogin />}</Row>
       <br />
@@ -169,8 +166,25 @@ function LandingPage() {
           <button onClick={loadMoreHandler}>더보기</button>
         </div>
       )}
-    </div>
+    </LandingContainer>
   );
 }
+
+const LandingContainer = styled.div`
+  width: 80%;
+  margin: 2rem auto;
+`;
+
+const TitleBox = styled.h2`
+  color: white;
+  text-shadow: 0 0 3px #fff, 0 0 6px #fff, 0 0 15px #fff, 0 0 30px #ccc;
+  text-align: center;
+`;
+
+const SearchFeatuerBox = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin: 15px auto;
+`;
 
 export default LandingPage;
