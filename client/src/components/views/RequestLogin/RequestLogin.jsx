@@ -1,6 +1,26 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+const SampleLogin = styled.div`
+  line-height: 1.2rem;
+  margin: 10px 0 50px;
+`;
+
+const RegisterButton = styled.h3`
+  & > a {
+    color: white;
+    border: solid 1px;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #1890ff;
+    transition: 0.6s;
+    &:hover {
+      color: #1890ff;
+      background-color: white;
+    }
+  }
+`;
+
 const RequestLogin = () => {
   return (
     <RequestContainer>
@@ -27,26 +47,6 @@ const RequestContainer = styled.div`
   align-items: center;
   line-height: 2rem;
   margin: 20px 0;
-`;
-
-const SampleLogin = styled.div`
-  line-height: 1.2rem;
-  margin: 10px 0 50px;
-`;
-
-const RegisterButton = styled.h3`
-  & > a {
-    color: white;
-    border: solid 1px;
-    border-radius: 10px;
-    padding: 10px;
-    background-color: #1890ff;
-    transition: 0.6s;
-    &:hover {
-      color: #1890ff;
-      background-color: white;
-    }
-  }
 `;
 
 export default RequestLogin;

@@ -1,26 +1,6 @@
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 
-const SelectCompletePage = () => {
-  const clothes = useSelector((state) => state.cloth);
-  const ProductKey = Object.keys(clothes).reverse();
-  return (
-    <Container>
-      {ProductKey.map(
-        (cloth, idx) =>
-          clothes[cloth].src !== "" && (
-            <ProductImage
-              index={idx}
-              src={clothes[cloth].src.image}
-              category={cloth}
-              key={cloth}
-            />
-          )
-      )}
-    </Container>
-  );
-};
-
 //  [outer,shoes,bottom,top]
 const topCss = ["35%", "88%", "60%", "25%"];
 const leftCss = ["40%", "50%", "50%", "50%"];
@@ -53,5 +33,25 @@ const ProductImage = styled.img.attrs((props) => ({
     left: ${(props) => MobileleftCss[props.index]};
   }
 `;
+
+const SelectCompletePage = () => {
+  const clothes = useSelector((state) => state.cloth);
+  const ProductKey = Object.keys(clothes).reverse();
+  return (
+    <Container>
+      {ProductKey.map(
+        (cloth, idx) =>
+          clothes[cloth].src !== "" && (
+            <ProductImage
+              index={idx}
+              src={clothes[cloth].src.image}
+              category={cloth}
+              key={cloth}
+            />
+          )
+      )}
+    </Container>
+  );
+};
 
 export default SelectCompletePage;

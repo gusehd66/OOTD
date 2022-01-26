@@ -13,6 +13,23 @@ import RequestLogin from "../RequestLogin/RequestLogin";
 import useAuth from "../../../hooks/auth";
 import styled from "styled-components";
 
+const LandingContainer = styled.div`
+  width: 80%;
+  margin: 2rem auto;
+`;
+
+const TitleBox = styled.h2`
+  color: white;
+  text-shadow: 0 0 3px #fff, 0 0 6px #fff, 0 0 15px #fff, 0 0 30px #ccc;
+  text-align: center;
+`;
+
+const SearchFeatuerBox = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin: 15px auto;
+`;
+
 function LandingPage() {
   const [products, setProducts] = useState([]);
   const [skip, setSkip] = useState(0);
@@ -169,22 +186,5 @@ function LandingPage() {
     </LandingContainer>
   );
 }
-
-const LandingContainer = styled.div`
-  width: 80%;
-  margin: 2rem auto;
-`;
-
-const TitleBox = styled.h2`
-  color: white;
-  text-shadow: 0 0 3px #fff, 0 0 6px #fff, 0 0 15px #fff, 0 0 30px #ccc;
-  text-align: center;
-`;
-
-const SearchFeatuerBox = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  margin: 15px auto;
-`;
 
 export default LandingPage;

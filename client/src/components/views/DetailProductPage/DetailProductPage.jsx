@@ -5,6 +5,12 @@ import ProductImage from "./Sections/ProductImage";
 import ProductInfo from "./Sections/ProductInfo";
 import { Row, Col } from "antd";
 import useAuth from "../../../hooks/auth";
+import styled from "styled-components";
+
+const DetailContainer = styled.div`
+  width: 100%;
+  padding: 3rem 4rem;
+`;
 
 const DetailProductPage = (props) => {
   const productId = props.match.params.productId;
@@ -25,10 +31,8 @@ const DetailProductPage = (props) => {
   }, [productId]);
 
   return (
-    <div style={{ width: "100%", padding: "3rem 4rem" }}>
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <h1>{product.title}</h1>
-      </div>
+    <DetailContainer>
+      <h1 style={{ textAlign: "center" }}>{product.title}</h1>
       <br />
 
       <Row gutter={[16, 16]} style={{ justifyContent: "center" }}>
@@ -39,7 +43,7 @@ const DetailProductPage = (props) => {
           <ProductInfo detail={product} productId={productId} />
         </Col>
       </Row>
-    </div>
+    </DetailContainer>
   );
 };
 

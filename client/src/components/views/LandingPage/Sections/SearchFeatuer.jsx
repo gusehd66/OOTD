@@ -17,7 +17,7 @@ const SearchFeature = ({ refreshFuntion }) => {
       allowClear
       onChange={searchHandler}
       value={searchItem}
-      style={{ width: 200 }}
+      style={{ width: 200, boxShadow: "5px 5px 5px #666" }}
     />
   );
 };

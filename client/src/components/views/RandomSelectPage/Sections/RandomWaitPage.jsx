@@ -1,23 +1,6 @@
 import { useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
 
-const RandomWaitPage = ({ products }) => {
-  const randomItem = products[Math.floor(Math.random() * products.length)];
-
-  const [image, setImage] = useState(0);
-
-  useEffect(() => {
-    const handleTick = setTimeout(() => setImage(image + 1), 5000);
-    return () => clearTimeout(handleTick);
-  }, [image]);
-
-  return (
-    <Container>
-      {randomItem && <RandomImage src={randomItem.images[0].image} />}
-    </Container>
-  );
-};
-
 const Container = styled.div`
   position: relative;
   width: 100vw;
@@ -62,5 +45,22 @@ const RandomImage = styled.img.attrs((props) => ({
     width: 70%;
   }
 `;
+
+const RandomWaitPage = ({ products }) => {
+  const randomItem = products[Math.floor(Math.random() * products.length)];
+
+  const [image, setImage] = useState(0);
+
+  useEffect(() => {
+    const handleTick = setTimeout(() => setImage(image + 1), 5000);
+    return () => clearTimeout(handleTick);
+  }, [image]);
+
+  return (
+    <Container>
+      {randomItem && <RandomImage src={randomItem.images[0].image} />}
+    </Container>
+  );
+};
 
 export default RandomWaitPage;

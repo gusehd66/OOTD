@@ -4,6 +4,37 @@ import { PlusOutlined } from "@ant-design/icons";
 import axios from "axios";
 import styled from "styled-components";
 
+const UploadContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+`;
+const UploadButton = styled.div`
+  width: 300px;
+  height: 240px;
+  border: 1px dashed lightgray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid 1px grey;
+`;
+const UploadImageBox = styled.div`
+  display: flex;
+  width: 350px;
+  height: 240px;
+  overflow-x: scroll;
+  margin: 0 20px;
+`;
+const UploadImages = styled.img.attrs((props) => ({
+  src: props.src,
+  alt: "img",
+}))`
+  min-width: 300px;
+  width: 300px;
+  height: 240px;
+  object-fit: contain;
+`;
+
 const FileUpload = ({ refreshFunction, productImage }) => {
   const [images, setImages] = useState(productImage || []);
 
@@ -60,36 +91,5 @@ const FileUpload = ({ refreshFunction, productImage }) => {
     </UploadContainer>
   );
 };
-
-const UploadContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 30px;
-`;
-const UploadButton = styled.div`
-  width: 300px;
-  height: 240px;
-  border: 1px dashed lightgray;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: solid 1px grey;
-`;
-const UploadImageBox = styled.div`
-  display: flex;
-  width: 350px;
-  height: 240px;
-  overflow-x: scroll;
-  margin: 0 20px;
-`;
-const UploadImages = styled.img.attrs((props) => ({
-  src: props.src,
-  alt: "img",
-}))`
-  min-width: 300px;
-  width: 300px;
-  height: 240px;
-  object-fit: contain;
-`;
 
 export default FileUpload;

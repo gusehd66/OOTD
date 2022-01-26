@@ -3,6 +3,15 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import useAuth from "../../../hooks/auth";
 import { loginUser } from "../../../_actions/user_actions";
+import styled from "styled-components";
+
+const LoginContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+`;
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -36,15 +45,7 @@ const LoginPage = () => {
     });
   };
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        width: "100%",
-        height: "100vh",
-      }}
-    >
+    <LoginContainer>
       <form
         style={{ display: "flex", flexDirection: "column" }}
         onSubmit={onSubmitHandler}
@@ -67,7 +68,7 @@ const LoginPage = () => {
         <br />
         <button type="submit">Login</button>
       </form>
-    </div>
+    </LoginContainer>
   );
 };
 

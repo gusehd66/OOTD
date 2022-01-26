@@ -4,6 +4,11 @@ import { useHistory } from "react-router-dom";
 import UpdateModal from "../../../utils/UpdateModal";
 import styled from "styled-components";
 
+const ButtonBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 const ProductInfo = ({ detail, productId }) => {
   const history = useHistory();
 
@@ -44,10 +49,5 @@ const ProductInfo = ({ detail, productId }) => {
     </div>
   );
 };
-
-const ButtonBox = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
 
 export default ProductInfo;
