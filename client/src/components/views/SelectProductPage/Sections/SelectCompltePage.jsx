@@ -20,7 +20,7 @@ const ProductImage = styled.img.attrs((props) => ({
   src: props.src,
   alt: "img",
 }))`
-  objectfit: contain;
+  object-fit: contain;
   position: absolute;
   transform: translate(-50%, -50%);
   height: ${(props) => heightCss[props.index]};

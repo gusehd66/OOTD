@@ -7,11 +7,22 @@ import useAuth from "../../../hooks/auth";
 import { clothActions } from "../../../_store/select_item";
 import RequestLogin from "../RequestLogin/RequestLogin";
 import SelectCompletePage from "./Sections/SelectCompltePage";
+import styled from "styled-components";
 import "./SelectProductPage.css";
 
 const { Step } = Steps;
 
 const steps = ["top", "bottom", "shoes", "outer"];
+
+const SelectList = styled.div`
+  display: flex;
+  width: 90%;
+  gap: 0 10px;
+  height: 25vh;
+  margin: 15px;
+  box-sizing: border-box;
+  overflow: auto;
+`;
 
 const SelectProductPage = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -181,17 +192,7 @@ const SelectProductPage = () => {
           ))}
         <Button onClick={handleReset}>Reset</Button>
       </div>
-      <div
-        style={{
-          display: "flex",
-          width: "90%",
-          gap: "0 10px",
-          height: "25vh",
-          margin: "15px",
-          boxSizing: "border-box",
-          overflow: "auto",
-        }}
-      >
+      <SelectList>
         {steps.map((item, index) => {
           return (
             clothes[item].src && (
@@ -204,7 +205,7 @@ const SelectProductPage = () => {
             )
           );
         })}
-      </div>
+      </SelectList>
     </>
   );
 };

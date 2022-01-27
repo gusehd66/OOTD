@@ -23,7 +23,7 @@ const UpdateModal = ({ detail }) => {
         onCancel={handleCancel}
         footer={false}
       >
-        <UploadProductPage detail={detail} handleCancel={handleCancel} />
+        <UploadProductPage detail={detail} />
       </Modal>
     </>
   );

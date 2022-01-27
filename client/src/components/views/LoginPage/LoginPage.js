@@ -53,6 +53,7 @@ const LoginPage = () => {
         <label>Email</label>
         <input
           type="email"
+          autoFocus
           value={email}
           onChange={onEmailChange}
           style={{ fontFamily: "sans-serif" }}

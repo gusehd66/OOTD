@@ -96,6 +96,7 @@ const UploadProductPage = ({ detail }) => {
           value={state.title}
           name="title"
           style={{ marginBottom: "20px" }}
+          autoFocus
         />
         <label>설명</label>
         <TextArea

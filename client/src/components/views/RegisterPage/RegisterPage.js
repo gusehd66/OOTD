@@ -64,7 +64,7 @@ const RegisterPage = () => {
         onSubmit={onSubmitHandler}
       >
         <label>Email</label>
-        <input type="email" value={email} onChange={onEmailChange} />
+        <input type="email" value={email} onChange={onEmailChange} autoFocus />
 
         <label>Name</label>
         <input type="text" value={name} onChange={onNameChange} />
