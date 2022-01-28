@@ -30,6 +30,26 @@ const SearchFeatuerBox = styled.div`
   margin: 15px auto;
 `;
 
+const LoadMore = styled.button`
+  cursor: pointer;
+  color: black;
+  width: 300px;
+  height: 30px;
+  display: block;
+  margin: 0 auto;
+  border: solid 1px black;
+  background-color: whitesmoke;
+  border-radius: 5px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  &:hover {
+    background-color: #1b273f;
+    box-shadow: 0px 15px 20px rgba(27, 39, 63, 0.4);
+    color: whitesmoke;
+    transform: translateY(-5px);
+  }
+`;
+
 function LandingPage() {
   const [products, setProducts] = useState([]);
   const [skip, setSkip] = useState(0);
@@ -179,9 +199,7 @@ function LandingPage() {
       <Row gutter={[16, 16]}>{user?._id ? renderCards : <RequestLogin />}</Row>
       <br />
       {postSize >= limit && (
-        <div style={{ justifyContent: "center" }}>
-          <button onClick={loadMoreHandler}>더보기</button>
-        </div>
+        <LoadMore onClick={loadMoreHandler}>더보기</LoadMore>
       )}
     </LandingContainer>
   );
