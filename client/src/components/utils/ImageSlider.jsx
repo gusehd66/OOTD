@@ -10,6 +10,11 @@ const ImageBox = styled.img.attrs((props) => ({
   width: 100%;
   height: 150px;
   object-fit: contain;
+  transition: 0.4s;
+  &:hover {
+    filter: drop-shadow(0 0 10px rgba(27, 39, 63));
+    transform: scale(1.1);
+  }
 `;
 
 function ImageSlider({ images }) {
