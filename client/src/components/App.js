@@ -10,6 +10,7 @@ import UploadProductPage from "./views/UploadProductPage/UploadProductPage";
 import DetailProductPage from "./views/DetailProductPage/DetailProductPage";
 import SelectProductPage from "./views/SelectProductPage/SelectProductPage";
 import RandomSelectPage from "./views/RandomSelectPage/RandomSelectPage";
+import MyInfo from "./views/MyInfo/MyInfo.jsx";
 
 //null   Anyone Can go inside
 //true   only logged in user can go inside
@@ -27,6 +28,7 @@ function App() {
           <Route exact path="/" component={LandingPage} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/register" component={RegisterPage} />
+          <Route exact path="/myInfo" component={MyInfo} />
           <Route exact path="/product/upload" component={UploadProductPage} />
           <Route exact path="/product/select" component={SelectProductPage} />
           <Route exact path="/product/random" component={RandomSelectPage} />

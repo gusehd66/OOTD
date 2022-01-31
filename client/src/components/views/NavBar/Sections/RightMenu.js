@@ -37,6 +37,9 @@ function RightMenu({ mode, onClose, selectkey, setKey }) {
         </>
       ) : (
         <>
+          <Menu.Item key="info" onClick={handleClick}>
+            <Link to="/myInfo">My Info</Link>
+          </Menu.Item>
           <Menu.Item key="upload" onClick={handleClick}>
             <Link to="/product/upload">Upload</Link>
           </Menu.Item>

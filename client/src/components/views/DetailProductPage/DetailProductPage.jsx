@@ -17,6 +17,7 @@ const DetailProductPage = (props) => {
   const [product, setProduct] = useState({});
 
   useAuth(null);
+  console.log(product);
 
   useEffect(() => {
     axios
