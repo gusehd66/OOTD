@@ -3,7 +3,7 @@ import { Typography, Button, Form, Input } from "antd";
 import { useState } from "react";
 import FileUpload from "../../utils/FileUpload";
 import Axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useHistory, Prompt } from "react-router-dom";
 import useAuth from "../../../hooks/auth";
 
 const { Title } = Typography;
@@ -18,6 +18,7 @@ const Categories = [
 
 const UploadProductPage = ({ detail }) => {
   const [images, setImages] = useState(detail?.images || []);
+  const [isEntering, setIsEntering] = useState(false);
   const [state, setState] = useState({
     title: detail?.title || "",
     description: detail?.description || "",
@@ -58,6 +59,7 @@ const UploadProductPage = ({ detail }) => {
       images,
       ...state,
     };
+    setIsEntering(false);
     detail
       ? Axios.post(`/api/product/update?id=${detail?._id}`, body).then(
           (response) => {
@@ -79,60 +81,75 @@ const UploadProductPage = ({ detail }) => {
         });
   };
 
-  return (
-    <div style={{ maxWidth: "700px", margin: "2rem auto" }}>
-      <div style={{ textAlign: "center", marginBottom: "2rem" }}>
-        <Title level={2}>옷장 업로드</Title>
-      </div>
+  const formFocusHandler = () => {
+    setIsEntering(true);
+  };
 
-      <Form onFinish={submitHandler} style={{ padding: "0 1rem" }}>
-        <FileUpload
-          refreshFunction={updateImages}
-          productImage={detail?.images}
-        />
-        <label>이름</label>
-        <Input
-          onChange={handleChange}
-          value={state.title}
-          name="title"
-          style={{ marginBottom: "20px" }}
-          autoFocus
-        />
-        <label>설명</label>
-        <TextArea
-          onChange={handleChange}
-          value={state.description}
-          name="description"
-        />
-        <br />
-        <br />
-        <label>가격($)</label>
-        <Input
-          type="number"
-          onChange={handleChange}
-          value={state.price}
-          name="price"
-        />
-        <br />
-        <br />
-        <select
-          onChange={handleChange}
-          value={state.categories}
-          name="categories"
+  return (
+    <>
+      <Prompt
+        when={isEntering}
+        message={(location) =>
+          "정말 나가시겠습니까? 나가시면 입력한 모든 정보를 잃게 됩니다."
+        }
+      />
+      <div style={{ maxWidth: "700px", margin: "2rem auto" }}>
+        <div style={{ textAlign: "center", marginBottom: "2rem" }}>
+          <Title level={2}>옷장 업로드</Title>
+        </div>
+
+        <Form
+          onFinish={submitHandler}
+          style={{ padding: "0 1rem" }}
+          onFocus={formFocusHandler}
         >
-          {Categories.map((item) => (
-            <option key={item.key} value={item.key}>
-              {item.value}
-            </option>
-          ))}
-        </select>
-        <br />
-        <br />
-        <Button type="primary" htmlType="submit">
-          {detail ? "수정" : "확인"}
-        </Button>
-      </Form>
-    </div>
+          <FileUpload
+            refreshFunction={updateImages}
+            productImage={detail?.images}
+          />
+          <label>이름</label>
+          <Input
+            onChange={handleChange}
+            value={state.title}
+            name="title"
+            style={{ marginBottom: "20px" }}
+          />
+          <label>설명</label>
+          <TextArea
+            onChange={handleChange}
+            value={state.description}
+            name="description"
+          />
+          <br />
+          <br />
+          <label>가격($)</label>
+          <Input
+            type="number"
+            onChange={handleChange}
+            value={state.price}
+            name="price"
+          />
+          <br />
+          <br />
+          <select
+            onChange={handleChange}
+            value={state.categories}
+            name="categories"
+          >
+            {Categories.map((item) => (
+              <option key={item.key} value={item.key}>
+                {item.value}
+              </option>
+            ))}
+          </select>
+          <br />
+          <br />
+          <Button type="primary" htmlType="submit">
+            {detail ? "수정" : "확인"}
+          </Button>
+        </Form>
+      </div>
+    </>
   );
 };
 
