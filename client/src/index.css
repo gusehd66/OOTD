@@ -1,9 +1,11 @@
 @import "~react-image-gallery/styles/css/image-gallery.css";
 
 @font-face {
-  font-family: "GmarketM";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
-    format("truetype");
+  font-family: "IBMPlexSansKR-R";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 
 .image-gallery-slide {
@@ -43,7 +45,7 @@ body {
 }
 
 #root {
-  font-family: "GmarketM";
+  font-family: "IBMPlexSansKR-R";
 }
 
 #root::before {

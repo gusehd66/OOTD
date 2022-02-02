@@ -3,6 +3,10 @@ import { auth } from "../_actions/user_actions";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
+//null   아무나 입장
+//true   로그인 유저만 입장
+//false  로그인 유저 입장 불가
+
 const useAuth = (option, adminRoute = null) => {
   const user = useSelector((state) => state.user);
   const history = useHistory();

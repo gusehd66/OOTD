@@ -12,10 +12,6 @@ import SelectProductPage from "./views/SelectProductPage/SelectProductPage";
 import RandomSelectPage from "./views/RandomSelectPage/RandomSelectPage";
 import MyInfo from "./views/MyInfo/MyInfo.jsx";
 
-//null   Anyone Can go inside
-//true   only logged in user can go inside
-//false  logged in user can't go inside
-
 function App() {
   const history = useHistory();
   history.push("/");
