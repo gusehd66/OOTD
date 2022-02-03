@@ -30,7 +30,7 @@ const SearchFeatuerBox = styled.div`
   margin: 15px auto;
 `;
 
-const LoadMore = styled.button`
+export const LoadMore = styled.button`
   cursor: pointer;
   color: black;
   width: 300px;

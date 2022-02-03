@@ -24,7 +24,7 @@ function RightMenu({ mode, onClose, selectkey, setKey }) {
       mode={mode}
       onSelect={onClose}
       selectedKeys={selectkey}
-      style={{ minWidth: "240px", justifyContent: "flex-end" }}
+      style={{ minWidth: "340px", justifyContent: "flex-end" }}
     >
       {user.userData && !user.userData.isAuth ? (
         <>

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { EditOutlined } from "@ant-design/icons";
 import { createPortal } from "react-dom";
 import { useState } from "react";
+import OpenNameModal from "../../utils/NameModal";
 
 const MyInfoContainer = styled.div`
   display: flex;
@@ -39,50 +40,19 @@ const MyInfoContainer = styled.div`
   }
 `;
 
-const ModalBackGround = styled.div`
-  position: fixed;
-  top: 0px;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
-  display: flex;
-  background-color: rgba(214, 218, 218, 0.8);
-  justify-content: center;
-  align-items: center;
-  > .modal-box {
-    width: 300px;
-    height: 300px;
-    background-color: white;
-    box-sizing: border-box;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-`;
-
 const Portal = (props) => {
   return createPortal(props.children, document.getElementById("nameModal"));
 };
+
 const MyInfo = () => {
   const [isOpen, setIsOpen] = useState(false);
-
-  const user = useAuth();
-
-  const OpenNameModal = () => {
-    return (
-      <ModalBackGround>
-        <div className="modal-box">
-          <button onClick={() => setIsOpen(false)}>&times;</button>
-          <p>닉네임 수정 공간</p>
-        </div>
-      </ModalBackGround>
-    );
-  };
+  const user = useAuth(true);
 
   return (
     <>
-      <Portal>{isOpen && <OpenNameModal />}</Portal>
+      <Portal>
+        {isOpen && <OpenNameModal nickName={user.name} setIsOpen={setIsOpen} />}
+      </Portal>
       <MyInfoContainer>
         <div className="user-info">
           <div>
@@ -96,7 +66,7 @@ const MyInfo = () => {
 
         <div className="favorite">
           {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-            <div>{i} Box</div>
+            <div key={i}>{i} Box</div>
           ))}
         </div>
       </MyInfoContainer>
