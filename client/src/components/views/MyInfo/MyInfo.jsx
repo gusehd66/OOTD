@@ -2,7 +2,7 @@ import useAuth from "../../../hooks/auth";
 import styled from "styled-components";
 import { EditOutlined } from "@ant-design/icons";
 import { createPortal } from "react-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import OpenNameModal from "../../utils/NameModal";
 
 const MyInfoContainer = styled.div`
@@ -51,17 +51,17 @@ const MyInfo = () => {
   return (
     <>
       <Portal>
-        {isOpen && <OpenNameModal nickName={user.name} setIsOpen={setIsOpen} />}
+        {isOpen && <OpenNameModal user={user} setIsOpen={setIsOpen} />}
       </Portal>
       <MyInfoContainer>
         <div className="user-info">
           <div>
-            {user.name}
+            {user?.name}
             <span className="edit-btn">
               <EditOutlined onClick={() => setIsOpen(true)} />
             </span>
           </div>
-          <div>{user.email}</div>
+          <div>{user?.email}</div>
         </div>
 
         <div className="favorite">

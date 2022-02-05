@@ -1,6 +1,10 @@
-import { useState } from "react";
+import Axios from "axios";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { LoadMore } from "../views/LandingPage/LandingPage";
+import { USER_SERVER } from "../Config";
+import { useDispatch } from "react-redux";
+import { auth } from "../../_actions/user_actions";
 
 const ModalBackGround = styled.div`
   position: fixed;
@@ -49,11 +53,28 @@ const ModalSubmit = styled(LoadMore)`
   position: absolute;
 `;
 
-const OpenNameModal = ({ nickName, setIsOpen }) => {
+const OpenNameModal = ({ user, setIsOpen }) => {
   const [name, setName] = useState("");
+  const dispatch = useDispatch();
   const onNameChange = (event) => {
     setName(event.currentTarget.value);
   };
+
+  const modalSubmit = () => {
+    const body = { id: user._id, name };
+    name.trim() === ""
+      ? alert("닉네임은 공백을 사용할 수 없습니다.")
+      : Axios.post(`${USER_SERVER}/name-change`, body).then((response) => {
+          if (response.data.success) {
+            alert("닉네임 변경을 성공했습니다.");
+          } else {
+            alert("닉네임 변경을 실패했습니다.");
+          }
+          dispatch(auth());
+          setIsOpen(false);
+        });
+  };
+
   return (
     <ModalBackGround>
       <div className="modal-box">
@@ -62,8 +83,10 @@ const OpenNameModal = ({ nickName, setIsOpen }) => {
         </button>
         <p>닉네임 수정</p>
         <input type="text" value={name} onChange={onNameChange} />
-        <p>현재 닉네임: {nickName}</p>
-        <ModalSubmit className="modal-submit">완료</ModalSubmit>
+        <p>현재 닉네임: {user.name}</p>
+        <ModalSubmit className="modal-submit" onClick={() => modalSubmit()}>
+          완료
+        </ModalSubmit>
       </div>
     </ModalBackGround>
   );
