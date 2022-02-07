@@ -31,7 +31,9 @@ const ProductInfo = ({ detail, productId }) => {
     <div>
       <Descriptions title="Item Info" bordered>
         <Descriptions.Item label="Price">{detail.price}</Descriptions.Item>
-        <Descriptions.Item label="Select">{detail.select}</Descriptions.Item>
+        <Descriptions.Item label="Favorite">
+          {detail.favorite.length}
+        </Descriptions.Item>
         <Descriptions.Item label="Date">
           {new Date(detail.createdAt).toLocaleDateString()}
         </Descriptions.Item>

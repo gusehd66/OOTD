@@ -27,6 +27,11 @@ const userSchema = mongoose.Schema({
     default: 0,
   },
   image: String,
+  favorite: {
+    type: Array,
+    default: [],
+  },
+
   token: {
     type: String,
   },

@@ -4,12 +4,15 @@ import {
   loginUser,
   logoutUser,
   registerUser,
+  userFavorite,
 } from "../_actions/user_actions";
 
 const UserSlice = createSlice({
   name: "users",
   initialState: {},
-  reducers: {},
+  reducers: {
+    userFavorite,
+  },
   extraReducers: (builder) => {
     builder
       .addCase(auth.fulfilled, (state, action) => {

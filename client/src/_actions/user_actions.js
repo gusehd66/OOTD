@@ -25,3 +25,7 @@ export const logoutUser = createAsyncThunk(LOGOUT_USER, async () => {
   const request = await axios.get(`${USER_SERVER}/logout`);
   return request.data;
 });
+
+export const userFavorite = (like) => {
+  console.log(like);
+};

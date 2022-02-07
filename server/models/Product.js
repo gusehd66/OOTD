@@ -22,10 +22,9 @@ const productSchema = mongoose.Schema(
       type: Array,
       default: [],
     },
-    select: {
-      type: Number,
-      maxlength: 100,
-      default: 0,
+    favorite: {
+      type: Array,
+      default: [],
     },
     categories: {
       type: Number,
