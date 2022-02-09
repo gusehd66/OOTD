@@ -2,7 +2,7 @@ import useAuth from "../../../hooks/auth";
 import styled from "styled-components";
 import { EditOutlined } from "@ant-design/icons";
 import { createPortal } from "react-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import OpenNameModal from "../../utils/NameModal";
 
 const MyInfoContainer = styled.div`
@@ -47,6 +47,7 @@ const Portal = (props) => {
 const MyInfo = () => {
   const [isOpen, setIsOpen] = useState(false);
   const user = useAuth(true);
+  console.log(user);
 
   return (
     <>
@@ -65,8 +66,8 @@ const MyInfo = () => {
         </div>
 
         <div className="favorite">
-          {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-            <div key={i}>{i} Box</div>
+          {user?.favorite.map((favorite, index) => (
+            <div key={index}>{favorite.key} Box</div>
           ))}
         </div>
       </MyInfoContainer>

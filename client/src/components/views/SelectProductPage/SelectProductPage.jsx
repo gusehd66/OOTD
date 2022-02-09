@@ -142,7 +142,7 @@ const SelectProductPage = () => {
   );
 
   return allStepsCompleted() ? (
-    <SelectCompletePage />
+    <SelectCompletePage userId={user._id} />
   ) : (
     <>
       <Steps

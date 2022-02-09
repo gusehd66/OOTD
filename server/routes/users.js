@@ -9,7 +9,6 @@ const { auth } = require("../middleware/auth");
 //=================================
 
 router.get("/auth", auth, (req, res) => {
-  console.log(req.user);
   res.status(200).json({
     _id: req.user._id,
     isAdmin: req.user.role === 0 ? false : true,
@@ -78,6 +77,21 @@ router.post("/name-change", (req, res) => {
       return res.status(200).send({ success: true, product });
     }
   );
+});
+
+router.post("/favorite", (req, res) => {
+  console.log(req.body);
+  User.updateOne(
+    { _id: req.body.id },
+    {
+      $addToSet: {
+        favorite: { key: req.body.favoriteTitle, clothes: req.body.images },
+      },
+    }
+  ).exec((err, product) => {
+    if (err) return res.status(400).send(err);
+    return res.status(200).send({ success: true, product });
+  });
 });
 
 module.exports = router;

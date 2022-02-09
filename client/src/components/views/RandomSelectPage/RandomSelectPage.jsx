@@ -57,9 +57,9 @@ const RandomSelectPage = () => {
       {user?._id ? (
         <>
           {clickStart ? (
-            <SelectCompletePage />
+            <SelectCompletePage userId={user._id} />
           ) : (
-            <RandomWaitPage products={products} />
+            <RandomWaitPage products={products} userId={user._id} />
           )}
           <Button
             onClick={handleClick}

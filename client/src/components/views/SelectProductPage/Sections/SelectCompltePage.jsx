@@ -1,7 +1,8 @@
 import { HeartOutlined } from "@ant-design/icons";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { addFavorite } from "../../../../_actions/user_actions";
 
 //  [outer,shoes,bottom,top]
 const topCss = ["35%", "88%", "60%", "25%"];
@@ -49,11 +50,20 @@ const LikeBtn = styled.button`
   width: 120px;
   transition: 0.2s;
   font-weight: bold;
+  background-color: #fff;
   &:hover {
     background-color: #ff5454;
     color: #fff;
     animation: wiggle 2s;
     animation-iteration-count: 3;
+  }
+  @media screen and (max-width: 770px) {
+    top: 30px;
+    left: 30px;
+    width: 40px;
+    > .favorite-btn {
+      display: none;
+    }
   }
 
   @keyframes wiggle {
@@ -66,14 +76,77 @@ const LikeBtn = styled.button`
   }
 `;
 
-const SelectCompletePage = () => {
+const Popover = styled.form`
+  position: relative;
+  top: 70px;
+  left: 50px;
+  background-color: #fff;
+  width: 250px;
+  height: 40px;
+  box-sizing: border-box;
+  display: flex;
+  border: solid 2px #888;
+  border-radius: 20px;
+  transition: 0.2s;
+  padding: 5px;
+  align-items: center;
+  font-size: 12px;
+  &:focus-within {
+    border: solid 2px #ff5454;
+  }
+
+  @media screen and (max-width: 770px) {
+    top: 50px;
+    left: 30px;
+    width: 200px;
+    height: 35px;
+  }
+
+  > input {
+    width: 80%;
+    border: none;
+    border-radius: 10px;
+    padding: 0 10px;
+    outline: none;
+    height: 30px;
+  }
+  > button {
+    cursor: ${(props) => props.value.trim() && "pointer"};
+    color: ${(props) => (props.value.trim() ? "#000" : "#888")};
+    font-weight: bold;
+    width: 20%;
+    height: 30px;
+    background-color: white;
+    border: none;
+    border-radius: 10px;
+  }
+`;
+
+const SelectCompletePage = ({ userId }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [title, setTitle] = useState("");
+
+  const dispatch = useDispatch();
 
   const clothes = useSelector((state) => state.cloth);
   const ProductKey = Object.keys(clothes).reverse();
 
   const onLikeClick = () => {
     setIsOpen((prev) => !prev);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    dispatch(
+      addFavorite({ id: userId, favoriteTitle: title.trim(), images: clothes })
+    ).then(() => {
+      setIsOpen(false);
+      setTitle("");
+    });
+  };
+
+  const handleChange = (event) => {
+    setTitle(event.target.value);
   };
 
   return (
@@ -90,8 +163,19 @@ const SelectCompletePage = () => {
           )
       )}
       <LikeBtn onClick={() => onLikeClick()}>
-        <HeartOutlined /> Add Favorite
+        <HeartOutlined /> <span className="favorite-btn">Add Favorite</span>
       </LikeBtn>
+      {isOpen && (
+        <Popover onSubmit={handleSubmit} value={title}>
+          <input
+            type="text"
+            onChange={handleChange}
+            value={title}
+            placeholder="즐겨찾기 제목을 입력하세요."
+          />
+          <button type="submit">추가</button>
+        </Popover>
+      )}
     </CompleteContainer>
   );
 };

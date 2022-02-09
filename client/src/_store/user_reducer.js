@@ -1,18 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  addFavorite,
   auth,
   loginUser,
   logoutUser,
   registerUser,
-  userFavorite,
 } from "../_actions/user_actions";
 
 const UserSlice = createSlice({
   name: "users",
   initialState: {},
-  reducers: {
-    userFavorite,
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(auth.fulfilled, (state, action) => {
@@ -25,6 +23,9 @@ const UserSlice = createSlice({
         return { ...state, loginSucces: action.payload };
       })
       .addCase(logoutUser.fulfilled, (state, action) => {
+        return { ...state };
+      })
+      .addCase(addFavorite.fulfilled, (state, action) => {
         return { ...state };
       });
   },
