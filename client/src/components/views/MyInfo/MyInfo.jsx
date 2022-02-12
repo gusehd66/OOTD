@@ -20,23 +20,55 @@ const MyInfoContainer = styled.div`
       cursor: pointer;
     }
   }
-  .favorite {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    padding: 16px 40px;
-    margin: 16px;
-    box-sizing: border-box;
-    flex: 1;
-    border-top: solid 2px black;
-    justify-content: flex-start;
-    > div {
-      width: 240px;
-      height: 240px;
-      text-align: center;
-      border: solid 1px black;
-      margin: 8px;
+`;
+
+const FavoriteContent = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 16px 40px;
+  margin: 16px;
+  box-sizing: border-box;
+  flex: 1;
+  border-top: solid 1px black;
+  justify-content: flex-start;
+  > .content-box {
+    width: 240px;
+    height: 240px;
+    text-align: center;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 6px 6px 6px #666;
+    margin: 8px;
+    &:hover {
+      transition: 0.3s;
+      transform: scale(1.03);
     }
+    > h3 {
+      font-weight: bold;
+      height: 10%;
+      margin: 0;
+    }
+    > .content-images {
+      height: 90%;
+      width: 100%;
+      display: flex;
+      flex: 1 1 40%;
+      flex-wrap: wrap;
+      > div {
+        width: 50%;
+        height: 50%;
+        > img {
+          height: 100%;
+          width: 100%;
+          object-fit: contain;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 770px) {
+    justify-content: center;
   }
 `;
 
@@ -47,7 +79,7 @@ const Portal = (props) => {
 const MyInfo = () => {
   const [isOpen, setIsOpen] = useState(false);
   const user = useAuth(true);
-  console.log(user);
+  const categories = Object.keys(user.favorite[0].clothes);
 
   return (
     <>
@@ -65,11 +97,24 @@ const MyInfo = () => {
           <div>{user?.email}</div>
         </div>
 
-        <div className="favorite">
+        <FavoriteContent>
           {user?.favorite.map((favorite, index) => (
-            <div key={index}>{favorite.key} Box</div>
+            <div className="content-box" key={index}>
+              <h3>{favorite.key} Box</h3>
+              <div className="content-images">
+                {categories.map((category) => (
+                  <div>
+                    <img
+                      key={favorite.clothes[category].id}
+                      src={favorite.clothes[category].src.image}
+                      alt="img"
+                    ></img>
+                  </div>
+                ))}
+              </div>
+            </div>
           ))}
-        </div>
+        </FavoriteContent>
       </MyInfoContainer>
     </>
   );
