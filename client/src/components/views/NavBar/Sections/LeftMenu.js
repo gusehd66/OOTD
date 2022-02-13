@@ -5,7 +5,10 @@ const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 
 function LeftMenu({ mode, onClose, selectkey, setKey }) {
-  const handleClick = (e) => setKey(e.key);
+  const handleClick = (e) => {
+    setKey(e.key);
+    localStorage.setItem("id", e.key);
+  };
   return (
     <Menu
       mode={mode}

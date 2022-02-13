@@ -15,7 +15,6 @@ const DetailContainer = styled.div`
 const DetailProductPage = (props) => {
   const productId = props.match.params.productId;
   const [product, setProduct] = useState({});
-
   useAuth(null);
 
   useEffect(() => {

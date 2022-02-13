@@ -79,7 +79,7 @@ const Portal = (props) => {
 const MyInfo = () => {
   const [isOpen, setIsOpen] = useState(false);
   const user = useAuth(true);
-  const categories = Object.keys(user.favorite[0].clothes);
+  const categories = user && Object.keys(user.favorite[0].clothes);
 
   return (
     <>
@@ -103,7 +103,7 @@ const MyInfo = () => {
               <h3>{favorite.key} Box</h3>
               <div className="content-images">
                 {categories.map((category) => (
-                  <div>
+                  <div key={category}>
                     <img
                       key={favorite.clothes[category].id}
                       src={favorite.clothes[category].src.image}

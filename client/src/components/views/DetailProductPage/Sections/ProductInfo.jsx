@@ -11,7 +11,6 @@ const ButtonBox = styled.div`
 
 const ProductInfo = ({ detail, productId }) => {
   const history = useHistory();
-
   const handleDelete = () => {
     const confirm = window.confirm("삭제하시겠습니까?");
     confirm &&
@@ -32,7 +31,7 @@ const ProductInfo = ({ detail, productId }) => {
       <Descriptions title="Item Info" bordered>
         <Descriptions.Item label="Price">{detail.price}</Descriptions.Item>
         <Descriptions.Item label="Favorite">
-          {detail.favorite.length}
+          {detail.favorite?.length}
         </Descriptions.Item>
         <Descriptions.Item label="Date">
           {new Date(detail.createdAt).toLocaleDateString()}

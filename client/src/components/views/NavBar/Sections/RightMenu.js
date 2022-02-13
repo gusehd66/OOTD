@@ -7,7 +7,10 @@ import { useSelector } from "react-redux";
 function RightMenu({ mode, onClose, selectkey, setKey }) {
   const user = useSelector((state) => state.user);
   const history = useHistory();
-  const handleClick = (e) => setKey(e.key);
+  const handleClick = (e) => {
+    setKey(e.key);
+    localStorage.setItem("id", e.key);
+  };
 
   const logoutHandler = () => {
     axios.get(`${USER_SERVER}/logout`).then((response) => {

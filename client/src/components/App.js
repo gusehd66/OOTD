@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { Route, Switch, useHistory } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 // pages for this product
 import LandingPage from "./views/LandingPage/LandingPage.js";
 import LoginPage from "./views/LoginPage/LoginPage.js";
@@ -13,9 +13,6 @@ import RandomSelectPage from "./views/RandomSelectPage/RandomSelectPage";
 import MyInfo from "./views/MyInfo/MyInfo.jsx";
 
 function App() {
-  const history = useHistory();
-  history.push("/");
-
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <NavBar />

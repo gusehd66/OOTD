@@ -1,13 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LeftMenu from "./Sections/LeftMenu";
 import RightMenu from "./Sections/RightMenu";
 import { Drawer, Button } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./Navbar.css";
 import { AlignRightOutlined } from "@ant-design/icons";
 
 function NavBar() {
   const [visible, setVisible] = useState(false);
+  const a = useLocation();
+
   const [selectKey, setSelectKey] = useState("home");
 
   const showDrawer = () => {
@@ -17,6 +19,11 @@ function NavBar() {
   const onClose = () => {
     setVisible(false);
   };
+
+  useEffect(() => {
+    const saved = localStorage.getItem("id");
+    saved && setSelectKey(saved);
+  }, []);
 
   return (
     <nav className="menu">
