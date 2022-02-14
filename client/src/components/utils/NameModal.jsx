@@ -1,5 +1,5 @@
 import Axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { LoadMore } from "../views/LandingPage/LandingPage";
 import { USER_SERVER } from "../Config";

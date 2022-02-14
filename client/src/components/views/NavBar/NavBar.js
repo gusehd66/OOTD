@@ -2,13 +2,12 @@ import { useEffect, useState } from "react";
 import LeftMenu from "./Sections/LeftMenu";
 import RightMenu from "./Sections/RightMenu";
 import { Drawer, Button } from "antd";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Navbar.css";
 import { AlignRightOutlined } from "@ant-design/icons";
 
 function NavBar() {
   const [visible, setVisible] = useState(false);
-  const a = useLocation();
 
   const [selectKey, setSelectKey] = useState("home");
 
@@ -21,8 +20,8 @@ function NavBar() {
   };
 
   useEffect(() => {
-    const saved = localStorage.getItem("id");
-    saved && setSelectKey(saved);
+    const id = localStorage.getItem("id");
+    id && setSelectKey(id);
   }, []);
 
   return (

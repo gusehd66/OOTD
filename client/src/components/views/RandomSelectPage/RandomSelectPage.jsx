@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import useAuth from "../../../hooks/auth";
 import { clothActions } from "../../../_store/select_item";
 import RequestLogin from "../RequestLogin/RequestLogin";
-import SelectCompletePage from "../SelectProductPage/Sections/SelectCompltePage";
+import SelectCompletePage from "../../utils/SelectCompltePage";
 import RandomWaitPage from "./Sections/RandomWaitPage";
 
 const RandomSelectPage = () => {

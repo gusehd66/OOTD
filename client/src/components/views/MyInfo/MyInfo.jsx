@@ -4,6 +4,8 @@ import { EditOutlined } from "@ant-design/icons";
 import { createPortal } from "react-dom";
 import { useState } from "react";
 import OpenNameModal from "../../utils/NameModal";
+import EnlargeContent from "./Sections/EnlargeContent";
+import EnlargeTitle from "./Sections/EnlargeTitle";
 
 const MyInfoContainer = styled.div`
   display: flex;
@@ -33,6 +35,7 @@ const FavoriteContent = styled.div`
   border-top: solid 1px black;
   justify-content: flex-start;
   > .content-box {
+    cursor: pointer;
     width: 240px;
     height: 240px;
     text-align: center;
@@ -77,43 +80,74 @@ const Portal = (props) => {
 };
 
 const MyInfo = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [openNameModal, setOpenNameModal] = useState(false);
+  const [enlargeContent, setEnlargeContent] = useState({
+    open: false,
+    favorite: {},
+    index: 0,
+  });
   const user = useAuth(true);
-  const categories = user && Object.keys(user.favorite[0].clothes);
+  const categories =
+    user?.favorite?.length && Object.keys(user?.favorite[0].clothes);
+
+  const cancelToEnlarge = () => {
+    setEnlargeContent({ ...enlargeContent, open: false });
+  };
 
   return (
     <>
       <Portal>
-        {isOpen && <OpenNameModal user={user} setIsOpen={setIsOpen} />}
+        {openNameModal && (
+          <OpenNameModal user={user} setIsOpen={setOpenNameModal} />
+        )}
       </Portal>
       <MyInfoContainer>
         <div className="user-info">
           <div>
             {user?.name}
             <span className="edit-btn">
-              <EditOutlined onClick={() => setIsOpen(true)} />
+              <EditOutlined onClick={() => setOpenNameModal(true)} />
             </span>
           </div>
           <div>{user?.email}</div>
         </div>
 
         <FavoriteContent>
-          {user?.favorite.map((favorite, index) => (
-            <div className="content-box" key={index}>
-              <h3>{favorite.key} Box</h3>
-              <div className="content-images">
-                {categories.map((category) => (
-                  <div key={category}>
-                    <img
-                      key={favorite.clothes[category].id}
-                      src={favorite.clothes[category].src.image}
-                      alt="img"
-                    ></img>
-                  </div>
-                ))}
+          {enlargeContent.open ? (
+            <>
+              <EnlargeTitle
+                title={user?.favorite[enlargeContent.index].key}
+                cancelToEnlarge={cancelToEnlarge}
+              />
+              <EnlargeContent
+                categories={categories}
+                favorites={user?.favorite[enlargeContent.index]}
+              />
+            </>
+          ) : (
+            user?.favorite.map((favorite, index) => (
+              <div
+                className="content-box"
+                key={index}
+                onClick={() =>
+                  setEnlargeContent({ favorite, index, open: true })
+                }
+              >
+                <h3>{favorite.key} Box</h3>
+                <div className="content-images">
+                  {categories.map((category) => (
+                    <div key={category}>
+                      <img
+                        key={favorite.clothes[category].id}
+                        src={favorite.clothes[category].src.image}
+                        alt="img"
+                      ></img>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            ))
+          )}
         </FavoriteContent>
       </MyInfoContainer>
     </>
