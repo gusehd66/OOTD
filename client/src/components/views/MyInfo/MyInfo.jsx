@@ -1,11 +1,13 @@
 import useAuth from "../../../hooks/auth";
 import styled from "styled-components";
-import { EditOutlined } from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { createPortal } from "react-dom";
 import { useState } from "react";
 import OpenNameModal from "../../utils/NameModal";
 import EnlargeContent from "./Sections/EnlargeContent";
 import EnlargeTitle from "./Sections/EnlargeTitle";
+import Axios from "axios";
+import { useHistory } from "react-router-dom";
 
 const MyInfoContainer = styled.div`
   display: flex;
@@ -75,6 +77,45 @@ const FavoriteContent = styled.div`
   }
 `;
 
+const DeleteBtn = styled.button`
+  cursor: pointer;
+  position: absolute;
+  top: 220px;
+  left: 50px;
+  height: 40px;
+  color: #fff;
+  border: solid 1px #fff;
+  box-shadow: 3px 3px 5px #555;
+  border-radius: 5px;
+  width: 140px;
+  transition: 0.2s;
+  font-weight: bold;
+  background-color: #ff5454;
+  > .delete-btn {
+    margin-left: 5px;
+  }
+  &:hover {
+    background-color: #fff;
+    color: #ff5454;
+    animation: bigger 2s;
+    animation-iteration-count: 3;
+  }
+  @media screen and (max-width: 770px) {
+    top: 215px;
+    left: 25px;
+    width: 40px;
+    > .delete-btn {
+      display: none;
+    }
+  }
+
+  @keyframes bigger {
+    50% {
+      transform: scale(1.05);
+    }
+  }
+`;
+
 const Portal = (props) => {
   return createPortal(props.children, document.getElementById("nameModal"));
 };
@@ -87,11 +128,29 @@ const MyInfo = () => {
     index: 0,
   });
   const user = useAuth(true);
+  console.log(user);
+
   const categories =
     user?.favorite?.length && Object.keys(user?.favorite[0].clothes);
 
   const cancelToEnlarge = () => {
     setEnlargeContent({ ...enlargeContent, open: false });
+  };
+
+  const FavoriteDelete = () => {
+    const confirm = window.confirm("즐겨찾기를 삭제하시겠습니까?");
+    confirm &&
+      Axios.post(`/api/users/delete`, {
+        favorite: enlargeContent,
+        id: user?._id,
+      }).then((response) => {
+        if (response.data.success) {
+          alert("삭제를 완료했습니다.");
+          setEnlargeContent({ ...enlargeContent, open: false });
+        } else {
+          alert("삭제를 실패했습니다.");
+        }
+      });
   };
 
   return (
@@ -115,6 +174,10 @@ const MyInfo = () => {
         <FavoriteContent>
           {enlargeContent.open ? (
             <>
+              <DeleteBtn onClick={FavoriteDelete}>
+                <DeleteOutlined />
+                <span className="delete-btn">Delete Favorite</span>
+              </DeleteBtn>
               <EnlargeTitle
                 title={user?.favorite[enlargeContent.index].key}
                 cancelToEnlarge={cancelToEnlarge}

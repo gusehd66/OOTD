@@ -80,7 +80,6 @@ router.post("/name-change", (req, res) => {
 });
 
 router.post("/favorite", (req, res) => {
-  console.log(req.body);
   User.updateOne(
     { _id: req.body.id },
     {
@@ -91,6 +90,19 @@ router.post("/favorite", (req, res) => {
   ).exec((err, product) => {
     if (err) return res.status(400).send(err);
     return res.status(200).send({ success: true, product });
+  });
+});
+
+router.post("/delete", (req, res) => {
+  User.find({ _id: req.body.id }, (err, user) => {
+    const favorite = user[0].favorite;
+    favorite.splice(req.body.favorite.index, 1);
+    User.updateOne({ _id: req.body.id }, { $set: { favorite: favorite } }).exec(
+      (err, product) => {
+        if (err) return res.status(400).send(err);
+        return res.status(200).send({ success: true, product });
+      }
+    );
   });
 });
 

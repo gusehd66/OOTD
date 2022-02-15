@@ -2,7 +2,7 @@ import { HeartOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { addFavorite } from "../../_actions/user_actions";
+import { addFavorite } from "../../../../_actions/user_actions";
 
 //  [outer,shoes,bottom,top]
 const topCss = ["35%", "88%", "60%", "25%"];

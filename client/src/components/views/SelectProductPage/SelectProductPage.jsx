@@ -6,9 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import useAuth from "../../../hooks/auth";
 import { clothActions } from "../../../_store/select_item";
 import RequestLogin from "../RequestLogin/RequestLogin";
-import SelectCompletePage from "../../utils/SelectCompltePage";
 import styled from "styled-components";
 import "./SelectProductPage.css";
+import SelectCompletePage from "./Sections/SelectCompltePage";
 
 const { Step } = Steps;
 

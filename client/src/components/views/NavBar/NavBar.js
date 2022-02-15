@@ -20,7 +20,7 @@ function NavBar() {
   };
 
   useEffect(() => {
-    const id = localStorage.getItem("id");
+    const id = sessionStorage.getItem("id");
     id && setSelectKey(id);
   }, []);
 

@@ -9,7 +9,7 @@ function RightMenu({ mode, onClose, selectkey, setKey }) {
   const history = useHistory();
   const handleClick = (e) => {
     setKey(e.key);
-    localStorage.setItem("id", e.key);
+    sessionStorage.setItem("id", e.key);
   };
 
   const logoutHandler = () => {

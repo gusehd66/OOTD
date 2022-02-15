@@ -7,7 +7,7 @@ const MenuItemGroup = Menu.ItemGroup;
 function LeftMenu({ mode, onClose, selectkey, setKey }) {
   const handleClick = (e) => {
     setKey(e.key);
-    localStorage.setItem("id", e.key);
+    sessionStorage.setItem("id", e.key);
   };
   return (
     <Menu
