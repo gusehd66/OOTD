@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   addFavorite,
   auth,
+  deleteFavorite,
   loginUser,
   logoutUser,
   registerUser,
@@ -26,6 +27,9 @@ const UserSlice = createSlice({
         return { ...state };
       })
       .addCase(addFavorite.fulfilled, (state, action) => {
+        return { ...state };
+      })
+      .addCase(deleteFavorite.fulfilled, (state, action) => {
         return { ...state };
       });
   },

@@ -5,6 +5,7 @@ import {
   AUTH_USER,
   LOGOUT_USER,
   USER_FAVORITE,
+  Delete_FAVORITE,
 } from "./types";
 import { USER_SERVER } from "../components/Config.js";
 import { createAsyncThunk } from "@reduxjs/toolkit";
@@ -36,3 +37,11 @@ export const addFavorite = createAsyncThunk(USER_FAVORITE, async (favorite) => {
   const response = await axios.post(`${USER_SERVER}/favorite`, favorite);
   return response.data;
 });
+
+export const deleteFavorite = createAsyncThunk(
+  Delete_FAVORITE,
+  async (favorite) => {
+    const response = await axios.post(`${USER_SERVER}/delete`, favorite);
+    return response.data;
+  }
+);

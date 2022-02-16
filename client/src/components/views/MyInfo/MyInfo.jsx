@@ -6,8 +6,8 @@ import { useState } from "react";
 import OpenNameModal from "../../utils/NameModal";
 import EnlargeContent from "./Sections/EnlargeContent";
 import EnlargeTitle from "./Sections/EnlargeTitle";
-import Axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { auth, deleteFavorite } from "../../../_actions/user_actions";
 
 const MyInfoContainer = styled.div`
   display: flex;
@@ -128,7 +128,7 @@ const MyInfo = () => {
     index: 0,
   });
   const user = useAuth(true);
-  console.log(user);
+  const dispatch = useDispatch();
 
   const categories =
     user?.favorite?.length && Object.keys(user?.favorite[0].clothes);
@@ -140,12 +140,15 @@ const MyInfo = () => {
   const FavoriteDelete = () => {
     const confirm = window.confirm("즐겨찾기를 삭제하시겠습니까?");
     confirm &&
-      Axios.post(`/api/users/delete`, {
-        favorite: enlargeContent,
-        id: user?._id,
-      }).then((response) => {
-        if (response.data.success) {
+      dispatch(
+        deleteFavorite({
+          favorite: enlargeContent,
+          id: user?._id,
+        })
+      ).then((response) => {
+        if (response.payload.success) {
           alert("삭제를 완료했습니다.");
+          dispatch(auth());
           setEnlargeContent({ ...enlargeContent, open: false });
         } else {
           alert("삭제를 실패했습니다.");
