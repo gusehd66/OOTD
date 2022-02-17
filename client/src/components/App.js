@@ -11,6 +11,7 @@ import DetailProductPage from "./views/DetailProductPage/DetailProductPage";
 import SelectProductPage from "./views/SelectProductPage/SelectProductPage";
 import RandomSelectPage from "./views/RandomSelectPage/RandomSelectPage";
 import MyInfo from "./views/MyInfo/MyInfo.jsx";
+import NotFoundPage from "./views/NotFoundPage/NotFoundPage.jsx";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             path="/product/:productId"
             component={DetailProductPage}
           />
+          <Route component={NotFoundPage} />
         </Switch>
       </div>
       <Footer />
