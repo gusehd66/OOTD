@@ -1,4 +1,4 @@
-import { Steps, Button, Col, Card, Divider, Row } from "antd";
+import { Col, Card, Divider, Row } from "antd";
 import Meta from "antd/lib/card/Meta";
 import Axios from "axios";
 import { useCallback, useEffect, useState } from "react";
@@ -6,23 +6,13 @@ import { useDispatch, useSelector } from "react-redux";
 import useAuth from "../../../hooks/auth";
 import { clothActions } from "../../../_store/select_item";
 import RequestLogin from "../RequestLogin/RequestLogin";
-import styled from "styled-components";
 import "./SelectProductPage.css";
 import SelectCompletePage from "./Sections/SelectCompltePage";
-
-const { Step } = Steps;
+import StepBar from "./Sections/Steps";
+import ControlButtons from "./Sections/ControlButtons";
+import SelectList from "./Sections/SelectList";
 
 const steps = ["top", "bottom", "shoes", "outer"];
-
-const SelectList = styled.div`
-  display: flex;
-  width: 90%;
-  gap: 0 10px;
-  height: 25vh;
-  margin: 15px;
-  box-sizing: border-box;
-  overflow: auto;
-`;
 
 const SelectProductPage = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -30,48 +20,11 @@ const SelectProductPage = () => {
   const [products, setProducts] = useState([]);
 
   const user = useAuth(null);
-
   const dispatch = useDispatch();
   const clothes = useSelector((state) => state.cloth);
 
-  const totalSteps = () => {
-    return steps.length;
-  };
-  const completedSteps = () => {
-    return Object.keys(completed).length;
-  };
-  const isLastStep = () => {
-    return activeStep === totalSteps() - 1;
-  };
-  const allStepsCompleted = () => {
-    return completedSteps() === totalSteps();
-  };
-
-  const onChange = (step) => {
-    setActiveStep(step);
-  };
-
-  const handleNext = () => {
-    const newActiveStep =
-      isLastStep() && !allStepsCompleted()
-        ? steps.findIndex((step, i) => !(i in completed))
-        : activeStep + 1;
-    setActiveStep(newActiveStep);
-  };
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-  const handleComplete = () => {
-    const newCompleted = completed;
-    newCompleted[activeStep] = true;
-    setCompleted(newCompleted);
-    handleNext();
-  };
-  const handleReset = () => {
-    setActiveStep(0);
-    setCompleted({});
-    dispatch(clothActions.selectInit());
-  };
+  const completedSteps = Object.keys(completed).length;
+  const totalSteps = steps.length;
 
   const getProducts = useCallback((body) => {
     Axios.post("/api/product/products_select", body).then((response) => {
@@ -91,6 +44,10 @@ const SelectProductPage = () => {
         id: e.target.dataset.id,
       })
     );
+  };
+
+  const allStepsCompleted = () => {
+    return completedSteps === totalSteps;
   };
 
   useEffect(() => {
@@ -142,70 +99,38 @@ const SelectProductPage = () => {
   );
 
   return allStepsCompleted() ? (
-    <SelectCompletePage userId={user._id} />
+    // 결과페이지
+    <SelectCompletePage userId={user?._id} />
   ) : (
     <>
-      <Steps
-        type="navigation"
-        current={activeStep}
-        onChange={onChange}
-        direction="horizontal "
-        style={{ padding: "10px", flexDirection: "row" }}
-        size="small"
-      >
-        {steps.map((label, index) => (
-          <Step
-            style={{ width: "0" }}
-            key={label}
-            title={label}
-            status={
-              completed[index]
-                ? "finish"
-                : activeStep === index
-                ? "process"
-                : "wait"
-            }
-          />
-        ))}
-      </Steps>
+      <StepBar
+        activeStep={activeStep}
+        setActiveStep={setActiveStep}
+        steps={steps}
+        completed={completed}
+      />
 
-      {/* Select Page */}
+      {/* 카드 렌더  */}
       <Row gutter={[16, 16]} style={{ width: "100%" }}>
         {user?._id ? renderCards : <RequestLogin />}
       </Row>
 
       <Divider />
-      <div
-        style={{ display: "flex", justifyContent: "center", columnGap: "10px" }}
-      >
-        <Button disabled={activeStep === 0} onClick={handleBack}>
-          Prev
-        </Button>
-        <Button onClick={handleNext}>Next</Button>
-        {activeStep !== steps.length &&
-          (completed[activeStep] ? (
-            <span>{activeStep + 1} already completed</span>
-          ) : (
-            <Button onClick={handleComplete}>
-              {completedSteps() === totalSteps() - 1 ? "Finish" : "Complete"}
-            </Button>
-          ))}
-        <Button onClick={handleReset}>Reset</Button>
-      </div>
-      <SelectList>
-        {steps.map((item, index) => {
-          return (
-            clothes[item].src && (
-              <img
-                src={clothes[item].src.image}
-                alt="img"
-                key={index}
-                style={{ margin: "8px 10px" }}
-              />
-            )
-          );
-        })}
-      </SelectList>
+
+      {/* 선택지 이동 버튼 */}
+      <ControlButtons
+        activeStep={activeStep}
+        steps={steps}
+        completed={completed}
+        setActiveStep={setActiveStep}
+        setCompleted={setCompleted}
+        totalSteps={totalSteps}
+        completedSteps={completedSteps}
+        allStepsCompleted={allStepsCompleted}
+      />
+
+      {/* 선택한 카드 리스트 */}
+      <SelectList steps={steps} clothes={clothes} />
     </>
   );
 };
