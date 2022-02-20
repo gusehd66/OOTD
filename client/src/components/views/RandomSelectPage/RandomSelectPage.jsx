@@ -1,12 +1,39 @@
-import { Button } from "antd";
 import Axios from "axios";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import styled from "styled-components";
 import useAuth from "../../../hooks/auth";
 import { clothActions } from "../../../_store/select_item";
 import RequestLogin from "../RequestLogin/RequestLogin";
 import SelectCompletePage from "../SelectProductPage/Sections/SelectCompltePage";
 import RandomWaitPage from "./Sections/RandomWaitPage";
+
+const RandomButton = styled.button`
+  cursor: pointer;
+  position: relative;
+  left: 50%;
+  text-align: center;
+  transform: translateX(-50%);
+  margin-top: 20px;
+  width: 120px;
+  height: 40px;
+  border: none;
+  border-radius: 20px;
+  color: #ccc;
+  font-weight: bold;
+  text-shadow: 2px 2px 2px #222;
+  box-shadow: 0px 4px 5px #888;
+  box-sizing: border-box;
+  letter-spacing: 2px;
+  background-color: #1b273f;
+  transition: 0.2s;
+  &:hover {
+    background-color: #ff5454;
+    font-weight: 900;
+    text-shadow: none;
+    color: #fff;
+  }
+`;
 
 const RandomSelectPage = () => {
   const [products, setProducts] = useState([]);
@@ -61,16 +88,7 @@ const RandomSelectPage = () => {
           ) : (
             <RandomWaitPage products={products} userId={user._id} />
           )}
-          <Button
-            onClick={handleClick}
-            style={{
-              left: "50%",
-              transform: "translateX(-50%)",
-              marginTop: "30px",
-            }}
-          >
-            Random
-          </Button>
+          <RandomButton onClick={handleClick}>Random</RandomButton>
         </>
       ) : (
         <RequestLogin />

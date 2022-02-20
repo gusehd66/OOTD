@@ -9,7 +9,7 @@ const RegisterPage = () => {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
+  console.log("render");
   useAuth(false);
 
   const history = useHistory();

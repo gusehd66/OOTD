@@ -51,6 +51,7 @@ const RandomWaitPage = ({ products }) => {
 
   const [image, setImage] = useState(0);
 
+  //5초마다 이미지 변환
   useEffect(() => {
     const handleTick = setTimeout(() => setImage(image + 1), 5000);
     return () => clearTimeout(handleTick);

@@ -1,6 +1,16 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+const RequestContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  line-height: 2rem;
+  margin: 20px 0;
+`;
+
 const SampleLogin = styled.div`
   line-height: 1.2rem;
   margin: 10px 0 50px;
@@ -38,15 +48,5 @@ const RequestLogin = () => {
     </RequestContainer>
   );
 };
-
-const RequestContainer = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  line-height: 2rem;
-  margin: 20px 0;
-`;
 
 export default RequestLogin;
