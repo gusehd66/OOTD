@@ -64,15 +64,17 @@ const OpenNameModal = ({ user, setIsOpen }) => {
     const body = { id: user._id, name };
     name.trim() === ""
       ? alert("닉네임은 공백을 사용할 수 없습니다.")
-      : Axios.post(`${USER_SERVER}/name-change`, body).then((response) => {
-          if (response.data.success) {
-            alert("닉네임 변경을 성공했습니다.");
-          } else {
-            alert("닉네임 변경을 실패했습니다.");
-          }
-          dispatch(auth());
-          setIsOpen(false);
-        });
+      : Axios.post(`${USER_SERVER}/name-change`, body)
+          .then((response) => {
+            if (response.data.success) {
+              alert("닉네임 변경을 성공했습니다.");
+            } else {
+              alert("닉네임 변경을 실패했습니다.");
+            }
+            dispatch(auth());
+            setIsOpen(false);
+          })
+          .catch((err) => console.log(err));
   };
 
   return (

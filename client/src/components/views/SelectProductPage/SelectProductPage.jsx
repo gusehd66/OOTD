@@ -118,16 +118,18 @@ const SelectProductPage = () => {
       <Divider />
 
       {/* 선택지 이동 버튼 */}
-      <ControlButtons
-        activeStep={activeStep}
-        steps={steps}
-        completed={completed}
-        setActiveStep={setActiveStep}
-        setCompleted={setCompleted}
-        totalSteps={totalSteps}
-        completedSteps={completedSteps}
-        allStepsCompleted={allStepsCompleted}
-      />
+      {user?.id && (
+        <ControlButtons
+          activeStep={activeStep}
+          steps={steps}
+          completed={completed}
+          setActiveStep={setActiveStep}
+          setCompleted={setCompleted}
+          totalSteps={totalSteps}
+          completedSteps={completedSteps}
+          allStepsCompleted={allStepsCompleted}
+        />
+      )}
 
       {/* 선택한 카드 리스트 */}
       <SelectList steps={steps} clothes={clothes} />

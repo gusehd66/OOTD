@@ -63,21 +63,27 @@ function LandingPage() {
   const user = useAuth(null);
 
   const getProducts = useCallback((body) => {
-    axios.post("/api/product/products", body).then((response) => {
-      if (response.data.success) {
-        if (body.loadMore) {
-          setProducts((products) => [
-            ...products,
-            ...response.data.productInfo,
-          ]);
+    axios
+      .post("/api/product/products", body)
+      .then((response) => {
+        if (response.data.success) {
+          if (body.loadMore) {
+            setProducts((products) => [
+              ...products,
+              ...response.data.productInfo,
+            ]);
+          } else {
+            setProducts(response.data.productInfo);
+          }
+          setPostSize(response.data.postSize);
         } else {
-          setProducts(response.data.productInfo);
+          alert("상품들을 가져오는데 실패 했습니다.");
         }
-        setPostSize(response.data.postSize);
-      } else {
-        alert("상품들을 가져오는데 실패 했습니다.");
-      }
-    });
+      })
+      .catch((err) => {
+        console.log(err);
+        return err;
+      });
   }, []);
 
   useEffect(() => {

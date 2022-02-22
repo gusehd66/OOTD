@@ -40,7 +40,7 @@ const LoginPage = () => {
       if (response.payload.loginSuccess) {
         history.push("/");
       } else {
-        alert("Error");
+        alert("로그인에 실패하였습니다.");
       }
     });
   };

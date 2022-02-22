@@ -13,13 +13,16 @@ function RightMenu({ mode, onClose, selectkey, setKey }) {
   };
 
   const logoutHandler = () => {
-    axios.get(`${USER_SERVER}/logout`).then((response) => {
-      if (response.status === 200) {
-        history.push("/login");
-      } else {
-        alert("Log Out Failed");
-      }
-    });
+    axios
+      .get(`${USER_SERVER}/logout`)
+      .then((response) => {
+        if (response.status === 200) {
+          history.push("/login");
+        } else {
+          alert("Log Out Failed");
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   return (

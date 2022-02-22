@@ -44,20 +44,23 @@ const FileUpload = ({ refreshFunction, productImage }) => {
       header: { "content-type": "multipart/form-data" },
     };
     formData.append("file", files[0]);
-    axios.post("/api/product/image", formData, config).then((response) => {
-      if (response.data.success) {
-        setImages([
-          ...images,
-          { image: response.data.filePath, key: response.data.fileKey },
-        ]);
-        refreshFunction([
-          ...images,
-          { image: response.data.filePath, key: response.data.fileKey },
-        ]);
-      } else {
-        alert("파일을 저장하는데 실패했습니다.");
-      }
-    });
+    axios
+      .post("/api/product/image", formData, config)
+      .then((response) => {
+        if (response.data.success) {
+          setImages([
+            ...images,
+            { image: response.data.filePath, key: response.data.fileKey },
+          ]);
+          refreshFunction([
+            ...images,
+            { image: response.data.filePath, key: response.data.fileKey },
+          ]);
+        } else {
+          alert("파일을 저장하는데 실패했습니다.");
+        }
+      })
+      .catch((err) => console.log(err));
   };
   const deleteHandler = (image) => {
     const currentIndex = images.indexOf(image);
