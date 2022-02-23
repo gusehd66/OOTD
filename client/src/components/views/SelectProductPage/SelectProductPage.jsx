@@ -118,7 +118,7 @@ const SelectProductPage = () => {
       <Divider />
 
       {/* 선택지 이동 버튼 */}
-      {user?.id && (
+      {user?._id && (
         <ControlButtons
           activeStep={activeStep}
           steps={steps}

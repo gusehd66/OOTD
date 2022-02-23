@@ -96,9 +96,9 @@ const Popover = styled.form`
   }
 
   @media screen and (max-width: 770px) {
-    top: 50px;
-    left: 30px;
-    width: 200px;
+    top: -8px;
+    left: 80px;
+    width: 220px;
     height: 35px;
   }
 
@@ -137,12 +137,17 @@ const SelectCompletePage = ({ userId }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(
-      addFavorite({ id: userId, favoriteTitle: title.trim(), images: clothes })
-    ).then(() => {
-      setIsOpen(false);
-      setTitle("");
-    });
+    title.trim() &&
+      dispatch(
+        addFavorite({
+          id: userId,
+          favoriteTitle: title.trim(),
+          images: clothes,
+        })
+      ).then(() => {
+        setIsOpen(false);
+        setTitle("");
+      });
   };
 
   const handleChange = (event) => {
