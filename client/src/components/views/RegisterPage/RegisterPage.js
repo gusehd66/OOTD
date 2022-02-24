@@ -3,6 +3,33 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import useAuth from "../../../hooks/auth";
 import { registerUser } from "../../../_actions/user_actions";
+import styled from "styled-components";
+
+const RegisterContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 78vh;
+
+  > form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  input {
+    border: solid 1px #888;
+    /* box-sizing: border-box; */
+    &:focus-within {
+      outline: solid 2px #1b273f;
+      /* outline: none; */
+    }
+  }
+
+  button {
+    cursor: pointer;
+  }
+`;
 
 const RegisterPage = () => {
   const [email, setEmail] = useState("");
@@ -49,19 +76,8 @@ const RegisterPage = () => {
     });
   };
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        width: "100%",
-        height: "100vh",
-      }}
-    >
-      <form
-        style={{ display: "flex", flexDirection: "column" }}
-        onSubmit={onSubmitHandler}
-      >
+    <RegisterContainer>
+      <form onSubmit={onSubmitHandler}>
         <label>Email</label>
         <input type="email" value={email} onChange={onEmailChange} autoFocus />
 
@@ -86,7 +102,7 @@ const RegisterPage = () => {
         <br />
         <button type="submit">회원가입</button>
       </form>
-    </div>
+    </RegisterContainer>
   );
 };
 

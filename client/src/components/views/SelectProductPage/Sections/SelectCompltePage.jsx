@@ -85,6 +85,7 @@ const Popover = styled.form`
   height: 40px;
   box-sizing: border-box;
   display: flex;
+  flex-wrap: nowrap;
   border: solid 2px #888;
   border-radius: 20px;
   transition: 0.2s;
@@ -103,7 +104,6 @@ const Popover = styled.form`
   }
 
   > input {
-    width: 80%;
     border: none;
     border-radius: 10px;
     padding: 0 10px;
@@ -114,7 +114,7 @@ const Popover = styled.form`
     cursor: ${(props) => props.value.trim() && "pointer"};
     color: ${(props) => (props.value.trim() ? "#000" : "#888")};
     font-weight: bold;
-    width: 20%;
+    width: 50px;
     height: 30px;
     background-color: white;
     border: none;
